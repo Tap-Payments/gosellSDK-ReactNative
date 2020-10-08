@@ -1,26 +1,38 @@
 package com.gosellsdkreactnative;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.util.HashMap;
 
+import kotlin.Result;
+import retrofit2.Call;
+import retrofit2.Response;
+
 
 /**
  * GoSellSdkFlutterPlugin
  */
-public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
+public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule implements ActivityEventListener {
+    private Activity _activity;
 
     public GoSellSdkReactNativePlugin(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -28,7 +40,17 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "GoSellSdkFlutterPlugin";
+        return "GoSellSdkReactNativePlugin";
+    }
+
+    @Override
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+
     }
 
     /**
@@ -44,6 +66,10 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
 
         @Override
         public void onCreate(@NonNull LifecycleOwner owner) {
+            if(activity!=null){
+                GoSellSdkReactNativePlugin plugin = new GoSellSdkReactNativePlugin();
+                plugin.setup( application, activity);
+            }
         }
 
         @Override
@@ -70,6 +96,7 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            _activity = activity;
         }
 
         @Override
@@ -100,7 +127,7 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
         @Override
         public void onActivityStopped(Activity activity) {
             if (thisActivity == activity) {
-//                delegate.saveStateBeforeResult();
+                delegate.saveStateBeforeResult();
             }
         }
     }
@@ -110,35 +137,14 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
      */
 //    private MethodChannel channel;
     private GoSellSdKDelegate delegate;
-//    private FlutterPluginBinding pluginBinding;
-    private ActivityPluginBinding activityBinding;
+
+ //   private ActivityPluginBinding activityBinding;
     private Application application;
     private Activity activity;
     // This is null when not using v2 embedding;
     private Lifecycle lifecycle;
     private LifeCycleObserver observer;
-    private static final String CHANNEL = "tap.company.go_sell_sdk_flutter.GoSellSdkFlutterPlugin";
 
-    /**
-     * Register with
-     *
-     * @param registrar
-     */
-
-    public static void registerWith(PluginRegistry.Registrar registrar) {
-        if (registrar.activity() == null) {
-            // If a background flutter view tries to register the plugin, there will be no activity from the registrar,
-            // we stop the registering process immediately because the SDK requires an activity.
-            return;
-        }
-        Activity activity = registrar.activity();
-        Application application = null;
-        if (registrar.context() != null) {
-            application = (Application) (registrar.context().getApplicationContext());
-        }
-        GoSellSdkReactNativePlugin plugin = new GoSellSdkReactNativePlugin();
-        plugin.setup(registrar.messenger(), application, activity, registrar, null);
-    }
 
 
     /**
@@ -150,92 +156,28 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
     }
 
 
-    /**
-     * @param binding
-     */
-    @Override
-    public void onAttachedToEngine(FlutterPluginBinding binding) {
-        pluginBinding = binding;
-    }
-
-    @Override
-    public void onDetachedFromEngine(FlutterPluginBinding binding) {
-        pluginBinding = null;
-    }
-
-    @Override
-    public void onAttachedToActivity(ActivityPluginBinding binding) {
-        activityBinding = binding;
-        setup(
-                pluginBinding.getBinaryMessenger(),
-                (Application) pluginBinding.getApplicationContext(),
-                activityBinding.getActivity(),
-                null,
-                activityBinding);
-    }
-
-    @Override
-    public void onDetachedFromActivity() {
-        tearDown();
-    }
-
-    @Override
-    public void onDetachedFromActivityForConfigChanges() {
-        onDetachedFromActivity();
-    }
-
-
-    @Override
-    public void onReattachedToActivityForConfigChanges(ActivityPluginBinding binding) {
-        onAttachedToActivity(binding);
-    }
 
     /**
      * setup
      */
 
     private void setup(
-            final BinaryMessenger messenger,
             final Application application,
-            final Activity activity,
-            final PluginRegistry.Registrar registrar,
-            final ActivityPluginBinding activityBinding) {
+            final Activity activity) {
         this.activity = activity;
         this.application = application;
         this.delegate = constructDelegate(activity);
-        channel = new MethodChannel(messenger, "go_sell_sdk_flutter");
-        channel.setMethodCallHandler(this);
+
         observer = new LifeCycleObserver(activity);
-        if (registrar != null) {
+        if (activity != null) {
             // V1 embedding setup for activity listeners.
             application.registerActivityLifecycleCallbacks(observer);
-            registrar.addActivityResultListener(delegate);
-            registrar.addRequestPermissionsResultListener(delegate);
+
         } else {
-            // V2 embedding setup for activity listeners.
-            activityBinding.addActivityResultListener(delegate);
-            activityBinding.addRequestPermissionsResultListener(delegate);
-//            lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(activityBinding);
-//            lifecycle.addObserver(observer);
+
         }
     }
 
-
-    /**
-     * tearDown()
-     */
-    private void tearDown() {
-        activityBinding.removeActivityResultListener(delegate);
-        activityBinding.removeRequestPermissionsResultListener(delegate);
-        activityBinding = null;
-        lifecycle.removeObserver(observer);
-        lifecycle = null;
-        delegate = null;
-        channel.setMethodCallHandler(null);
-        channel = null;
-        application.unregisterActivityLifecycleCallbacks(observer);
-        application = null;
-    }
 
 
     /**
@@ -250,8 +192,8 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
      * MethodChannel.Result wrapper that responds on the platform thread.
      */
 
-    private static class MethodResultWrapper implements MethodChannel.Result {
-        private MethodChannel.Result methodResult;
+    public static class MethodResultWrapper implements retrofit2.Callback {
+       /* private MethodChannel.Result methodResult;
         private Handler handler;
 
         MethodResultWrapper(MethodChannel.Result result) {
@@ -287,25 +229,42 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
             handler.post(
                     () -> methodResult.notImplemented());
         }
+*/
+        @Override
+        public void onResponse(Call call, Response response) {
+            System.out.println("success coming from delegate : " + response.body());
+        }
+
+        @Override
+        public void onFailure(Call call, Throwable t) {
+            System.out.println("error encountered................." + call);
+
+           /* handler.post(
+                    () -> methodResult.error(errorCode,errorMessage,errorDetails));*/
+        }
     }
 
-    @Override
-    public void onMethodCall(MethodCall call, MethodChannel.Result rawResult) {
-        HashMap<String, Object> args = call.arguments();
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @ReactMethod
+    public void startPayment(ReadableMap objectHashMap, Callback callback) {
+        HashMap<String, Object> args = objectHashMap.toHashMap();
         System.out.println("args : " + args);
-        System.out.println("onMethodCall..... started");
-        if (activity == null) {
-            rawResult.error("no_activity", "SDK plugin requires a foreground activity.", null);
+        System.out.println("callback..... started");
+
+        if (getCurrentActivity() == null) {
+           // rawResult.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
+            callback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
             return;
         }
 
-        if (call.method.equals("terminate_session")) {
+        if (objectHashMap.toHashMap().equals("terminate_session")) {
             System.out.println("terminate session!");
             delegate.terminateSDKSession();
             return;
         }
-        MethodChannel.Result result = new MethodResultWrapper(rawResult);
-        delegate.startSDK(call, result, args);
+        //TODO how to pass the result callback???
+        delegate.startSDK(callback, args);
 
     }
 
