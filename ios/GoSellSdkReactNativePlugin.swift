@@ -1,5 +1,5 @@
 //
-//  SwiftGoSellSdkReactNativePlugin.swift
+//  GoSellSdkReactNativePlugin.swift
 //  gosellSDKReactNative
 //
 //  Created by Kareem Ahmed on 9/29/20.
@@ -10,8 +10,8 @@ import UIKit
 import goSellSDK
 import TapCardValidator
 
-@objc(SwiftGoSellSdkReactNativePlugin)
-public class SwiftGoSellSdkReactNativePlugin: NSObject {
+@objc(GoSellSdkReactNativePlugin)
+public class GoSellSdkReactNativePlugin: NSObject {
   let session = Session()
   public var argsSessionParameters:[String:Any]?
   public var argsAppCredentials:[String:String]?
@@ -44,7 +44,7 @@ public class SwiftGoSellSdkReactNativePlugin: NSObject {
   }
 }
 
-extension SwiftGoSellSdkReactNativePlugin: SessionDataSource {
+extension GoSellSdkReactNativePlugin: SessionDataSource {
   public var customer: Customer?{
     if let customerString:[String: Any] = argsSessionParameters?["customer"] as? [String:Any] {
             do {
@@ -305,7 +305,7 @@ extension SwiftGoSellSdkReactNativePlugin: SessionDataSource {
       }
 }
 
-extension SwiftGoSellSdkReactNativePlugin: SessionDelegate {
+extension GoSellSdkReactNativePlugin: SessionDelegate {
   public func paymentSucceed(_ charge: Charge, on session: SessionProtocol) {
         print(charge)
           
@@ -430,7 +430,7 @@ extension SwiftGoSellSdkReactNativePlugin: SessionDelegate {
       }
 }
 
-extension SwiftGoSellSdkReactNativePlugin: SessionAppearance {
+extension GoSellSdkReactNativePlugin: SessionAppearance {
     public func sessionShouldShowStatusPopup(_ session: SessionProtocol) -> Bool {
     return false
   }

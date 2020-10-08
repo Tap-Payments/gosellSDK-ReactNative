@@ -71,9 +71,9 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - goSellSDK (2.2.33):
-    - goSellSDK/Core (= 2.2.33)
-  - goSellSDK/Core (2.2.33):
+  - goSellSDK (2.2.35):
+    - goSellSDK/Core (= 2.2.35)
+  - goSellSDK/Core (2.2.35):
     - CardIODynamic
     - EditableTextInsetsTextFieldV2
     - SwiftyRSA
@@ -320,9 +320,9 @@ PODS:
     - React-Core (= 0.63.3)
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
-  - SDWebImage (5.9.1):
-    - SDWebImage/Core (= 5.9.1)
-  - SDWebImage/Core (5.9.1)
+  - SDWebImage (5.9.2):
+    - SDWebImage/Core (= 5.9.2)
+  - SDWebImage/Core (5.9.2)
   - SwiftLint (0.40.3)
   - SwiftyRSA (1.6.0):
     - SwiftyRSA/ObjC (= 1.6.0)
@@ -396,7 +396,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.54.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - goSellSDK (= 2.2.33)
+  - goSellSDK (= 2.2.35)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -529,7 +529,7 @@ SPEC CHECKSUMS:
   FlipperKit: ab353d41aea8aae2ea6daaf813e67496642f3d7d
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  goSellSDK: d0fc7a473036ce923ac5eaccf5c10ec7c3de6f5d
+  goSellSDK: 3d08ae3494a81eb10a443c3f07bee4cecc31447f
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -551,7 +551,7 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
+  SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftyRSA: 3b9c9179744217951facc6a3e9ae8d8c97061ffa
   TapAdditionsKitV2: 5752ee6837d690d4f38449d83155ab631fc4fc13
@@ -571,6 +571,6 @@ SPEC CHECKSUMS:
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 517b492e3968eb6554c79d8be97e58dae50250b3
+PODFILE CHECKSUM: c56151cb8a66919a996f66ae390f48afe8b3482e
 
 COCOAPODS: 1.9.3
