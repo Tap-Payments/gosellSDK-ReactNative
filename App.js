@@ -96,8 +96,7 @@ export default class App extends Component {
     };
 
     console.log('start SDK');
-
-    NativeModules.SwiftGoSellSdkReactNativePlugin.startPayment(allConfigurations, (error, status) => {
+    NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, (error, status) => {
       var myString = JSON.stringify(status);
       // console.log('callback is done');
       console.log('status is ' + status.sdk_result);

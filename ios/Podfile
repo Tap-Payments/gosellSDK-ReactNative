@@ -8,9 +8,9 @@ target 'gosellSDKReactNative' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNShare', :path => '../node_modules/react-native-share'
+#  pod 'RNShare', :path => '../node_modules/react-native-share'
   pod 'SDWebImage', :modular_headers => true
-  pod 'goSellSDK', '2.2.33', :modular_headers => true
+  pod 'goSellSDK', '2.2.35', :modular_headers => true
 
   target 'gosellSDKReactNativeTests' do
     inherit! :complete
