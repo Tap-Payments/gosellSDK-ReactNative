@@ -11,13 +11,17 @@ import { StyleSheet, Text, View, NativeModules, Button, Alert } from 'react-nati
 
 export default class App extends Component {
 
-  state = { statusNow: "not started" };
-  // constructor(props) {
-  //   super(props);
 
-  // }
+  constructor(props) {
+    super(props);
+    this.state = { statusNow: "not started" };
+    this.changeState = this.changeState.bind(this);
+    this.startSDK = this.startSDK.bind(this);
+  }
 
   startSDK() {
+
+    // console.log('this' + this)
     var transactionCurrency = "kwd";
     var shipping = [{
       name: "shipping 1",
@@ -96,35 +100,32 @@ export default class App extends Component {
     };
 
     console.log('start SDK');
-    NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, async (error, status) => {
+    NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, (error, status) => {
+
+
       var myString = JSON.stringify(status);
       // console.log('callback is done');
       console.log('status is ' + status.sdk_result);
       console.log(myString);
       var resultStr = String(status.sdk_result);
-      // Alert.alert(myString);
-      // this.lblSatus = myString;//String(status.sdk_result);
-      // handlest.bind(this, myString);
-      await this.changeState(resultStr);
 
-      // this.updatedStatus(myString);
-      // this.printStatus; 
-      // this.updatedStatus(String(status.sdk_result));
-      // setTimeout(() => {
-      //   Alert.alert("Perhatian", status.sdk_result)
-      // }, 100);
+      this.changeState(resultStr, () => { console.log('done') })
+
 
     })
 
   }
 
-
-  changeState = async (newName) => {
-    console.log('the new value is' + newName)
-    this.setState({
-      statusNow: newName
-    })
+  changeState(newName, callback) {
+    console.log('the new value is' + newName);
+    this.setState(
+      {
+        statusNow: newName,
+      },
+      callback,
+    );
   }
+
 
   render() {
     const { statusNow } = this.state;
