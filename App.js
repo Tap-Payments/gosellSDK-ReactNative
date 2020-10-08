@@ -96,14 +96,16 @@ export default class App extends Component {
     };
 
     console.log('start SDK');
-    NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, (error, status) => {
+    NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, async (error, status) => {
       var myString = JSON.stringify(status);
       // console.log('callback is done');
       console.log('status is ' + status.sdk_result);
       console.log(myString);
+      var resultStr = String(status.sdk_result);
       // Alert.alert(myString);
       // this.lblSatus = myString;//String(status.sdk_result);
       // handlest.bind(this, myString);
+      await this.changeState(resultStr);
 
       // this.updatedStatus(myString);
       // this.printStatus; 
@@ -112,23 +114,17 @@ export default class App extends Component {
       //   Alert.alert("Perhatian", status.sdk_result)
       // }, 100);
 
-    });
+    })
 
   }
 
-  // printStatus = () => {
-  //   console.log('print status: ' + status.statusNow);
-  // }
 
-  updatedStatus(visible) {
-    this.setState({ statusNow: visible });
+  changeState = async (newName) => {
+    console.log('the new value is' + newName)
+    this.setState({
+      statusNow: newName
+    })
   }
-
-  // handlest(updatedStatus) {
-  //   this.setState({
-  //     statusNow: updatedStatus
-  //   });
-  // }
 
   render() {
     const { statusNow } = this.state;
@@ -141,6 +137,7 @@ export default class App extends Component {
           title="Start Payment"
           color="#FF6347"
         />
+        {/* <Button title="Change state" onPress={() => this.changeState('my name here')} /> */}
       </View>
     );
   }
