@@ -74,6 +74,7 @@ To use the SDK the following requirements must be met:
 <a name="configure_sdk_session"></a>
 **Configure SDK Session Example**
 
+###### Transaction Currency
 ```
 var transactionCurrency = "kwd";
 var shipping = [{
@@ -82,6 +83,7 @@ description: "shiping description 1",
 amount: 100.0
 }];
 ```
+###### Payment Items
 ```
 var paymentitems = [
 {
@@ -113,12 +115,31 @@ var paymentitems = [
 }
 ];
 ```
+###### Taxes
 ```
-var taxes = [{ "name": "tax1", "description": "tax describtion", "amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } }, { "name": "tax1", "description": "tax describtion", "amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } }];
- var customer = { "isdNumber": "965", "number": "00000000", "customerId": "", "first_name": "test", "middle_name": "test", "last_name": "test", "email": "test@test.com" };
+var taxes = [{ "name": "tax1", 
+"description": "tax describtion",
+"amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } },
+{ "name": "tax1", 
+"description": "tax describtion", 
+"amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } }];
+ var customer = { "isdNumber": "965", 
+ "number": "00000000",
+ "customerId": "", 
+ "first_name": "test",
+ "middle_name": "test",
+ "last_name": "test", 
+ "email": "test@test.com" };
  ```
+ ###### Payment Reference
  ```
- var paymentReference = { "track": "track", "payment": "payment", "gateway": "gateway", "acquirer": "acquirer", "transaction": "trans_910101", "order": "order_262625", "gosellID": null };
+ var paymentReference = { "track": "track",
+ "payment": "payment", 
+ "gateway": "gateway",
+ "acquirer": "acquirer",
+ "transaction": "trans_910101",
+ "order": "order_262625",
+ "gosellID": null };
  ```
 ```
 var allConfigurations = {
