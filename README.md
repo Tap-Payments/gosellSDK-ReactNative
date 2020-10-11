@@ -71,7 +71,7 @@ To use the SDK the following requirements must be met:
 
 ---
 
-<a name="configure_your_app"></a>
+<a name="configure_sdk_session"></a>
 **Configure SDK Session Example**
 
 ```
@@ -152,7 +152,6 @@ sessionParameters: {
 }
 };
 ```
-<a name="configure_sdk_session"></a>
 
 ---
 
