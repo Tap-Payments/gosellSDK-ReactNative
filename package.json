@@ -1,6 +1,6 @@
 {
-  "name": "gosell-sdk-react-native",
-  "version": "0.0.1-beta2",
+  "name": "@tap-payments/gosell-sdk-react-native",
+  "version": "0.0.1-beta.2",
   "description": "",
   "author": "",
   "bugs": {
@@ -11,6 +11,7 @@
     "type": "git",
     "url": ".git"
   },
+  "private": false,
   "main": "src/index.js",
   "files": [
     "src/*"
