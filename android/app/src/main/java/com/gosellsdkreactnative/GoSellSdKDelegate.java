@@ -42,8 +42,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
           /* public void startSDK(MethodCall methodCall, MethodChannel.Result result,
                 HashMap<String, Object> sdkConfigurations) {*/
                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-               public void startSDK(Callback result,
-                                    HashMap<String, Object> sdkConfigurations) {
+               public void startSDK(
+                       HashMap<String, Object> sdkConfigurations,Callback result) {
 //Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
             finishWithAlreadyActiveError(result);
