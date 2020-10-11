@@ -44,11 +44,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                public void startSDK(Callback result,
                                     HashMap<String, Object> sdkConfigurations) {
-//Commented to testg
+//Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
             finishWithAlreadyActiveError(result);
             return;
         }*/
+
         // start SDK
         showSDK(sdkConfigurations, result);
     }

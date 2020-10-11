@@ -1,11 +1,20 @@
 package com.gosellsdkreactnative;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.uimanager.IllegalViewOperationException;
+import com.facebook.react.uimanager.PixelUtil;
+import com.facebook.react.util.RNLog;
 
 import android.app.Activity;
 import android.app.Application;
@@ -22,6 +31,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import kotlin.Result;
 import retrofit2.Call;
@@ -33,9 +43,10 @@ import retrofit2.Response;
  */
 public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule implements ActivityEventListener {
     private Activity _activity;
-
+    public static WritableArray applist;
     public GoSellSdkReactNativePlugin(ReactApplicationContext reactContext) {
         super(reactContext);
+        this.application = (Application) reactContext.getApplicationContext();
     }
 
     @Override
@@ -246,8 +257,8 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @ReactMethod
-    public void startPayment(ReadableMap objectHashMap, Callback callback) {
+  @ReactMethod
+ public void startPayment(ReadableMap objectHashMap, Callback callback) {
         HashMap<String, Object> args = objectHashMap.toHashMap();
         System.out.println("args : " + args);
         System.out.println("callback..... started");
@@ -263,10 +274,18 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             delegate.terminateSDKSession();
             return;
         }
+        ReadableMapKeySetIterator iterator = objectHashMap.keySetIterator()
+     // WritableMap resultData = new WritableNativeMap();
+     // resultData.putMap("map",objectHashMap);
+     // callback.invoke(resultData);
+
         //TODO how to pass the result callback???
         delegate.startSDK(callback, args);
 
     }
 
+
+
+}
 }
 
