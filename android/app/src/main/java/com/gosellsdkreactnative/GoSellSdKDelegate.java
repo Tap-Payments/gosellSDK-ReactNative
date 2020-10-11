@@ -2,10 +2,14 @@ package com.gosellsdkreactnative;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
+import com.facebook.react.bridge.Callback;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -23,35 +27,29 @@ import company.tap.gosellapi.open.exception.CurrencyException;
 import company.tap.gosellapi.open.models.CardsList;
 import company.tap.gosellapi.open.models.TapCurrency;
 
-public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
-        PluginRegistry.RequestPermissionsResultListener, SessionDelegate {
+
+public class GoSellSdKDelegate implements SessionDelegate {
 
     private SDKSession sdkSession;
     private Activity activity;
-    private MethodChannel.Result pendingResult;
-    private MethodCall methodCall;
+    private Callback pendingResult;
 
     public GoSellSdKDelegate(Activity _activity) {
         this.activity = _activity;
     }
 
-    @Override
-    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        return false;
-    }
 
-    @Override
-    public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        return false;
-    }
-
-    public void startSDK(MethodCall methodCall, MethodChannel.Result result,
-                         HashMap<String, Object> sdkConfigurations) {
-
-        if (!setPendingMethodCallAndResult(methodCall, result)) {
+          /* public void startSDK(MethodCall methodCall, MethodChannel.Result result,
+                HashMap<String, Object> sdkConfigurations) {*/
+               @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+               public void startSDK(Callback result,
+                                    HashMap<String, Object> sdkConfigurations) {
+//Commented to testing
+      /* if (!setPendingMethodCallAndResult(methodCall, result)) {
             finishWithAlreadyActiveError(result);
             return;
-        }
+        }*/
+
         // start SDK
         showSDK(sdkConfigurations, result);
     }
@@ -62,22 +60,9 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
         }
     }
 
-    private void finishWithAlreadyActiveError(MethodChannel.Result result) {
-        result.error("already_active", "SDK is already active", null);
-    }
 
-    private boolean setPendingMethodCallAndResult(MethodCall methodCall, MethodChannel.Result result) {
-        if (pendingResult != null) {
-            return false;
-        }
-
-        this.methodCall = methodCall;
-        pendingResult = result;
-
-        return true;
-    }
-
-    private void showSDK(HashMap<String, Object> sdkConfigurations, MethodChannel.Result result) {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void showSDK(HashMap<String, Object> sdkConfigurations,Callback result) {
         HashMap<String, Object> sessionParameters = (HashMap<String, Object>) sdkConfigurations
                 .get("sessionParameters");
         /**
@@ -104,6 +89,7 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void configureApp(String secrete_key, String bundleID, String language) {
         GoSellSDK.init(activity, secrete_key, bundleID); // to be replaced by merchant
         GoSellSDK.setLocale(language); // to be replaced by merchant
@@ -111,12 +97,10 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
 
     /**
      * Configure SDK Session
-     *
-     * @param sessionParameters
-     * @param result
-     */
-    private void configureSDKSession(HashMap<String, Object> sessionParameters, MethodChannel.Result result) {
-
+     *  @param sessionParameters
+     * @param result*/
+    private void configureSDKSession(HashMap<String, Object> sessionParameters, Callback result) {
+        pendingResult = result;
         // Instantiate SDK Session
         if (sdkSession == null)
             sdkSession = new SDKSession(); // ** Required **
@@ -322,7 +306,7 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
-        pendingResult.success(resultMap);
+        pendingResult.invoke(resultMap);
         pendingResult = null;
     }
 
@@ -340,7 +324,8 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
-        pendingResult.success(resultMap);
+        //pendingResult.success(resultMap);
+        pendingResult.invoke(resultMap);
         pendingResult = null;
     }
 
@@ -350,7 +335,8 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
         resultMap.put("sdk_error_code", errorCode);
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
-        pendingResult.success(resultMap);
+        //pendingResult.success(resultMap);
+        pendingResult.invoke(resultMap);
         pendingResult = null;
     }
 
@@ -420,7 +406,7 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
         Log.d("MainActivity", "Session Cancelled.........");
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "CANCELLED");
-        pendingResult.success(resultMap);
+        pendingResult.invoke(resultMap);
         pendingResult = null;
     }
 
@@ -456,5 +442,9 @@ public class GoSellSdKDelegate implements PluginRegistry.ActivityResultListener,
     @Override
     public void userEnabledSaveCardOption(boolean saveCardEnabled) {
         System.out.println("userEnabledSaveCardOption :  " + saveCardEnabled);
+    }
+
+    public void saveStateBeforeResult() {
+        System.out.println("saveStateBeforeResult called " );
     }
 }
