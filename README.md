@@ -43,7 +43,7 @@ To use the SDK the following requirements must be met:
 
 ### Include goSellSDK plugin as a dependency in your package.json
 
-```dart
+```
  "dependencies: {
      "go_sell_sdk_react_native": "0.0.1"
  }
@@ -57,7 +57,7 @@ To use the SDK the following requirements must be met:
 
 `goSellSDK` should be set up. To set it up, add the following lines of code somewhere in your project and make sure they will be called before any usage of `goSellSDK`.
 
-```dart
+```
 /**
  * Configure App. (You must get those keys from tap)
  */
@@ -72,8 +72,81 @@ To use the SDK the following requirements must be met:
 ---
 
 <a name="configure_your_app"></a>
+**Configure SDK Session Example**
 
+```
+var transactionCurrency = "kwd";
+    var shipping = [{
+      name: "shipping 1",
+      description: "shiping description 1",
+      amount: 100.0
+    }];
 
+    var paymentitems = [
+      {
+        "amount_per_unit": 1,
+        "description": "Item 1 Apple",
+        "discount": {
+          "type": "F",
+          "value": 10,
+          "maximum_fee": 10,
+          "minimum_fee": 1
+        },
+        "name": "item1",
+        "quantity": {
+          "value": 1
+        },
+        "taxes": [
+          {
+            "name": "tax1",
+            "description": "tax describtion",
+            "amount": {
+              "type": "F",
+              "value": 10,
+              "maximum_fee": 10,
+              "minimum_fee": 1
+            }
+          }
+        ],
+        "total_amount": 100
+      }
+    ];
+
+    var taxes = [{ "name": "tax1", "description": "tax describtion", "amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } }, { "name": "tax1", "description": "tax describtion", "amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } }];
+    var customer = { "isdNumber": "965", "number": "00000000", "customerId": "", "first_name": "test", "middle_name": "test", "last_name": "test", "email": "test@test.com" };
+    var paymentReference = { "track": "track", "payment": "payment", "gateway": "gateway", "acquirer": "acquirer", "transaction": "trans_910101", "order": "order_262625", "gosellID": null };
+
+    var allConfigurations = {
+      appCredentials: appCredentials,
+      sessionParameters: {
+        paymentStatementDescriptor: "paymentStatementDescriptor",
+        transactionCurrency: "kwd",
+        isUserAllowedToSaveCard: true,
+        paymentType: "PaymentType.ALL",
+        amount: "100",
+        shipping: shipping,
+        allowedCadTypes: "CREDIT",
+        paymentitems: paymentitems,
+        paymenMetaData: { "a": "a meta", "b": "b meta" },
+        applePayMerchantID: "applePayMerchantID",
+        authorizeAction: { "timeInHours": 10, "time": 10, "type": "CAPTURE" },
+        cardHolderName: "Card Holder NAME",
+        editCardHolderName: false,
+        postURL: "https://tap.company",
+        paymentDescription: "paymentDescription",
+        destinations: "null",
+        trxMode: "TransactionMode.PURCHASE",
+        taxes: taxes,
+        merchantID: "",
+        SDKMode: "SDKMode.Sandbox",
+        customer: customer,
+        isRequires3DSecure: false,
+        receiptSettings: { "id": null, "email": false, "sms": true },
+        allowsToSaveSameCardMoreThanOnce: false,
+        paymentReference: paymentReference,
+      }
+    };
+    ```
 ---
 
 <a name="handle_sdk_result"></a>
