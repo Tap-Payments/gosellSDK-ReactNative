@@ -1,0 +1,67 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "bugs": {
+    "url": "/issues"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src/*"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/runtime": "^7.3.1",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.0.0",
+    "babel-preset-expo": "~8.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "escape-regex-string": "^1.0.6",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-native": "^3.6.0",
+    "expo": "~36.0.0",
+    "expo-keep-awake": "^8.0.0",
+    "jest": "^24.0.0",
+    "jest-enzyme": "^7.0.2",
+    "jsdom": "^15.1.1",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz"
+  },
+  "scripts": {
+    "start": "npx expo-cli start --config \"./demo/app.json\" -c",
+    "eject": "npx expo-cli eject --config \"./demo/app.json\"",
+    "test:lint": "npx eslint \"src/*.js\"",
+    "test": "npm run test:lint && npx jest"
+  },
+  "jest": {
+    "preset": "react-native",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-tests.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/demo/"
+    ],
+    "collectCoverage": true
+  },
+  "license": "ISC"
+}
