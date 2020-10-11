@@ -103,7 +103,8 @@ export default class App extends Component {
 
     console.log('start SDK');
     NativeModules.GoSellSdkReactNativePlugin.startPayment(allConfigurations, (error, status) => {
-
+      console.log(`received error => ${error}`);
+      console.log(`received status => ${status}`);
 
       var myString = JSON.stringify(status);
       console.log('callback is done');
@@ -123,8 +124,7 @@ export default class App extends Component {
       {
         statusNow: newName,
         // result: resultValue
-      },
-      callback,
+      }
     );
   }
 

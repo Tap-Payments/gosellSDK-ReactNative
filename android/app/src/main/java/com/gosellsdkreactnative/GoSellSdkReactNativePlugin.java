@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -78,11 +79,13 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             if (activity != null) {
                 GoSellSdkReactNativePlugin plugin = new GoSellSdkReactNativePlugin();
                 plugin.setup(application, activity);
+
             }
         }
 
         @Override
         public void onStart(@NonNull LifecycleOwner owner) {
+
         }
 
         @Override
@@ -106,6 +109,8 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             _activity = activity;
+
+
         }
 
         @Override
@@ -170,10 +175,10 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
 
     private void setup(
             final Application application,
-            final Activity activity) {
-        this.activity = activity;
+            final Activity activity1) {
+        this.activity = activity1;
         this.application = application;
-        this.delegate = constructDelegate(activity);
+        this.delegate = constructDelegate(activity1);
 
         observer = new LifeCycleObserver(activity);
         if (activity != null) {
@@ -181,7 +186,7 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             application.registerActivityLifecycleCallbacks(observer);
 
         } else {
-
+            application.registerActivityLifecycleCallbacks((Application.ActivityLifecycleCallbacks) delegate);
         }
     }
 
@@ -194,69 +199,17 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
         return new GoSellSdKDelegate(setupActivity);
     }
 
-    /**
-     * MethodChannel.Result wrapper that responds on the platform thread.
-     */
 
-   /* public static class MethodResultWrapper implements retrofit2.Callback {
-        *//* private MethodChannel.Result methodResult;
-         private Handler handler;
 
-         MethodResultWrapper(MethodChannel.Result result) {
-             methodResult = result;
-             handler = new Handler(Looper.getMainLooper());
-         }
-
-         @Override
-         public void success(final Object result) {
-
-             System.out.println("success coming from delegate : " + result);
-
-             handler.post(
-                     new Runnable() {
-                         @Override
-                         public void run() {
-                             methodResult.success(result);
-                         }
-                     });
-         }
-
-         @Override
-         public void error(
-                 final String errorCode, final String errorMessage, final Object errorDetails) {
-             System.out.println("error encountered................." + errorCode);
-
-             handler.post(
-                     () -> methodResult.error(errorCode,errorMessage,errorDetails));
-         }
-
-         @Override
-         public void notImplemented() {
-             handler.post(
-                     () -> methodResult.notImplemented());
-         }
- *//*
-        @Override
-        public void onResponse(Call call, Response response) {
-            System.out.println("success coming from delegate : " + response.body());
-        }
-
-        @Override
-        public void onFailure(Call call, Throwable t) {
-            System.out.println("error encountered................." + call);
-
-           *//* handler.post(
-                    () -> methodResult.error(errorCode,errorMessage,errorDetails));*//*
-        }
-    }*/
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @ReactMethod
-    public void startPayment(ReadableMap objectHashMap, Callback callback) {
-        HashMap<String, Object> args = objectHashMap.toHashMap();
+    public void startPayment(ReadableMap readableMap, Callback callback) {
+        System.out.println( "callbacktype = " + callback);
+        HashMap<String, Object> args = readableMap.toHashMap();
         System.out.println("args : " + args);
-        System.out.println("objectHashMap : " + objectHashMap);
+        System.out.println("readableMap : " + readableMap);
         System.out.println("callback..... started");
 
         if (getCurrentActivity() == null) {
@@ -265,42 +218,40 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             return;
         }
 
-        if (objectHashMap.toHashMap().equals("terminate_session")) {
+        if (readableMap.toHashMap().equals("terminate_session")) {
             System.out.println("terminate session!");
             delegate.terminateSDKSession();
             return;
         }
-        this.callback= callback;
+      //  this.callback= callback;
+
+     //   pickerCancelCallback = cancelCallback;
        // ReadableMapKeySetIterator iterator = objectHashMap.keySetIterator();
       //  ReadableMap data =  objectHashMap.getMap(  "appCredentials");
       //  callback.invoke(null, data);
      //   System.out.println("objectHashMap = " + objectHashMap + ", callback = " + callback);
      //   callback.invoke(objectHashMap.toHashMap());
-        //TODO how to pass the result callback???
-      MethodResultWrapper methodResultWrapper = new MethodResultWrapper(objectHashMap);
+
+        HashMap<String,Object> map = new HashMap<>();
+      //  map.put("message","Session react");
+       // callback.invoke("error1","message 23");
+
+        System.out.println("call back invoked " + callback);
+            //TODO how to pass the result callback???
+           // callback.invoke(writableArray,writableMap);
+
       //  startPayment(objectHashMap, callback);
-        callback.invoke( methodResultWrapper);
-        delegate.startSDK(callback, args);
+
+      //  callback.invoke( methodResultWrapper);
+
+        delegate.startSDK(args,callback);
 
 
-    }
-    public static class MethodResultWrapper implements Callback {
-        ReadableMap map;
-
-        MethodResultWrapper(ReadableMap result) {
-            map = result;
-        }
+  //  }
 
 
-        @Override
-        public void invoke(Object... args) {
-            System.out.println("args in wrapper = " + Arrays.deepToString(args));
 
-
-        }
-    }
-
-
+}
 }
 
 
