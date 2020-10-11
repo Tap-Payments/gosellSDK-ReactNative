@@ -152,6 +152,7 @@ sessionParameters: {
 }
 };
 ```
+<a name="configure_sdk_session"></a>
 
 ---
 
