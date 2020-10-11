@@ -1,15 +1,15 @@
 {
   "name": "@tap-payments/gosell-sdk-react-native",
   "version": "0.0.1-beta.2",
-  "description": "",
-  "author": "",
+  "description": "React-Ntive plugin compatible version of goSellSDK library for both Android and iOS that fully covers payment/authorization/card saving/card tokenization process inside your Android application. Original SDKS",
+  "author": "Tap Payments",
   "bugs": {
-    "url": "/issues"
+    "url": "https://github.com/Tap-Payments/gosellSDK-ReactNative/issues"
   },
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": ".git"
+    "url": "https://github.com/Tap-Payments/gosellSDK-ReactNative.git"
   },
   "private": false,
   "main": "src/index.js",
