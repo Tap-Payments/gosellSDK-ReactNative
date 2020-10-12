@@ -6,17 +6,18 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   RNGosellSdkReactNative
                    DESC
-  s.homepage     = ""
+  s.homepage     = "https://github.com/Tap-Payments/gosellSDK-ReactNative"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "11.0"
   s.source       = { :git => "https://github.com/Tap-Payments/gosellSDK-ReactNative.git", :tag => "master" }
   s.source_files  = "RNGosellSdkReactNative/**/*.{h,m}"
   s.requires_arc = true
   s.dependency 'goSellSDK', '2.2.35'
-
+  s.dependency 'SDWebImage'
   s.dependency "React"
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   #s.dependency "others"
 
 end
