@@ -152,6 +152,7 @@ public class DeserializationUtil {
         System.out.println("sessionParameters = " + sessionParameters+"customerString"+ customerString);
         JSONObject jsonObject;
         try {
+
             jsonObject = new JSONObject(customerString);
             PhoneNumber phoneNumber = new PhoneNumber(jsonObject.get("isdNumber").toString(), jsonObject.get("number").toString());
             return new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).email(jsonObject.get("email").toString()).firstName(jsonObject.get("first_name").toString())
