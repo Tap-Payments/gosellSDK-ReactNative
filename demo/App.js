@@ -20,7 +20,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Header from './components/Header';
-
+import GoSellSDK from '../src';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -141,20 +141,18 @@ export default class App extends Component {
     };
 
     console.log('start SDK');
-    NativeModules.GoSellSdkReactNativePlugin.startPayment(
-      allConfigurations,
-      (error, status) => {
-        var myString = JSON.stringify(status);
-        // console.log('callback is done');
-        console.log('status is ' + status.sdk_result);
-        console.log(myString);
-        var resultStr = String(status.sdk_result);
 
-        this.changeState(resultStr, myString, () => {
-          console.log('done');
-        });
-      },
-    );
+    GoSellSDK.startPayment(allConfigurations, (error, status) => {
+      var myString = JSON.stringify(status);
+      // console.log('callback is done');
+      console.log('status is ' + status.sdk_result);
+      console.log(myString);
+      var resultStr = String(status.sdk_result);
+
+      this.changeState(resultStr, myString, () => {
+        console.log('done');
+      });
+    });
   }
 
   changeState(newName, resultValue, callback) {
