@@ -6,12 +6,14 @@ buildscript {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        google()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
+
 
 apply plugin: 'com.android.library'
 
@@ -28,6 +30,11 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 repositories {
@@ -37,6 +44,7 @@ repositories {
         name 'Google'
     }
     maven { url 'https://jitpack.io' }
+    google()
 
 }
 

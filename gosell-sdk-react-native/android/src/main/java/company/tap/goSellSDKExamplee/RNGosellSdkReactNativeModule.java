@@ -4,7 +4,7 @@ package company.tap.goSellSDKExamplee;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
