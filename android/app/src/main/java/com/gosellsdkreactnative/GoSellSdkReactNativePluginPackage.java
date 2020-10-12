@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GoSellSdkReactNativePluginPackage implements ReactPackage  {
+public class GoSellSdkReactNativePluginPackage implements ReactPackage {
+
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.emptyList();
@@ -19,6 +20,7 @@ public class GoSellSdkReactNativePluginPackage implements ReactPackage  {
     public List<NativeModule> createNativeModules(
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
+
 
         modules.add(new GoSellSdkReactNativePlugin(reactContext));
 
