@@ -31,7 +31,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     private SDKSession sdkSession;
     private Activity activity;
-    private Callback callback;
+    private GoSellSdkReactNativePlugin callback;
 
     public GoSellSdKDelegate(Activity _activity) {
         this.activity = _activity;
@@ -40,7 +40,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startSDK(
-            HashMap<String, Object> sdkConfigurations, Callback result, Activity activity1) {
+            HashMap<String, Object> sdkConfigurations, GoSellSdkReactNativePlugin result, Activity activity1) {
         activity = activity1;
 //Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
@@ -60,7 +60,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void showSDK(HashMap<String, Object> sdkConfigurations, Callback result) {
+    private void showSDK(HashMap<String, Object> sdkConfigurations, GoSellSdkReactNativePlugin result) {
         HashMap<String, Object> sessionParameters = (HashMap<String, Object>) sdkConfigurations
                 .get("sessionParameters");
         /**
@@ -96,11 +96,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     /**
      * Configure SDK Session
-     *
-     * @param sessionParameters
+     *  @param sessionParameters
      * @param result
      */
-    private void configureSDKSession(HashMap<String, Object> sessionParameters, Callback result) {
+    private void configureSDKSession(HashMap<String, Object> sessionParameters, GoSellSdkReactNativePlugin result) {
         callback = result;
         // Instantiate SDK Session
         if (sdkSession == null)
@@ -310,12 +309,15 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("trx_mode", trx_mode);
         System.out.println("resultMap on success = " + resultMap);
         System.out.println("callback on success = " + callback);
-        callback.invoke(resultMap);
+        HashMap<String,String> map = new HashMap();
+        map.put("id",charge.getId());
+        callback.onSuccess(map);
+//        callback.invoke(resultMap);
         callback = null;
     }
 
     private void sendTokenResult(Token token, String paymentStatus) {
-        Map<String, Object> resultMap = new HashMap<>();
+        HashMap<String, String> resultMap = new HashMap<>();
 
         resultMap.put("token", token.getId());
         resultMap.put("token_currency", token.getCurrency());
@@ -323,13 +325,13 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_first_six", token.getCard().getFirstSix());
             resultMap.put("card_last_four", token.getCard().getLastFour());
             resultMap.put("card_object", token.getCard().getObject());
-            resultMap.put("card_exp_month", token.getCard().getExpirationYear());
-            resultMap.put("card_exp_year", token.getCard().getExpirationMonth());
+            resultMap.put("card_exp_month", ""+ token.getCard().getExpirationYear());
+            resultMap.put("card_exp_year", ""+token.getCard().getExpirationMonth());
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
         //pendingResult.success(resultMap);
-        callback.invoke(resultMap);
+        callback.onSuccess(resultMap);
         callback = null;
     }
 
@@ -340,7 +342,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
         //pendingResult.success(resultMap);
-        callback = (Callback) resultMap;
+        callback.onFailure();
         //pendingResult.invoke(resultMap);
         callback = null;
     }
@@ -348,7 +350,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void paymentSucceed(@NonNull Charge charge) {
-        System.out.println("paymentSucceed = " + charge.getCard() +" charge infor"+charge.getId());
+        System.out.println("paymentSucceed = " + charge.getCard() +" charge information"+charge.getId());
         sendChargeResult(charge, "SUCCESS", "CHARGE");
     }
 
@@ -410,9 +412,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @Override
     public void sessionCancelled() {
         Log.d("MainActivity", "Session Cancelled.........");
-        Map<String, Object> resultMap = new HashMap<>();
+        HashMap<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "CANCELLED");
-        callback.invoke(resultMap);
+        callback.onSuccess(resultMap);
         callback = null;
     }
 

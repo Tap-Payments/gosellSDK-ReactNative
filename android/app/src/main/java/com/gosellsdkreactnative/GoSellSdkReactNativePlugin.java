@@ -18,9 +18,9 @@ import java.util.HashMap;
 /**
  * GoSellSdkFlutterPlugin
  */
-public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
+public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule implements SDKCallBack {
     private Activity _activity;
-    private Callback callback;
+    private Callback jsCallback;
     private GoSellSdKDelegate delegate;
     private Application application;
 
@@ -64,14 +64,14 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @ReactMethod
     public void startPayment(ReadableMap readableMap, Callback callback) {
-        System.out.println("callbacktype = " + callback);
+        jsCallback = callback;
         HashMap<String, Object> args = readableMap.toHashMap();
         System.out.println("args : " + args);
         System.out.println("readableMap : " + readableMap);
         System.out.println("callback..... started" + delegate);
-        final Activity currentActivity = getCurrentActivity();
+         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
-            callback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
+            jsCallback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
             return;
         }
 
@@ -81,10 +81,22 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule {
             return;
         }
 
-        System.out.println("call back invoked " + callback);
-        delegate.startSDK(args, callback, currentActivity);
+        System.out.println("call back invoked " + jsCallback);
+        delegate.startSDK(args, this , currentActivity);
 
 
+    }
+
+
+    @Override
+    public void onSuccess(HashMap<String,String> result) {
+        System.out.println(" on success callback : "+ result);
+        jsCallback.invoke("no_activity", "SUCCESSSS SDK plugin requires a foreground activity.", null);
+    }
+
+    @Override
+    public void onFailure() {
+        System.out.println(" on failure callback : ");
     }
 }
 
