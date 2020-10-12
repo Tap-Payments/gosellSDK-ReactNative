@@ -1,7 +1,5 @@
 package com.gosellsdkreactnative;
 
-import android.app.Activity;
-
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GoSellSdkReactNativePluginPackage implements ReactPackage  {
+public class GoSellSdkReactNativePluginPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -23,7 +21,7 @@ public class GoSellSdkReactNativePluginPackage implements ReactPackage  {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        System.out.println("currct act :"+reactContext.getCurrentActivity());
+
         modules.add(new GoSellSdkReactNativePlugin(reactContext));
 
         return modules;

@@ -1,7 +1,6 @@
 package com.gosellsdkreactnative;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
@@ -39,12 +38,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
 
-          /* public void startSDK(MethodCall methodCall, MethodChannel.Result result,
-                HashMap<String, Object> sdkConfigurations) {*/
-               @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-               public void startSDK(
-                       HashMap<String, Object> sdkConfigurations, Callback result, Activity activity1) {
-                   activity = activity1;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void startSDK(
+            HashMap<String, Object> sdkConfigurations, Callback result, Activity activity1) {
+        activity = activity1;
 //Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
             finishWithAlreadyActiveError(result);
@@ -63,7 +60,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void showSDK(HashMap<String, Object> sdkConfigurations,Callback result) {
+    private void showSDK(HashMap<String, Object> sdkConfigurations, Callback result) {
         HashMap<String, Object> sessionParameters = (HashMap<String, Object>) sdkConfigurations
                 .get("sessionParameters");
         /**
@@ -77,7 +74,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         if ("SDKMode.Production".equalsIgnoreCase(sessionParameters.get("SDKMode").toString()))
             activeKey = productionKey;
         // System.out.println("activeKey : " + activeKey);
-        configureApp(activeKey, appConfigurations.get("bundleID"), appConfigurations.get("language"),activity);
+        configureApp(activeKey, appConfigurations.get("bundleID"), appConfigurations.get("language"), activity);
 
         // configureSDKThemeObject();
 
@@ -89,19 +86,20 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void configureApp(String secrete_key, String bundleID, String language, Activity activity1) {
-                   System.out.println("act val :"+ this.activity);
-this.activity = activity1;
+        System.out.println("act val :" + this.activity);
+        this.activity = activity1;
         GoSellSDK.init(this.activity, secrete_key, bundleID); // to be replaced by merchant
         GoSellSDK.setLocale(language); // to be replaced by merchant
     }
 
     /**
      * Configure SDK Session
-     *  @param sessionParameters
-     * @param result*/
+     *
+     * @param sessionParameters
+     * @param result
+     */
     private void configureSDKSession(HashMap<String, Object> sessionParameters, Callback result) {
         pendingResult = result;
         // Instantiate SDK Session
@@ -153,7 +151,7 @@ this.activity = activity1;
         }
         sdkSession.setAmount(amount); // ** Required **
 
-        sdkSession.setPaymentItems(DeserializationUtil.getPaymentItems(sessionParameters.get("paymentitems")));// **
+        //  sdkSession.setPaymentItems(DeserializationUtil.getPaymentItems(sessionParameters.get("paymentitems")));// **
         // Optional
         // ** you
         // can
@@ -163,22 +161,22 @@ this.activity = activity1;
         // list
 
         // Set Taxes array list
-        sdkSession.setTaxes(DeserializationUtil.getTaxes(sessionParameters.get("taxes")));// ** Optional ** you can pass
+        //  sdkSession.setTaxes(DeserializationUtil.getTaxes(sessionParameters.get("taxes")));// ** Optional ** you can pass
         // empty array list
 
         // Set Shipping array list
-        sdkSession.setShipping(DeserializationUtil.getShipping(sessionParameters.get("shipping")));// ** Optional ** you
+        //   sdkSession.setShipping(DeserializationUtil.getShipping(sessionParameters.get("shipping")));// ** Optional ** you
         // can pass empty
         // array list
 
         // Post URL
-        sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
+        //    sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
 
         // Payment Description
-        sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
+        //    sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
 
         // Payment Extra Info
-        sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymenMetaData")));// **
+        //    sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymenMetaData")));// **
         // Optional
         // **
         // you
@@ -199,7 +197,7 @@ this.activity = activity1;
         // null
 
         // Payment Statement Descriptor
-        sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **
+        //   sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **
         // Optional
         // **
 
@@ -212,7 +210,7 @@ this.activity = activity1;
         sdkSession.isRequires3DSecure((boolean) sessionParameters.get("isRequires3DSecure"));
 
         // Set Receipt Settings [SMS - Email ]
-        sdkSession.setReceiptSettings(DeserializationUtil.getReceipt(sessionParameters.get("receiptSettings"))); // **
+        //     sdkSession.setReceiptSettings(DeserializationUtil.getReceipt(sessionParameters.get("receiptSettings"))); // **
         // Optional
         // **
         // you
@@ -224,7 +222,7 @@ this.activity = activity1;
         // null
 
         // Set Authorize Action
-        sdkSession.setAuthorizeAction(DeserializationUtil.getAuthorizeAction(sessionParameters.get("authorizeAction"))); // **
+        //   sdkSession.setAuthorizeAction(DeserializationUtil.getAuthorizeAction(sessionParameters.get("authorizeAction"))); // **
         // Optional
         // **
         // you
@@ -235,7 +233,7 @@ this.activity = activity1;
         // or
         // null
 
-        sdkSession.setDestination(DeserializationUtil.getDestinations(sessionParameters.get("destinations"))); // **
+        //   sdkSession.setDestination(DeserializationUtil.getDestinations(sessionParameters.get("destinations"))); // **
         // Optional
         // ** you
         // can
@@ -245,10 +243,10 @@ this.activity = activity1;
         // or
         // null
 
-        sdkSession.setMerchantID(sessionParameters.get("merchantID").toString()); // ** Optional ** you can pass
+        //    sdkSession.setMerchantID(sessionParameters.get("merchantID").toString()); // ** Optional ** you can pass
         // merchant id or null
 
-        sdkSession.setCardType(DeserializationUtil.getCardType(sessionParameters.get("allowedCadTypes").toString())); // **
+        //    sdkSession.setCardType(DeserializationUtil.getCardType(sessionParameters.get("allowedCadTypes").toString())); // **
         // Optional
         // **
         // you
@@ -259,12 +257,12 @@ this.activity = activity1;
 
         sdkSession.setPaymentType(DeserializationUtil.getPaymentType(sessionParameters.get("paymentType").toString()));
 
-        sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you
+        //    sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you
         // can pass default
         // CardHolderName of
         // the
         // user .So you don't need to type it.
-        sdkSession.isUserAllowedToEnableCardHolderName((boolean) sessionParameters.get("editCardHolderName")); // **
+        //    sdkSession.isUserAllowedToEnableCardHolderName((boolean) sessionParameters.get("editCardHolderName")); // **
         // Optional
         // **
         // you
@@ -339,13 +337,15 @@ this.activity = activity1;
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
         //pendingResult.success(resultMap);
-        pendingResult.invoke(resultMap);
+        pendingResult = (Callback) resultMap;
+        //pendingResult.invoke(resultMap);
         pendingResult = null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void paymentSucceed(@NonNull Charge charge) {
+        System.out.println("paymentSucceed = " + charge);
         sendChargeResult(charge, "SUCCESS", "CHARGE");
     }
 
@@ -448,6 +448,6 @@ this.activity = activity1;
     }
 
     public void saveStateBeforeResult() {
-        System.out.println("saveStateBeforeResult called " );
+        System.out.println("saveStateBeforeResult called ");
     }
 }
