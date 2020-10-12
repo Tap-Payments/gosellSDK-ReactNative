@@ -31,7 +31,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     private SDKSession sdkSession;
     private Activity activity;
-    private Callback pendingResult;
+    private Callback callback;
 
     public GoSellSdKDelegate(Activity _activity) {
         this.activity = _activity;
@@ -101,7 +101,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
      * @param result
      */
     private void configureSDKSession(HashMap<String, Object> sessionParameters, Callback result) {
-        pendingResult = result;
+        callback = result;
         // Instantiate SDK Session
         if (sdkSession == null)
             sdkSession = new SDKSession(); // ** Required **
@@ -274,6 +274,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
+        System.out.println("charge = " + charge + ", paymentStatus = " + paymentStatus + ", trx_mode = " + trx_mode);
         Map<String, Object> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
@@ -307,8 +308,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
-        pendingResult.invoke(resultMap);
-        pendingResult = null;
+        System.out.println("resultMap on success = " + resultMap);
+        System.out.println("callback on success = " + callback);
+        callback.invoke(resultMap);
+        callback = null;
     }
 
     private void sendTokenResult(Token token, String paymentStatus) {
@@ -326,8 +329,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
         //pendingResult.success(resultMap);
-        pendingResult.invoke(resultMap);
-        pendingResult = null;
+        callback.invoke(resultMap);
+        callback = null;
     }
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
@@ -337,15 +340,15 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
         //pendingResult.success(resultMap);
-        pendingResult = (Callback) resultMap;
+        callback = (Callback) resultMap;
         //pendingResult.invoke(resultMap);
-        pendingResult = null;
+        callback = null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void paymentSucceed(@NonNull Charge charge) {
-        System.out.println("paymentSucceed = " + charge);
+        System.out.println("paymentSucceed = " + charge.getCard() +" charge infor"+charge.getId());
         sendChargeResult(charge, "SUCCESS", "CHARGE");
     }
 
@@ -409,8 +412,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
         Log.d("MainActivity", "Session Cancelled.........");
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "CANCELLED");
-        pendingResult.invoke(resultMap);
-        pendingResult = null;
+        callback.invoke(resultMap);
+        callback = null;
     }
 
     @Override
