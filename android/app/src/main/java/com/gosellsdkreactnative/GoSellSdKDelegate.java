@@ -43,7 +43,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 HashMap<String, Object> sdkConfigurations) {*/
                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                public void startSDK(
-                       HashMap<String, Object> sdkConfigurations,Callback result) {
+                       HashMap<String, Object> sdkConfigurations, Callback result, Activity activity1) {
+                   activity = activity1;
 //Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
             finishWithAlreadyActiveError(result);
@@ -76,7 +77,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         if ("SDKMode.Production".equalsIgnoreCase(sessionParameters.get("SDKMode").toString()))
             activeKey = productionKey;
         // System.out.println("activeKey : " + activeKey);
-        configureApp(activeKey, appConfigurations.get("bundleID"), appConfigurations.get("language"));
+        configureApp(activeKey, appConfigurations.get("bundleID"), appConfigurations.get("language"),activity);
 
         // configureSDKThemeObject();
 
@@ -90,8 +91,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void configureApp(String secrete_key, String bundleID, String language) {
-        GoSellSDK.init(activity, secrete_key, bundleID); // to be replaced by merchant
+    private void configureApp(String secrete_key, String bundleID, String language, Activity activity1) {
+                   System.out.println("act val :"+ this.activity);
+this.activity = activity1;
+        GoSellSDK.init(this.activity, secrete_key, bundleID); // to be replaced by merchant
         GoSellSDK.setLocale(language); // to be replaced by merchant
     }
 
