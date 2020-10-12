@@ -20,7 +20,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Header from './components/Header';
-import GoSellSDK from '../src';
+import GoSellSDK from '@tap-payments/gosell-sdk-react-native';
 export default class App extends Component {
   constructor(props) {
     super(props);
