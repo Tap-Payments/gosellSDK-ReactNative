@@ -2,6 +2,7 @@ package com.gosellsdkreactnative;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ComponentCallbacks;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,7 +47,13 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
     public GoSellSdkReactNativePlugin(ReactApplicationContext reactContext) {
         super(reactContext);
         this.application = (Application) reactContext.getApplicationContext();
+        this._activity = reactContext.getCurrentActivity();
+        System.out.println("_activity = " + _activity);
+        reactContext.addActivityEventListener(this);
+        setup(application, _activity);
     }
+
+
 
     @Override
     public String getName() {
@@ -63,102 +70,17 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
 
     }
 
-    /**
-     * LifeCycleObserver
-     */
-    private class LifeCycleObserver
-            implements Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
-        private final Activity thisActivity;
 
-        LifeCycleObserver(Activity activity) {
-            this.thisActivity = activity;
-        }
-
-        @Override
-        public void onCreate(@NonNull LifecycleOwner owner) {
-            if (activity != null) {
-                GoSellSdkReactNativePlugin plugin = new GoSellSdkReactNativePlugin();
-                plugin.setup(application, activity);
-
-            }
-        }
-
-        @Override
-        public void onStart(@NonNull LifecycleOwner owner) {
-
-        }
-
-        @Override
-        public void onResume(@NonNull LifecycleOwner owner) {
-        }
-
-        @Override
-        public void onPause(@NonNull LifecycleOwner owner) {
-        }
-
-        @Override
-        public void onStop(@NonNull LifecycleOwner owner) {
-            onActivityStopped(thisActivity);
-        }
-
-        @Override
-        public void onDestroy(@NonNull LifecycleOwner owner) {
-            onActivityDestroyed(thisActivity);
-        }
-
-        @Override
-        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            _activity = activity;
-
-
-        }
-
-        @Override
-        public void onActivityStarted(Activity activity) {
-        }
-
-        @Override
-        public void onActivityResumed(Activity activity) {
-        }
-
-        @Override
-        public void onActivityPaused(Activity activity) {
-        }
-
-        @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        }
-
-        @Override
-        public void onActivityDestroyed(Activity activity) {
-            if (thisActivity == activity && activity.getApplicationContext() != null) {
-                ((Application) activity.getApplicationContext())
-                        .unregisterActivityLifecycleCallbacks(
-                                this); // Use getApplicationContext() to avoid casting failures
-            }
-        }
-
-        @Override
-        public void onActivityStopped(Activity activity) {
-            if (thisActivity == activity) {
-                delegate.saveStateBeforeResult();
-            }
-        }
-    }
 
     /**
      * class properties
      */
-//    private MethodChannel channel;
+
     private GoSellSdKDelegate delegate;
 
-    //   private ActivityPluginBinding activityBinding;
     private Application application;
     private Activity activity;
     // This is null when not using v2 embedding;
-    private Lifecycle lifecycle;
-    private LifeCycleObserver observer;
-
 
     /**
      * Default constructor for the plugin.
@@ -175,18 +97,20 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
 
     private void setup(
             final Application application,
-            final Activity activity1) {
-        this.activity = activity1;
+            final Activity activity) {
+        this.activity = activity;
         this.application = application;
-        this.delegate = constructDelegate(activity1);
+        this.delegate = constructDelegate(activity);
 
-        observer = new LifeCycleObserver(activity);
+     //   observer = new LifeCycleObserver(activity);
         if (activity != null) {
             // V1 embedding setup for activity listeners.
-            application.registerActivityLifecycleCallbacks(observer);
+          //  application.registerActivityLifecycleCallbacks(observer);
 
         } else {
-            application.registerActivityLifecycleCallbacks((Application.ActivityLifecycleCallbacks) delegate);
+        //    application.registerComponentCallbacks((ComponentCallbacks) delegate);
+        //    application.registerActivityLifecycleCallbacks((Application.ActivityLifecycleCallbacks) delegate);
+
         }
     }
 
@@ -196,6 +120,7 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
      */
 
     private final GoSellSdKDelegate constructDelegate(final Activity setupActivity) {
+        System.out.println("setupActivity = " + setupActivity + "delegate>>>"+delegate);
         return new GoSellSdKDelegate(setupActivity);
     }
 
@@ -210,9 +135,9 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
         HashMap<String, Object> args = readableMap.toHashMap();
         System.out.println("args : " + args);
         System.out.println("readableMap : " + readableMap);
-        System.out.println("callback..... started");
-
-        if (getCurrentActivity() == null) {
+        System.out.println("callback..... started"+delegate);
+        final Activity activity = getCurrentActivity();
+        if (activity == null) {
             // rawResult.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
             callback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
             return;
@@ -240,11 +165,11 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             //TODO how to pass the result callback???
            // callback.invoke(writableArray,writableMap);
 
-      //  startPayment(objectHashMap, callback);
+        //  startPayment(objectHashMap, callback);
 
       //  callback.invoke( methodResultWrapper);
-
-        delegate.startSDK(args,callback);
+      //  activity.
+        delegate.startSDK(args,callback,activity);
 
 
   //  }

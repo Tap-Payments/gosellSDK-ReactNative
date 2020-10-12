@@ -40,12 +40,13 @@ public class DeserializationUtil {
     static private JsonElement getJsonElement(String jsonString, String type) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement;
+
         if ("array".equalsIgnoreCase(type)) {
             JsonArray jsonArray = (JsonArray) jsonParser.parse(jsonString);
             jsonElement = jsonArray;
         } else {
-            JsonObject jsonArray = (JsonObject) jsonParser.parse(jsonString);
-            jsonElement = jsonArray;
+            JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonString);
+            jsonElement = jsonObject;
         }
         return jsonElement;
     }
@@ -144,7 +145,11 @@ public class DeserializationUtil {
         System.out.println("customer object >>>>> " + sessionParameters.get("customer"));
         if (sessionParameters.get("customer") == null || "null".equalsIgnoreCase(sessionParameters.get("customer").toString()))
             return null;
-        String customerString = (String) sessionParameters.get("customer");
+      //  String customerString = (String) sessionParameters.get("customer");
+
+        Gson gson = new Gson();
+        String customerString = gson.toJson(sessionParameters.get("customer"));
+        System.out.println("sessionParameters = " + sessionParameters+"customerString"+ customerString);
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(customerString);
