@@ -1,6 +1,8 @@
-package company.tap.goSellSDKExamplee;
+package com.gosellsdkreactnative;
+
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -27,12 +29,6 @@ import company.tap.gosellapi.open.models.Reference;
 import company.tap.gosellapi.open.models.Shipping;
 import company.tap.gosellapi.open.models.Tax;
 
-/**
- * Created by AhlaamK on 10/12/20.
- * <p>
- * Copyright (c) 2020    Tap Payments.
- * All rights reserved.
- **/
 public class DeserializationUtil {
 
     static private boolean validJsonString(String jsonString) {
@@ -58,8 +54,10 @@ public class DeserializationUtil {
 
     // shipping
     static public ArrayList<Shipping> getShipping(Object jsonString) {
-        if (!validJsonString(jsonString.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString.toString(), "array");
+        Gson gson = new GsonBuilder().create();
+        String jsonString1 = gson.toJson(jsonString);
+        if (!validJsonString(jsonString1.toString())) return null;
+        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "array");
         Type listType = new TypeToken<List<Shipping>>() {
         }.getType();
         List<Shipping> shippingList = new Gson().fromJson(jsonElement, listType);
@@ -68,8 +66,10 @@ public class DeserializationUtil {
 
     // taxes
     static public ArrayList<Tax> getTaxes(Object jsonString) {
-        if (!validJsonString(jsonString.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString.toString(), "array");
+        Gson gson = new GsonBuilder().create();
+        String jsonString1 = gson.toJson(jsonString);
+        if (!validJsonString(jsonString1.toString())) return null;
+        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "array");
         Type listType = new TypeToken<List<Tax>>() {
         }.getType();
         List<Tax> taxesList = new Gson().fromJson(jsonElement, listType);
@@ -79,8 +79,11 @@ public class DeserializationUtil {
 
     // taxes
     static public ArrayList<PaymentItem> getPaymentItems(Object jsonString) {
-        if (!validJsonString(jsonString.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString.toString(), "array");
+        Gson gson = new GsonBuilder().create();
+        String jsonString1 = gson.toJson(jsonString);
+        System.out.println("jsonString1 = " + jsonString1);
+        if (!validJsonString(jsonString1.toString())) return null;
+        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "array");
         Type listType = new TypeToken<List<PaymentItem>>() {
         }.getType();
         List<PaymentItem> taxesList = new Gson().fromJson(jsonElement, listType);
@@ -90,8 +93,10 @@ public class DeserializationUtil {
 
     // metadata
     static public HashMap<String, String> getMetaData(Object jsonString) {
-        if (!validJsonString(jsonString.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString.toString(), "object");
+        Gson gson = new GsonBuilder().create();
+        String jsonString1 = gson.toJson(jsonString);
+        if (!validJsonString(jsonString1.toString())) return null;
+        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "object");
         Type listType = new TypeToken<HashMap<String, String>>() {
         }.getType();
         HashMap<String, String> metaMap = new Gson().fromJson(jsonElement, listType);
@@ -154,7 +159,7 @@ public class DeserializationUtil {
 
         Gson gson = new Gson();
         String customerString = gson.toJson(sessionParameters.get("customer"));
-        System.out.println("sessionParameters = " + sessionParameters+"customerString"+ customerString);
+        System.out.println("sessionParameters = " + sessionParameters + "customerString" + customerString);
         JSONObject jsonObject;
         try {
 
@@ -218,3 +223,4 @@ public class DeserializationUtil {
     }
 
 }
+
