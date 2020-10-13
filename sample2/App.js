@@ -34,18 +34,9 @@ export default class App1 extends Component {
     };
     this.changeState = this.changeState.bind(this);
     this.startSDK = this.startSDK.bind(this);
-
-    console.log(GoSellSdkReactNativePlugin);
-    console.log(GoSellSdkReactNativePlugin);
-    console.log(GoSellSdkReactNativePlugin);
-    console.log(GoSellSdkReactNativePlugin);
-    console.log(GoSellSdkReactNativePlugin);
+    
     if (!this.sdkModule&&GoSellSdkReactNativePlugin){ 
-      console.log('this.sdkModule');
-      console.log(this.sdkModule);
       this.sdkModule = GoSellSdkReactNativePlugin
-      console.log('this.sdkModule2');
-      console.log(this.sdkModule);
     }
 
   }
