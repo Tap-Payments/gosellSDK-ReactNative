@@ -11,6 +11,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,14 +93,23 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
 
     @Override
     public void onSuccess(HashMap<String,String> result) {
-        System.out.println(" on success callback : "+ result);
-        jsCallback.invoke(null, result);
+        WritableMap writableMap = new WritableNativeMap();
+        for (Map.Entry<String, String> entry : result.entrySet()) {
+            writableMap.putString(entry.getKey(), entry.getValue());
+        }
+        System.out.println(" on success callback : "+ writableMap);
+        jsCallback.invoke(null, writableMap);
     }
 
     @Override
-    public void onFailure(Map<String, Object> resultMap) {
+    public void onFailure(Map<String, String> resultMap) {
         System.out.println(" on failure callback : "+resultMap);
-        jsCallback.invoke(null,resultMap.entrySet());
+        WritableMap writableMap = new WritableNativeMap();
+        for (Map.Entry<String, String> entry : resultMap.entrySet()) {
+            writableMap.putString(entry.getKey(), entry.getValue());
+        }
+        System.out.println(" on failure writableMap : "+writableMap);
+        jsCallback.invoke(null,writableMap);
     }
 }
 

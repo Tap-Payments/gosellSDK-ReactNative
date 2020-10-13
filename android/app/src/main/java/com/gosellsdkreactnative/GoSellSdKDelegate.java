@@ -337,9 +337,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "SDK_ERROR");
-        resultMap.put("sdk_error_code", errorCode);
+        resultMap.put("sdk_error_code", String.valueOf(errorCode));
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
         callback.onFailure(resultMap);
