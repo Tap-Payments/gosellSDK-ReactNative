@@ -118,15 +118,18 @@ export default class App extends Component {
 
   }
 
-  changeState(newName, callback) {
+  changeState(newName, resultValue, callback) {
     console.log('the new value is' + newName);
     this.setState(
       {
         statusNow: newName,
-        // result: resultValue
-      }
+        result: resultValue,
+      },
+      callback,
     );
   }
+
+
 
 
   render() {
