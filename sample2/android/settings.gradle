@@ -1,4 +1,6 @@
 rootProject.name = 'sample'
+include ':@tap-payments_gosell-sdk-react-native'
+project(':@tap-payments_gosell-sdk-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/@tap-payments/gosell-sdk-react-native/android')
 include ':react-native-ble-plx'
 project(':react-native-ble-plx').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ble-plx/android')
 include ':react-native-battery'
