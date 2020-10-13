@@ -3,6 +3,7 @@ package com.gosellsdkreactnative;
 import android.app.Activity;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -330,7 +331,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
-        //pendingResult.success(resultMap);
+
         callback.onSuccess(resultMap);
         callback = null;
     }
@@ -341,9 +342,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_error_code", errorCode);
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
-        //pendingResult.success(resultMap);
-        callback.onFailure();
-        //pendingResult.invoke(resultMap);
+        callback.onFailure(resultMap);
         callback = null;
     }
 
@@ -397,6 +396,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
 
         sendSDKError(goSellError.getErrorCode(), goSellError.getErrorMessage(), goSellError.getErrorBody());
+        Toast.makeText(activity.getBaseContext(), goSellError.getErrorMessage(),Toast.LENGTH_LONG).show();
     }
 
     @Override
