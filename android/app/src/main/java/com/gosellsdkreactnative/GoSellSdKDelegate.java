@@ -1,6 +1,7 @@
 package com.gosellsdkreactnative;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ import company.tap.gosellapi.internal.api.models.Authorize;
 import company.tap.gosellapi.internal.api.models.Charge;
 import company.tap.gosellapi.internal.api.models.Token;
 import company.tap.gosellapi.open.controllers.SDKSession;
+import company.tap.gosellapi.open.controllers.ThemeObject;
 import company.tap.gosellapi.open.delegate.SessionDelegate;
+import company.tap.gosellapi.open.enums.AppearanceMode;
 import company.tap.gosellapi.open.exception.CurrencyException;
 import company.tap.gosellapi.open.models.CardsList;
 import company.tap.gosellapi.open.models.TapCurrency;
@@ -75,7 +78,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         // System.out.println("activeKey : " + activeKey);
         configureApp(activeKey, appConfigurations.get("bundleID"), appConfigurations.get("language"), activity);
 
-        // configureSDKThemeObject();
+        configureSDKThemeObject();
 
         /**
          * Required step. Configure SDK Session with all required data.
@@ -379,6 +382,23 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @Override
     public void userEnabledSaveCardOption(boolean saveCardEnabled) {
         System.out.println("userEnabledSaveCardOption :  " + saveCardEnabled);
+    }
+
+    private void configureSDKThemeObject() {
+
+        ThemeObject.getInstance()
+                .setAppearanceMode(AppearanceMode.WINDOWED_MODE)
+                .setSdkLanguage("en")
+                .setPayButtonResourceId(R.drawable.btn_pay_selector)  //btn_pay_merchant_selector
+                .setPayButtonTextSize(14)
+                .setPayButtonLoaderVisible(true)
+                .setPayButtonSecurityIconVisible(true)
+                .setPayButtonText("PAY BTN CAN VERY  LONGGGG LONGGGGG") // **Optional**
+
+
+
+        ;
+
     }
 
 }
