@@ -10,8 +10,10 @@ export default function  App() {
   
   console.log('goSell2');
   console.log(GoSellSdkReactNativePlugin);
+
+  if (GoSellSdkReactNativePlugin&&GoSellSdkReactNativePlugin.khaled)GoSellSdkReactNativePlugin.khaled()
+  if (GoSellSdkReactNativePlugin&&GoSellSdkReactNativePlugin.kareem)GoSellSdkReactNativePlugin.kareem((data)=>{console.log(data);})
   // console.log(GoSellSdkReactNativePlugin&& GoSellSdkReactNativePlugin.khaled && GoSellSdkReactNativePlugin.khaled());
-  console.log(GoSellSdkReactNativePlugin&& GoSellSdkReactNativePlugin.startPayment && GoSellSdkReactNativePlugin.startPayment({fuck:'fuck'}, ()=>{console.log('fuck');}));
 
   return (
     <View style={styles.container}>

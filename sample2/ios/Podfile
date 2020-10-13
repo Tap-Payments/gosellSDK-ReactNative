@@ -3,8 +3,7 @@ require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 platform :ios, '11.0'
-#use_modular_headers!
-use_frameworks!
+
 target 'sample' do
   use_unimodules!
   config = use_native_modules!
@@ -16,11 +15,6 @@ target 'sample' do
   # you should disable these next few lines.
   use_flipper!
   # pod 'RNGosellSdkReactNative', :path => '../node_modules/@tap-payments/gosell-sdk-react-native'
-
-	pod 'goSellSDK', '2.2.35', :modular_headers => true
-	pod 'SDWebImage', :modular_headers => true
-
-
   post_install do |installer|
     flipper_post_install(installer)
   end
