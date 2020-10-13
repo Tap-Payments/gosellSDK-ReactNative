@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import company.tap.goSellSDKExamplee.RNGosellSdkReactNativePackage;
 import com.polidea.reactnativeble.BlePackage;
 import com.rctbattery.BatteryManagerPackage;
 import company.tap.goSellSDKExamplee.RNGosellSdkReactNativePackage;
