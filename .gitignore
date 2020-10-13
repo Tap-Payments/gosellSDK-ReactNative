@@ -57,5 +57,5 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-/example/ios/Pods/
 /sample/ios/Pods/
+/sample2/ios/Pods/
