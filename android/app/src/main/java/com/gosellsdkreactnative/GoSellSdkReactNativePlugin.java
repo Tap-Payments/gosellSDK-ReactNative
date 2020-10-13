@@ -274,7 +274,7 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
             delegate.terminateSDKSession();
             return;
         }
-        ReadableMapKeySetIterator iterator = objectHashMap.keySetIterator()
+        ReadableMapKeySetIterator iterator = objectHashMap.keySetIterator();
      // WritableMap resultData = new WritableNativeMap();
      // resultData.putMap("map",objectHashMap);
      // callback.invoke(resultData);
