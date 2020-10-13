@@ -13,6 +13,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -91,12 +92,13 @@ public class GoSellSdkReactNativePlugin extends ReactContextBaseJavaModule imple
     @Override
     public void onSuccess(HashMap<String,String> result) {
         System.out.println(" on success callback : "+ result);
-        jsCallback.invoke("no_activity", "SUCCESSSS SDK plugin requires a foreground activity.", null);
+        jsCallback.invoke(null, result);
     }
 
     @Override
-    public void onFailure() {
-        System.out.println(" on failure callback : ");
+    public void onFailure(Map<String, Object> resultMap) {
+        System.out.println(" on failure callback : "+resultMap);
+        jsCallback.invoke(null,resultMap.entrySet());
     }
 }
 
