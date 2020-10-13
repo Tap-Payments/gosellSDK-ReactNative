@@ -3,12 +3,11 @@ package com.gosellsdkreactnative;
 import android.app.Activity;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
-import com.facebook.react.bridge.Callback;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -96,7 +95,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     /**
      * Configure SDK Session
-     *  @param sessionParameters
+     *
+     * @param sessionParameters
      * @param result
      */
     private void configureSDKSession(HashMap<String, Object> sessionParameters, GoSellSdkReactNativePlugin result) {
@@ -150,124 +150,54 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
         sdkSession.setAmount(amount); // ** Required **
 
-        //  sdkSession.setPaymentItems(DeserializationUtil.getPaymentItems(sessionParameters.get("paymentitems")));// **
-        // Optional
-        // ** you
-        // can
-        // pass
-        // empty
-        // array
-        // list
+        sdkSession.setPaymentItems(DeserializationUtil.getPaymentItems(sessionParameters.get("paymentitems")));//**Optional you can pass empty array list**//
 
         // Set Taxes array list
-        //  sdkSession.setTaxes(DeserializationUtil.getTaxes(sessionParameters.get("taxes")));// ** Optional ** you can pass
-        // empty array list
+        sdkSession.setTaxes(DeserializationUtil.getTaxes(sessionParameters.get("taxes")));// ** Optional ** you can pass empty array list
 
         // Set Shipping array list
-        //   sdkSession.setShipping(DeserializationUtil.getShipping(sessionParameters.get("shipping")));// ** Optional ** you
-        // can pass empty
-        // array list
+        sdkSession.setShipping(DeserializationUtil.getShipping(sessionParameters.get("shipping")));// ** Optional ** you can pass empty array list
 
         // Post URL
-        //    sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
+        sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
 
         // Payment Description
-        //    sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
+        sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
 
         // Payment Extra Info
-        //    sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymenMetaData")));// **
-        // Optional
-        // **
-        // you
-        // can
-        // pass
-        // empty
-        // array
-        // hash
-        // map
+        sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymenMetaData")));// **Optional** you can pass empty array hashmap//
 
         // Payment Reference
-        sdkSession.setPaymentReference(DeserializationUtil.getReference(sessionParameters.get("paymentReference"))); // **
-        // Optional
-        // **
-        // you
-        // can
-        // pass
-        // null
+        sdkSession.setPaymentReference(DeserializationUtil.getReference(sessionParameters.get("paymentReference"))); // **Optional**you can pass null
 
         // Payment Statement Descriptor
-        //   sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **
-        // Optional
-        // **
+        sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **Optional**//
 
         // Enable or Disable Saving Card
-        sdkSession.isUserAllowedToSaveCard((boolean) sessionParameters.get("isUserAllowedToSaveCard")); // ** Required
-        // ** you can
-        // pass boolean
+        sdkSession.isUserAllowedToSaveCard((boolean) sessionParameters.get("isUserAllowedToSaveCard")); // ** Required you can pass boolean //
+
 
         // Enable or Disable 3DSecure
         sdkSession.isRequires3DSecure((boolean) sessionParameters.get("isRequires3DSecure"));
 
         // Set Receipt Settings [SMS - Email ]
-        //     sdkSession.setReceiptSettings(DeserializationUtil.getReceipt(sessionParameters.get("receiptSettings"))); // **
-        // Optional
-        // **
-        // you
-        // can
-        // pass
-        // Receipt
-        // object
-        // or
-        // null
+        sdkSession.setReceiptSettings(DeserializationUtil.getReceipt(sessionParameters.get("receiptSettings"))); // **Optional** you can pass Receipt object or null
 
         // Set Authorize Action
-        //   sdkSession.setAuthorizeAction(DeserializationUtil.getAuthorizeAction(sessionParameters.get("authorizeAction"))); // **
-        // Optional
-        // **
-        // you
-        // can
-        // pass
-        // AuthorizeAction
-        // object
-        // or
-        // null
+        sdkSession.setAuthorizeAction(DeserializationUtil.getAuthorizeAction(sessionParameters.get("authorizeAction"))); // **Optional**you can pass AuthorizeAction object or null
 
-        //   sdkSession.setDestination(DeserializationUtil.getDestinations(sessionParameters.get("destinations"))); // **
-        // Optional
-        // ** you
-        // can
-        // pass
-        // Destinations
-        // object
-        // or
-        // null
+        sdkSession.setDestination(DeserializationUtil.getDestinations(sessionParameters.get("destinations"))); //**Optional you can pass Destinations object or null //
 
-        //    sdkSession.setMerchantID(sessionParameters.get("merchantID").toString()); // ** Optional ** you can pass
-        // merchant id or null
+        sdkSession.setMerchantID(sessionParameters.get("merchantID").toString()); // ** Optional ** you can pass  merchant id or null
 
-        //    sdkSession.setCardType(DeserializationUtil.getCardType(sessionParameters.get("allowedCadTypes").toString())); // **
-        // Optional
-        // **
-        // you
-        // can
-        // pass
-        // [CREDIT/DEBIT]
-        // id
+
+        sdkSession.setCardType(DeserializationUtil.getCardType(sessionParameters.get("allowedCadTypes").toString())); //**Optional ** You can pass [CREDIT/DEBIT] id.
 
         sdkSession.setPaymentType(DeserializationUtil.getPaymentType(sessionParameters.get("paymentType").toString()));
 
-        //    sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you
-        // can pass default
-        // CardHolderName of
-        // the
-        // user .So you don't need to type it.
-        //    sdkSession.isUserAllowedToEnableCardHolderName((boolean) sessionParameters.get("editCardHolderName")); // **
-        // Optional
-        // **
-        // you
-        // can enable/ disable
-        // default
-        // CardHolderName .
+        sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you can pass default CardHolderName of the user .So you don't need to type it.
+
+        sdkSession.isUserAllowedToEnableCardHolderName((boolean) sessionParameters.get("editCardHolderName")); // **Optional** you can enable/ disable  default CardHolderName .
 
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,10 +239,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("trx_mode", trx_mode);
         System.out.println("resultMap on success = " + resultMap);
         System.out.println("callback on success = " + callback);
-        HashMap<String,String> map = new HashMap();
-        map.put("id",charge.getId());
+        HashMap<String, String> map = new HashMap();
+        map.put("id", charge.getId());
         callback.onSuccess(map);
-//        callback.invoke(resultMap);
         callback = null;
     }
 
@@ -325,33 +254,32 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_first_six", token.getCard().getFirstSix());
             resultMap.put("card_last_four", token.getCard().getLastFour());
             resultMap.put("card_object", token.getCard().getObject());
-            resultMap.put("card_exp_month", ""+ token.getCard().getExpirationYear());
-            resultMap.put("card_exp_year", ""+token.getCard().getExpirationMonth());
+            resultMap.put("card_exp_month", "" + token.getCard().getExpirationYear());
+            resultMap.put("card_exp_year", "" + token.getCard().getExpirationMonth());
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
-        //pendingResult.success(resultMap);
+
         callback.onSuccess(resultMap);
         callback = null;
     }
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "SDK_ERROR");
-        resultMap.put("sdk_error_code", errorCode);
+        resultMap.put("sdk_error_code", String.valueOf(errorCode));
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
-        //pendingResult.success(resultMap);
-        callback.onFailure();
-        //pendingResult.invoke(resultMap);
+        callback.onFailure(resultMap);
         callback = null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void paymentSucceed(@NonNull Charge charge) {
-        System.out.println("paymentSucceed = " + charge.getCard() +" charge information"+charge.getId());
+        System.out.println("paymentSucceed = " + charge.getCard() + " charge information" + charge.getId());
         sendChargeResult(charge, "SUCCESS", "CHARGE");
+        Toast.makeText(activity, charge.getId(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -397,6 +325,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
 
         sendSDKError(goSellError.getErrorCode(), goSellError.getErrorMessage(), goSellError.getErrorBody());
+        Toast.makeText(activity.getBaseContext(), goSellError.getErrorMessage(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -452,7 +381,4 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println("userEnabledSaveCardOption :  " + saveCardEnabled);
     }
 
-    public void saveStateBeforeResult() {
-        System.out.println("saveStateBeforeResult called ");
-    }
 }
