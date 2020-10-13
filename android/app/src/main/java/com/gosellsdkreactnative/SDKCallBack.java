@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface SDKCallBack {
     public void onSuccess(HashMap<String,String> result);
-    public void onFailure(Map<String, Object> resultMap);
+    public void onFailure(Map<String, String> resultMap);
 }
