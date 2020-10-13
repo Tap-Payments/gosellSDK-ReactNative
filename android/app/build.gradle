@@ -124,7 +124,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
 
-        minSdkVersion 16
+        minSdkVersion 17
         compileSdkVersion 29
         targetSdkVersion 29
         multiDexEnabled true
@@ -225,6 +225,8 @@ dependencies {
         implementation 'com.google.code.gson:gson:2.8.6'
         implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
         implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+        implementation 'com.google.android.material:material:1.2.1'
+         implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
 
 }
 
