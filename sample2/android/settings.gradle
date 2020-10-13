@@ -1,0 +1,15 @@
+rootProject.name = 'sample'
+include ':react-native-ble-plx'
+project(':react-native-ble-plx').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ble-plx/android')
+include ':react-native-battery'
+project(':react-native-battery').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-battery/android')
+include ':@tap-payments_gosell-sdk-react-native'
+project(':@tap-payments_gosell-sdk-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/@tap-payments/gosell-sdk-react-native/android')
+
+apply from: '../node_modules/react-native-unimodules/gradle.groovy'
+includeUnimodulesProjects()
+
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+applyNativeModulesSettingsGradle(settings)
+
+include ':app'
