@@ -12,8 +12,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule implements SDKCallBack {
 
@@ -21,11 +24,17 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   private GoSellSdKDelegate delegate;
   private Application application;
   private final ReactApplicationContext reactContext;
+  private Activity _activity;
+
+
 
   public RNGosellSdkReactNativeModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
     this.application = (Application) reactContext.getApplicationContext();
+    this._activity = reactContext.getCurrentActivity();
+    System.out.println("_activity = " + _activity);
+    setup(application, _activity);
 
   }
 
@@ -34,16 +43,31 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
     return "RNGosellSdkReactNative";
   }
 
-
   @Override
-  public void onSuccess(HashMap<String, String> result) {
-
+  public void onSuccess(HashMap<String,String> result) {
+    System.out.println(" on success callback : "+ result);
+    jsCallback.invoke(null, result);
+    WritableMap writableMap = new WritableNativeMap();
+    for (Map.Entry<String, String> entry : result.entrySet()) {
+      writableMap.putString(entry.getKey(), entry.getValue());
+    }
+    System.out.println(" on success callback : "+ writableMap);
+    jsCallback.invoke(null, writableMap);
   }
 
   @Override
-  public void onFailure(HashMap<String, String> result) {
+  public void onFailure(Map<String, String> resultMap) {
 
-  }
+      System.out.println(" on failure callback : "+resultMap);
+      jsCallback.invoke(null,resultMap.entrySet());
+      WritableMap writableMap = new WritableNativeMap();
+      for (Map.Entry<String, String> entry : resultMap.entrySet()) {
+        writableMap.putString(entry.getKey(), entry.getValue());
+      }
+      System.out.println(" on failure writableMap : "+writableMap);
+      jsCallback.invoke(null,writableMap);
+    }
+
   /**
    * setup
    */
@@ -71,7 +95,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   @ReactMethod
   public void startPayment(ReadableMap readableMap, Callback callback) {
     jsCallback = callback;
-    HashMap<String, Object> args = (HashMap<String, Object>) readableMap;
+    HashMap<String, Object> args = readableMap.toHashMap();
     System.out.println("args : " + args);
     System.out.println("readableMap : " + readableMap);
     System.out.println("callback..... started" + delegate);
@@ -81,7 +105,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
       return;
     }
 
-    if (readableMap.equals("terminate_session")) {
+    if (readableMap.toHashMap().equals("terminate_session")) {
       System.out.println("terminate session!");
       delegate.terminateSDKSession();
       return;

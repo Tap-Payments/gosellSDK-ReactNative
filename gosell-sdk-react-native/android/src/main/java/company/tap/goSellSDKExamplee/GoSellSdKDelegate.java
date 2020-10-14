@@ -99,6 +99,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
      * @param sessionParameters
      * @param result
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void configureSDKSession(HashMap<String, Object> sessionParameters, RNGosellSdkReactNativeModule result) {
         callback = result;
         // Instantiate SDK Session
@@ -265,7 +266,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
-        Map<String, String> resultMap = new HashMap<>();
+        HashMap<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "SDK_ERROR");
         resultMap.put("sdk_error_code", String.valueOf(errorCode));
         resultMap.put("sdk_error_message", errorMessage);
