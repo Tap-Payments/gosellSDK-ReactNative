@@ -1,3 +1,5 @@
+import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+
 const transactionCurrency = 'kwd';
 const shipping = [
     {
@@ -68,21 +70,23 @@ const paymentReference = {
     gosellID: null,
 };
 
+const appCredentials = {
+    production_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'Android-Live-KEY',
+    language: RNGoSell.goSellSDKModels.Languages.EN,//'en',
+    sandbox_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'Android-SANDBOX-KEY',
+    bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'ANDROIID-PACKAGE-NAME',
+}
+
 const allConfigurations = {
-    appCredentials: {
-        production_secrete_key: 'YOUR_SANDBOX_SECRET_KEY',
-        language: 'en',
-        sandbox_secrete_key: 'YOUR_SANDBOX_SECRET_KEY',
-        bundleID: 'company.tap.goSellSDKExamplee',
-    },
+    appCredentials: appCredentials,
     sessionParameters: {
         paymentStatementDescriptor: 'paymentStatementDescriptor',
         transactionCurrency: 'kwd',
         isUserAllowedToSaveCard: true,
-        paymentType: 'PaymentType.ALL',
+        paymentType: RNGoSell.goSellSDKModels.PaymentTypes.ALL,//'PaymentType.ALL',
         amount: '100',
         shipping: shipping,
-        allowedCadTypes: 'CREDIT',
+        allowedCadTypes: RNGoSell.goSellSDKModels.AllowedCadTypes.CREDIT,//'CREDIT',
         paymentitems: paymentitems,
         paymenMetaData: { a: 'a meta', b: 'b meta' },
         applePayMerchantID: 'applePayMerchantID',
@@ -92,10 +96,10 @@ const allConfigurations = {
         postURL: 'https://tap.company',
         paymentDescription: 'paymentDescription',
         destinations: 'null',
-        trxMode: 'TransactionMode.PURCHASE',
+        trxMode: RNGoSell.goSellSDKModels.TrxMode.PURCHASE,//'TransactionMode.PURCHASE',
         taxes: taxes,
         merchantID: '',
-        SDKMode: 'SDKMode.Sandbox',
+        SDKMode: RNGoSell.goSellSDKModels.SDKMode.Sandbox,//'SDKMode.Sandbox',
         customer: customer,
         isRequires3DSecure: false,
         receiptSettings: { id: null, email: false, sms: true },
