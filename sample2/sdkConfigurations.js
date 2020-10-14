@@ -1,3 +1,5 @@
+// import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+
 const transactionCurrency = 'kwd';
 const shipping = [
     {
@@ -68,13 +70,15 @@ const paymentReference = {
     gosellID: null,
 };
 
+const appCredentials = {
+    production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'Android-Live-KEY',
+    language: 'en',
+    sandbox_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'Android-SANDBOX-KEY',
+    bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'ANDROIID-PACKAGE-NAME',
+}
+
 const allConfigurations = {
-    appCredentials: {
-        production_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
-        language: 'en',
-        sandbox_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
-        bundleID: 'company.tap.goSellSDKExamplee',
-    },
+    appCredentials: appCredentials,
     sessionParameters: {
         paymentStatementDescriptor: 'paymentStatementDescriptor',
         transactionCurrency: 'kwd',

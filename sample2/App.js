@@ -21,7 +21,7 @@ import {
 } from 'react-native';
 import Header from './components/Header';
 import RNGoSell from '@tap-payments/gosell-sdk-react-native';
-import sdkConfigurations from './sdkConfigurations'
+import sdkConfigurations from './sdkConfigurations';
 
 
 export default class App extends Component {
@@ -34,6 +34,8 @@ export default class App extends Component {
     this.changeState = this.changeState.bind(this);
     this.startSDK = this.startSDK.bind(this);
     this.handleResult = this.handleResult.bind(this);
+    this.handleSDKResult = this.handleSDKResult.bind(this);
+    this.printSDKResult = this.printSDKResult.bind(this);
 
     if (!this.sdkModule && RNGoSell && RNGoSell.goSellSDK) {
       this.sdkModule = RNGoSell.goSellSDK
@@ -55,10 +57,67 @@ export default class App extends Component {
     console.log('status is ' + status.sdk_result);
     console.log(myString);
     var resultStr = String(status.sdk_result);
+    switch (resultStr) {
+      case 'SUCCESS':
+        this.handleSDKResult(status)
+        break
+      case 'FAILED':
+        this.handleSDKResult(status)
+        break
+      case "SDK_ERROR":
+        console.log('sdk error............');
+        console.log(status['sdk_error_code']);
+        console.log(status['sdk_error_message']);
+        console.log(status['sdk_error_description']);
+        console.log('sdk error............');
+        break
+      case "NOT_IMPLEMENTED":
+        break
+    }
     this.changeState(resultStr, myString, () => {
       console.log('done');
     });
   }
+
+  handleSDKResult(result) {
+    console.log('trx_mode::::');
+    console.log(result['trx_mode'])
+    switch (result['trx_mode']) {
+      case "CHARGE":
+        console.log('Charge');
+        console.log(result);
+        this.printSDKResult(result);
+        break;
+
+      case "AUTHORIZE":
+        this.printSDKResult(result);
+        break;
+
+      case "SAVE_CARD":
+        this.printSDKResult(result);
+        break;
+
+      case "TOKENIZE":
+        console.log('TOKENIZE token : ' + result[token]);
+        console.log('TOKENIZE token_currency : ' + result[token_currency]);
+        console.log('TOKENIZE card_first_six : ' + result[card_first_six]);
+        console.log('TOKENIZE card_last_four : ' + result[card_last_four]);
+        console.log('TOKENIZE card_object : ' + result[card_object]);
+        console.log('TOKENIZE card_exp_month : ' + result[card_exp_month]);
+        console.log('TOKENIZE card_exp_year : ' + result[card_exp_year]);
+
+        // responseID = tapSDKResult['token'];
+        break;
+    }
+  }
+
+  printSDKResult(result) {
+    if (!result) return
+    Object.keys(result).map((key) => {
+      console.log(`${result['trx_mode']}\t${key}:\t\t\t${result[key]}`);
+    })
+  }
+
 
   changeState(newName, resultValue, callback) {
     console.log('the new value is' + newName);
