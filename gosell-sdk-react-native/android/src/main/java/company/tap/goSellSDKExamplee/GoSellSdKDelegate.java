@@ -205,7 +205,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
         System.out.println("charge = " + charge + ", paymentStatus = " + paymentStatus + ", trx_mode = " + trx_mode);
-        Map<String, Object> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
         resultMap.put("charge_id", charge.getId());
