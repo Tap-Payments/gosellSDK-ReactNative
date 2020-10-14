@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,12 +20,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Header from './components/Header';
-import GoSellSdkReactNativePlugin from '@tap-payments/gosell-sdk-react-native';
+import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+import sdkConfigurations from './sdkConfigurations'
 
 
-
-
-export default class App1 extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,134 +33,30 @@ export default class App1 extends Component {
     };
     this.changeState = this.changeState.bind(this);
     this.startSDK = this.startSDK.bind(this);
-    
-    if (!this.sdkModule&&GoSellSdkReactNativePlugin){ 
-      this.sdkModule = GoSellSdkReactNativePlugin
-    }
+    this.handleResult = this.handleResult.bind(this);
 
+    if (!this.sdkModule && RNGoSell && RNGoSell.goSellSDK) {
+      this.sdkModule = RNGoSell.goSellSDK
+    }
+    if (!this.sdkModule && RNGoSell && RNGoSell.goSellSDKModels) {
+      this.sdkModels = RNGoSell.goSellSDKModels
+    }
   }
 
   startSDK() {
-    // console.log('this' + this)
-    var transactionCurrency = 'kwd';
-    var shipping = [
-      {
-        name: 'shipping 1',
-        description: 'shiping description 1',
-        amount: 100.0,
-      },
-    ];
-
-    var paymentitems = [
-      {
-        amount_per_unit: 1,
-        description: 'Item 1 Apple',
-        discount: {
-          type: 'F',
-          value: 10,
-          maximum_fee: 10,
-          minimum_fee: 1,
-        },
-        name: 'item1',
-        quantity: {
-          value: 1,
-        },
-        taxes: [
-          {
-            name: 'tax1',
-            description: 'tax describtion',
-            amount: {
-              type: 'F',
-              value: 10,
-              maximum_fee: 10,
-              minimum_fee: 1,
-            },
-          },
-        ],
-        total_amount: 100,
-      },
-    ];
-
-    var taxes = [
-      {
-        name: 'tax1',
-        description: 'tax describtion',
-        amount: {type: 'F', value: 10.0, maximum_fee: 10.0, minimum_fee: 1.0},
-      },
-      {
-        name: 'tax1',
-        description: 'tax describtion',
-        amount: {type: 'F', value: 10.0, maximum_fee: 10.0, minimum_fee: 1.0},
-      },
-    ];
-    var customer = {
-      isdNumber: '965',
-      number: '00000000',
-      customerId: '',
-      first_name: 'test',
-      middle_name: 'test',
-      last_name: 'test',
-      email: 'test@test.com',
-    };
-    var paymentReference = {
-      track: 'track',
-      payment: 'payment',
-      gateway: 'gateway',
-      acquirer: 'acquirer',
-      transaction: 'trans_910101',
-      order: 'order_262625',
-      gosellID: null,
-    };
-
-    var allConfigurations = {
-      appCredentials: {
-        production_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
-        language: 'en',
-        sandbox_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
-        bundleID: 'company.tap.goSellSDKExamplee',
-      },
-      sessionParameters: {
-        paymentStatementDescriptor: 'paymentStatementDescriptor',
-        transactionCurrency: 'kwd',
-        isUserAllowedToSaveCard: true,
-        paymentType: 'PaymentType.ALL',
-        amount: '100',
-        shipping: shipping,
-        allowedCadTypes: 'CREDIT',
-        paymentitems: paymentitems,
-        paymenMetaData: {a: 'a meta', b: 'b meta'},
-        applePayMerchantID: 'applePayMerchantID',
-        authorizeAction: {timeInHours: 10, time: 10, type: 'CAPTURE'},
-        cardHolderName: 'Card Holder NAME',
-        editCardHolderName: false,
-        postURL: 'https://tap.company',
-        paymentDescription: 'paymentDescription',
-        destinations: 'null',
-        trxMode: 'TransactionMode.PURCHASE',
-        taxes: taxes,
-        merchantID: '',
-        SDKMode: 'SDKMode.Sandbox',
-        customer: customer,
-        isRequires3DSecure: false,
-        receiptSettings: {id: null, email: false, sms: true},
-        allowsToSaveSameCardMoreThanOnce: false,
-        paymentReference: paymentReference,
-      },
-    };
-
     console.log('start SDK');
     console.log(this.sdkModule);
 
-    this.sdkModule&&  this.sdkModule.startPayment(allConfigurations, (error, status) => {
-      var myString = JSON.stringify(status);
-      // console.log('callback is done');
-      console.log('status is ' + status.sdk_result);
-      console.log(myString);
-      var resultStr = String(status.sdk_result);
+    this.sdkModule && this.sdkModule.startPayment(sdkConfigurations, this.handleResult)
+  }
 
-      this.changeState(resultStr, myString, () => {
-        console.log('done');
-      });
+  handleResult(error, status) {
+    var myString = JSON.stringify(status);
+    console.log('status is ' + status.sdk_result);
+    console.log(myString);
+    var resultStr = String(status.sdk_result);
+    this.changeState(resultStr, myString, () => {
+      console.log('done');
     });
   }
 
@@ -177,16 +72,13 @@ export default class App1 extends Component {
   }
 
   render() {
-    console.log(GoSellSdkReactNativePlugin);
-
-
     const statusbar =
       Platform.OS == 'ios' ? (
         <StatusBar backgroundColor="blue" barStyle="light-content" />
       ) : (
-        <View />
-      );
-    const {statusNow} = this.state;
+          <View />
+        );
+    const { statusNow } = this.state;
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.container}>
@@ -213,8 +105,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   statusbar: {

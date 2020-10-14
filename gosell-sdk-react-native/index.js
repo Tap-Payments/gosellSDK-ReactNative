@@ -1,6 +1,8 @@
 
 import { NativeModules } from 'react-native';
-
+import goSellModels from './models'
 const { RNGosellSdkReactNative } = NativeModules;
 
-export default RNGosellSdkReactNative;
+export default { goSellSDK: RNGosellSdkReactNative, goSellSDKModels: { ...goSellModels } };
+
+
