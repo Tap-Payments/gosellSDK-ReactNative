@@ -1,5 +1,3 @@
-import RNGoSell from '@tap-payments/gosell-sdk-react-native';
-
 const transactionCurrency = 'kwd';
 const shipping = [
     {
@@ -70,23 +68,21 @@ const paymentReference = {
     gosellID: null,
 };
 
-const appCredentials = {
-    production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'Android-Live-KEY',
-    language: RNGoSell.goSellSDKModels.Languages.EN,//'en',
-    sandbox_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'Android-SANDBOX-KEY',
-    bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'ANDROIID-PACKAGE-NAME',
-}
-
 const allConfigurations = {
-    appCredentials: appCredentials,
+    appCredentials: {
+        production_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
+        language: 'en',
+        sandbox_secrete_key: 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA',
+        bundleID: 'company.tap.goSellSDKExamplee',
+    },
     sessionParameters: {
         paymentStatementDescriptor: 'paymentStatementDescriptor',
         transactionCurrency: 'kwd',
         isUserAllowedToSaveCard: true,
-        paymentType: RNGoSell.goSellSDKModels.PaymentTypes.ALL,//'PaymentType.ALL',
+        paymentType: 'PaymentType.ALL',
         amount: '100',
         shipping: shipping,
-        allowedCadTypes: RNGoSell.goSellSDKModels.AllowedCadTypes.CREDIT,//'CREDIT',
+        allowedCadTypes: 'CREDIT',
         paymentitems: paymentitems,
         paymenMetaData: { a: 'a meta', b: 'b meta' },
         applePayMerchantID: 'applePayMerchantID',
@@ -96,10 +92,10 @@ const allConfigurations = {
         postURL: 'https://tap.company',
         paymentDescription: 'paymentDescription',
         destinations: 'null',
-        trxMode: RNGoSell.goSellSDKModels.TrxMode.PURCHASE,//'TransactionMode.PURCHASE',
+        trxMode: 'TransactionMode.PURCHASE',
         taxes: taxes,
         merchantID: '',
-        SDKMode: RNGoSell.goSellSDKModels.SDKMode.Sandbox,//'SDKMode.Sandbox',
+        SDKMode: 'SDKMode.Sandbox',
         customer: customer,
         isRequires3DSecure: false,
         receiptSettings: { id: null, email: false, sms: true },
