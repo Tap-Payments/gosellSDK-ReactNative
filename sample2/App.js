@@ -87,13 +87,13 @@ export default class App extends Component {
           <Text style={styles.statusText}> Status: {statusNow}</Text>
           <Text style={styles.resultText}>{this.state.result}</Text>
           <View style={styles.bottom}>
-            {Platform.OS == 'ios' ?  
-            <TouchableOpacity onPress={this.startSDK}>
-              <View style={styles.payButtonBg}>
-                <Text style={styles.payButtonText}>Start Payment</Text>
-              </View>:
-            </TouchableOpacity>
-            :<Button onPress={this.startSDK} {...styles.payButtonBg} title='Start Payment'/>
+            {Platform.OS == 'ios' ?
+              <TouchableOpacity onPress={this.startSDK}>
+                <View style={styles.payButtonBg}>
+                  <Text style={styles.payButtonText}>Start Payment</Text>
+                </View>
+              </TouchableOpacity>
+              : <Button onPress={this.startSDK} {...styles.payButtonBg} title='Start Payment' />
             }
           </View>
         </View>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   payButtonBg: {
-    alignItems: 'center',  
+    alignItems: 'center',
     color: '#25cf1f',
     backgroundColor: '#25cf1f',
     paddingVertical: 12,
