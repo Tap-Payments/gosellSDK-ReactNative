@@ -371,7 +371,7 @@ PODS:
   - SwiftyRSA (1.6.0):
     - SwiftyRSA/ObjC (= 1.6.0)
   - SwiftyRSA/ObjC (1.6.0)
-  - TapAdditionsKitV2 (0.0.4):
+  - TapAdditionsKitV2 (0.0.3):
     - SwiftLint
     - TapSwiftFixes/Exceptions
     - TapSwiftFixes/Threading
@@ -716,7 +716,7 @@ SPEC CHECKSUMS:
   RNScreens: b748efec66e095134c7166ca333b628cd7e6f3e2
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftyRSA: 3b9c9179744217951facc6a3e9ae8d8c97061ffa
-  TapAdditionsKitV2: 44eb28e3a2c70a30825c71a236964a3f823b37e0
+  TapAdditionsKitV2: 5752ee6837d690d4f38449d83155ab631fc4fc13
   TapApplicationV2: d5299d0f5bac323ece9a3f03605d8ab0b59d4b66
   TapBundleLocalization: c7d7c14850223b0ef447aca1269d7308f78d54f9
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
