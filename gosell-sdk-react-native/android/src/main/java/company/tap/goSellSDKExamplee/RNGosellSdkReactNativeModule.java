@@ -46,7 +46,6 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   @Override
   public void onSuccess(HashMap<String,String> result) {
     System.out.println(" on success callback : "+ result);
-    jsCallback.invoke(null, result);
     WritableMap writableMap = new WritableNativeMap();
     for (Map.Entry<String, String> entry : result.entrySet()) {
       writableMap.putString(entry.getKey(), entry.getValue());
@@ -58,8 +57,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   @Override
   public void onFailure(Map<String, String> resultMap) {
 
-      System.out.println(" on failure callback : "+resultMap);
-      jsCallback.invoke(null,resultMap.entrySet());
+    System.out.println(" on failure callback : "+resultMap);
       WritableMap writableMap = new WritableNativeMap();
       for (Map.Entry<String, String> entry : resultMap.entrySet()) {
         writableMap.putString(entry.getKey(), entry.getValue());
