@@ -1,6 +1,7 @@
 package company.tap.goSellSDKExamplee;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by AhlaamK on 10/12/20.
@@ -10,5 +11,5 @@ import java.util.HashMap;
  **/
 public interface SDKCallBack {
     public void onSuccess(HashMap<String,String> result);
-    public void onFailure(HashMap<String, String> error);
+    public void onFailure(Map<String, String> error);
 }
