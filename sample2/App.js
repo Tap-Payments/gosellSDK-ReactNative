@@ -98,13 +98,9 @@ export default class App extends Component {
         break;
 
       case "TOKENIZE":
-        console.log('TOKENIZE token : ' + result[token]);
-        console.log('TOKENIZE token_currency : ' + result[token_currency]);
-        console.log('TOKENIZE card_first_six : ' + result[card_first_six]);
-        console.log('TOKENIZE card_last_four : ' + result[card_last_four]);
-        console.log('TOKENIZE card_object : ' + result[card_object]);
-        console.log('TOKENIZE card_exp_month : ' + result[card_exp_month]);
-        console.log('TOKENIZE card_exp_year : ' + result[card_exp_year]);
+        Object.keys(result).map((key) => {
+          console.log(`TOKENIZE \t${key}:\t\t\t${result[key]}`);
+        })
 
         // responseID = tapSDKResult['token'];
         break;
