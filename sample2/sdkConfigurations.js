@@ -80,7 +80,7 @@ const paymentReference = {
 
 const appCredentials = {
     production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
-    language: Languages.AR,
+    language: Languages.EN,
     sandbox_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
     bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'company.tap.goSellSDKExample',
 }
