@@ -14,7 +14,7 @@ Original SDKS
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-   1. Install goSellSDK using npm (#installation_with_npm)
+   1. [Install goSellSDK using npm](#installation_with_npm)
 3. [Usage](#usage)
    1. [Configure Your App](#configure_your_app)
    2. [Configure SDK Session](#configure_sdk_session)
