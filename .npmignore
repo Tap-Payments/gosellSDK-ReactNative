@@ -1,0 +1,15 @@
+.github
+.travis
+docs
+example
+example_tmp
+example_podspec
+tmp
+website
+.editorconfig
+.eslintrc
+.travis.yml
+Makefile
+*~
+*.tgz
+.envrc
