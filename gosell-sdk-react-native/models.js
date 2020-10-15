@@ -28,13 +28,10 @@ const SDKMode = {
 }
 
 
-const config = {
+module.exports = {
     Languages: Languages,
     PaymentTypes: PaymentTypes,
     AllowedCadTypes: AllowedCadTypes,
     TrxMode: TrxMode,
     SDKMode: SDKMode
 }
-
-
-export default config 
