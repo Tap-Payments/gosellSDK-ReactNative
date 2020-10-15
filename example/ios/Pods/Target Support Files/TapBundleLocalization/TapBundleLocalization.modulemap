@@ -1,6 +1,0 @@
-module TapBundleLocalization {
-  umbrella header "TapBundleLocalization-umbrella.h"
-
-  export *
-  module * { export * }
-}

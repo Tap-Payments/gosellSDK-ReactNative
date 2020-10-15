@@ -1,6 +1,0 @@
-module TapEditableViewV2 {
-  umbrella header "TapEditableViewV2-umbrella.h"
-
-  export *
-  module * { export * }
-}
