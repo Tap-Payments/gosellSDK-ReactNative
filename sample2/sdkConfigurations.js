@@ -1,4 +1,11 @@
-// import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+const {
+Languages,
+PaymentTypes,
+AllowedCadTypes,
+TrxMode,
+SDKMode
+}= RNGoSell.goSellSDKModels;
 
 const transactionCurrency = 'kwd';
 const shipping = [
@@ -73,7 +80,7 @@ const paymentReference = {
 
 const appCredentials = {
     production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
-    language: 'en',
+    language: Languages.AR,
     sandbox_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
     bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'company.tap.goSellSDKExample',
 }
@@ -84,10 +91,10 @@ const allConfigurations = {
         paymentStatementDescriptor: 'paymentStatementDescriptor',
         transactionCurrency: 'kwd',
         isUserAllowedToSaveCard: true,
-        paymentType: 'PaymentType.ALL',
+        paymentType: PaymentTypes.ALL,
         amount: '100',
         shipping: shipping,
-        allowedCadTypes: 'CREDIT',
+        allowedCadTypes:AllowedCadTypes.CREDIT,
         paymentitems: paymentitems,
         paymenMetaData: { a: 'a meta', b: 'b meta' },
         applePayMerchantID: 'applePayMerchantID',
@@ -97,10 +104,10 @@ const allConfigurations = {
         postURL: 'https://tap.company',
         paymentDescription: 'paymentDescription',
         destinations: 'null',
-        trxMode: 'TransactionMode.PURCHASE',
+        trxMode: TrxMode.PURCHASE,
         taxes: taxes,
         merchantID: '',
-        SDKMode: 'SDKMode.Sandbox',
+        SDKMode: SDKMode.Sandbox,
         customer: customer,
         isRequires3DSecure: false,
         receiptSettings: { id: null, email: false, sms: true },

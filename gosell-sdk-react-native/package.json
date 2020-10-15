@@ -1,6 +1,6 @@
 {
   "name": "@tap-payments/gosell-sdk-react-native",
-  "version": "0.0.1-beta.21",
+  "version": "0.0.1-beta.22",
   "description": "",
   "main": "index.js",
   "scripts": {
