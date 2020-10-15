@@ -70,8 +70,9 @@ const paymentReference = {
     gosellID: null,
 };
 
+
 const appCredentials = {
-    production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'Android-Live-KEY',
+    production_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
     language: 'en',
     sandbox_secrete_key: (Platform.OS == 'ios') ? 'sk_test_cvSHaplrPNkJO7dhoUxDYjqA' : 'sk_test_kovrMB0mupFJXfNZWx6Etg5y',
     bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'company.tap.goSellSDKExample',
