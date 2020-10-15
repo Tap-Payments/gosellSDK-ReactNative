@@ -1,0 +1,6 @@
+module TapApplicationV2 {
+  umbrella header "TapApplicationV2-umbrella.h"
+
+  export *
+  module * { export * }
+}

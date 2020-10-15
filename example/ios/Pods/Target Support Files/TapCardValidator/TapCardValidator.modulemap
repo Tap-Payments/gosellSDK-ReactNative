@@ -1,0 +1,6 @@
+module TapCardValidator {
+  umbrella header "TapCardValidator-umbrella.h"
+
+  export *
+  module * { export * }
+}

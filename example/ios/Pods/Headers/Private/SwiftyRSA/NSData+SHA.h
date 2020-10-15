@@ -1,0 +1,1 @@
+../../../SwiftyRSA/Source/NSData+SHA.h

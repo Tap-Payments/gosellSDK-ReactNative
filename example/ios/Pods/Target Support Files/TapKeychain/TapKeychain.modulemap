@@ -1,0 +1,6 @@
+module TapKeychain {
+  umbrella header "TapKeychain-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+module TapNetworkManagerV2 {
+  umbrella header "TapNetworkManagerV2-umbrella.h"
+
+  export *
+  module * { export * }
+}
