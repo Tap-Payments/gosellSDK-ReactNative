@@ -14,12 +14,13 @@ Original SDKS
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-   1. [Installation with npm]
+   1. Install goSellSDK using npm (#installation_with_npm)
 3. [Usage](#usage)
    1. [Configure Your App](#configure_your_app)
    2. [Configure SDK Session](#configure_sdk_session)
    3. [Use Tap Pay Button](#tap_pay_button)
    4. [Handle SDK Result](#handle_sdk_result)
+4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
 
@@ -39,14 +40,18 @@ To use the SDK the following requirements must be met:
 
 ---
 
-<a name="installation_with_pubspec"></a>
+<a name="installation_with_npm"></a>
 
-### Include goSellSDK plugin as a dependency in your package.json
-
+### Install goSellSDK using npm
+###### Open Terminal
 ```
- "dependencies: {
-     "go_sell_sdk_react_native": "0.0.1"
- }
+npm i @tap-payments/gosell-sdk-react-native@0.0.1-beta.14
+```
+
+### Install pods for iOS
+```
+cd ios
+pod install
 ```
 
 ---
@@ -57,7 +62,7 @@ To use the SDK the following requirements must be met:
 
 `goSellSDK` should be set up. To set it up, add the following lines of code somewhere in your project and make sure they will be called before any usage of `goSellSDK`.
 
-```
+``` javascript
 /**
  * Configure App. (You must get those keys from tap)
  */
@@ -75,7 +80,7 @@ To use the SDK the following requirements must be met:
 **Configure SDK Session Example**
 
 ###### Transaction Currency
-```
+``` javascript
 var transactionCurrency = "kwd";
 var shipping = [{
 name: "shipping 1",
@@ -84,7 +89,7 @@ amount: 100.0
 }];
 ```
 ###### Payment Items
-```
+``` javascript
 var paymentitems = [
 {
   "amount_per_unit": 1,
@@ -116,7 +121,7 @@ var paymentitems = [
 ];
 ```
 ###### Taxes
-```
+``` javascript
 var taxes = [{ "name": "tax1", 
 "description": "tax describtion",
 "amount": { "type": "F", "value": 10.0, "maximum_fee": 10.0, "minimum_fee": 1.0 } },
@@ -132,7 +137,7 @@ var taxes = [{ "name": "tax1",
  "email": "test@test.com" };
  ```
  ###### Payment Reference
- ```
+ ``` javascript
  var paymentReference = { "track": "track",
  "payment": "payment", 
  "gateway": "gateway",
@@ -141,7 +146,7 @@ var taxes = [{ "name": "tax1",
  "order": "order_262625",
  "gosellID": null };
  ```
-```
+``` javascript
 var allConfigurations = {
 appCredentials: appCredentials,
 sessionParameters: {
@@ -178,7 +183,7 @@ sessionParameters: {
 
 <a name="tap_pay_button"></a>
 **Use Tap Pay Button**
-```
+``` javascript
 render() {
     const statusbar = (Platform.OS == 'ios') ? <StatusBar backgroundColor="blue" barStyle="light-content" /> : <View />
     const { statusNow } = this.state;
@@ -186,7 +191,6 @@ render() {
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.container}>
           {statusbar}
-          <Header title="Plugin Example app" />
           <Text style={styles.statusText}> Status: {statusNow}</Text>
           <Text style={styles.resultText} >{this.state.result}</Text>
           <View style={styles.bottom}>
@@ -204,7 +208,7 @@ render() {
   }
 }
 ```
-```
+``` javascript
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
@@ -254,3 +258,18 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
+
+---
+
+<a name="common_issues"></a>
+
+## Common Issues
+#### iOS
+1. Undefined symbol:
+   1. Undefined symbol: __swift_FORCE_LOAD_$_swiftWebKit
+   2. Undefined symbol: __swift_FORCE_LOAD_$_swiftUniformTypeIdentifiers
+   3. Undefined symbol: __swift_FORCE_LOAD_$_swiftCoreMIDI
+
+   ###### Fix:
+   - Add $(SDKROOT)/usr/lib/swift in **Build Settings > Library Search Paths**
