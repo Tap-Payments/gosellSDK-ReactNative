@@ -19,7 +19,8 @@ Original SDKS
    1. [Configure Your App](#configure_your_app)
    2. [Configure SDK Session](#configure_sdk_session)
    3. [Use Tap Pay Button](#tap_pay_button)
-   4. [Handle SDK Result](#handle_sdk_result)
+   4. [Start Payment](#start_payment)
+   5. [Handle SDK Result](#handle_sdk_result)
 4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
@@ -46,7 +47,7 @@ To use the SDK the following requirements must be met:
 ###### Open Terminal
 **Install npm packages**
 ```
-npm i
+npm install
 ```
 **Install goSellSdkReactNative package**
 ```
@@ -300,6 +301,83 @@ const styles = StyleSheet.create({
     marginRight: '10%',
   },
 });
+```
+---
+<a name="start_payment"></a>
+**Start Payment**
+
+- In your `App.js` import RNGoSell from '@tap-payments/gosell-sdk-react-native'
+- Import `sdkConfigurations` from './sdkConfigurations'
+- Call start payment from 
+
+``` javascript
+import RNGoSell from '@tap-payments/gosell-sdk-react-native';
+import sdkConfigurations from './sdkConfigurations';
+RNGoSell.goSellSDK.startPayment(sdkConfigurations, this.handleResult)
+```
+---
+<a name="handle_sdk_result"></a>
+**Handle SDK Result**
+
+```javascript
+handleResult(error, status) {
+    var myString = JSON.stringify(status);
+    console.log('status is ' + status.sdk_result);
+    console.log(myString);
+    var resultStr = String(status.sdk_result);
+    switch (resultStr) {
+      case 'SUCCESS':
+        this.handleSDKResult(status)
+        break
+      case 'FAILED':
+        this.handleSDKResult(status)
+        break
+      case "SDK_ERROR":
+        console.log('sdk error............');
+        console.log(status['sdk_error_code']);
+        console.log(status['sdk_error_message']);
+        console.log(status['sdk_error_description']);
+        console.log('sdk error............');
+        break
+      case "NOT_IMPLEMENTED":
+        break
+    }
+  }
+  
+  handleSDKResult(result) {
+    console.log('trx_mode::::');
+    console.log(result['trx_mode'])
+    switch (result['trx_mode']) {
+      case "CHARGE":
+        console.log('Charge');
+        console.log(result);
+        this.printSDKResult(result);
+        break;
+
+      case "AUTHORIZE":
+        this.printSDKResult(result);
+        break;
+
+      case "SAVE_CARD":
+        this.printSDKResult(result);
+        break;
+
+      case "TOKENIZE":
+        Object.keys(result).map((key) => {
+          console.log(`TOKENIZE \t${key}:\t\t\t${result[key]}`);
+        })
+
+        // responseID = tapSDKResult['token'];
+        break;
+    }
+  }
+
+  printSDKResult(result) {
+    if (!result) return
+    Object.keys(result).map((key) => {
+      console.log(`${result['trx_mode']}\t${key}:\t\t\t${result[key]}`);
+    })
+  }
 ```
 ---
 
