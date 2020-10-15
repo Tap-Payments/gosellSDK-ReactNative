@@ -1,1 +1,0 @@
-../../../../../node_modules/@tap-payments/gosell-sdk-react-native/ios/Classes/RNGosellSdkReactNative.h

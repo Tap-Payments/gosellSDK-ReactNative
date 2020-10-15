@@ -1,2 +1,0 @@
-# TapApplication
-Base Application interface.

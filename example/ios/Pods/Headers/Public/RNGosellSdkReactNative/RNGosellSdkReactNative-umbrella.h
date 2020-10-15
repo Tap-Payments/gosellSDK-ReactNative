@@ -1,1 +1,0 @@
-../../../Target Support Files/RNGosellSdkReactNative/RNGosellSdkReactNative-umbrella.h

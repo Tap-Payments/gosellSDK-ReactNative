@@ -1,6 +1,0 @@
-module TapNibViewV2 {
-  umbrella header "TapNibViewV2-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-module TapGLKitV2 {
-  umbrella header "TapGLKitV2-umbrella.h"
-
-  export *
-  module * { export * }
-}
