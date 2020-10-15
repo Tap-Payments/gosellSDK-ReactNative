@@ -70,8 +70,9 @@ const paymentReference = {
     gosellID: null,
 };
 
+
 const appCredentials = {
-    production_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'Android-Live-KEY',
+    production_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'YOUR_SANDBOX_SECRET_KEY',
     language: 'en',
     sandbox_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'YOUR_SANDBOX_SECRET_KEY',
     bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'company.tap.goSellSDKExample',
