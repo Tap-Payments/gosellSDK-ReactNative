@@ -1,0 +1,6 @@
+module TapFontsKitV2 {
+  umbrella header "TapFontsKitV2-umbrella.h"
+
+  export *
+  module * { export * }
+}

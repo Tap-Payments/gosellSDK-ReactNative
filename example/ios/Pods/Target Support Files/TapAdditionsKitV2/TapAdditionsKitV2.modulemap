@@ -1,0 +1,6 @@
+module TapAdditionsKitV2 {
+  umbrella header "TapAdditionsKitV2-umbrella.h"
+
+  export *
+  module * { export * }
+}

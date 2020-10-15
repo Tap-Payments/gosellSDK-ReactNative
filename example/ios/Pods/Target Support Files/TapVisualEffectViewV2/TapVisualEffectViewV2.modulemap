@@ -1,0 +1,6 @@
+module TapVisualEffectViewV2 {
+  umbrella header "TapVisualEffectViewV2-umbrella.h"
+
+  export *
+  module * { export * }
+}
