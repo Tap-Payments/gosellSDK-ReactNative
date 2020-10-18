@@ -61,6 +61,10 @@ pod install
 pod update
 ```
 
+### Install for Andoid
+1. Make sure to set **minimum version to 17 in gradle**
+2. Add **multiDexEnabled true** build gradle of app in android
+
 ---
 
 <a name="configure_your_app"></a>
