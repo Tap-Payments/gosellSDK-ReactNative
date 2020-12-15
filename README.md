@@ -34,6 +34,7 @@ To use the SDK the following requirements must be met:
 1. **Visual Studio - InteliJ Idea**
 2. **react: 16.13.1** or newer
 3. **react-native: 0.63.3** or newer
+4. **iOS 11** or later
 
 <a name="installation"></a>
 
