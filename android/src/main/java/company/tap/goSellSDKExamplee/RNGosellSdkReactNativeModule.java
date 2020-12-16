@@ -48,7 +48,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
     System.out.println(" on success callback : "+ result);
     WritableMap writableMap = new WritableNativeMap();
     for (Map.Entry<String, String> entry : result.entrySet()) {
-      writableMap.putString(entry.getKey(), entry.getValue());
+      writableMap.putString(entry.getKey(), (String) entry.getValue());
     }
     System.out.println(" on success callback : "+ writableMap);
     jsCallback.invoke(null, writableMap);
