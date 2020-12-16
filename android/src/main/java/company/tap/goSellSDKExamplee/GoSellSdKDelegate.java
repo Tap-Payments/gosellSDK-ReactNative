@@ -205,7 +205,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
         System.out.println("charge = " + charge + ", paymentStatus = " + paymentStatus + ", trx_mode = " + trx_mode);
-        HashMap<String, Object> resultMap = new HashMap<>();
+        HashMap<String, String> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
         resultMap.put("charge_id", charge.getId());
@@ -238,11 +238,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
+        resultMap.put("id", charge.getId());
         System.out.println("resultMap on success = " + resultMap);
         System.out.println("callback on success = " + callback);
-        HashMap<String, String> map = new HashMap();
-        map.put("id", charge.getId());
-        callback.onSuccess(map);
+        callback.onSuccess(resultMap);
         callback = null;
     }
 
@@ -344,7 +343,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         Log.d("MainActivity", "Session Cancelled.........");
         HashMap<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "CANCELLED");
-        callback.onSuccess(resultMap);
+        callback.onFailure(resultMap);
         callback = null;
     }
 
