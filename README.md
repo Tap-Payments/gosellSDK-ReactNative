@@ -35,6 +35,7 @@ To use the SDK the following requirements must be met:
 2. **react: 16.13.1** or newer
 3. **react-native: 0.63.3** or newer
 4. **iOS 11** or later
+5. **XCode 12** or later
 
 <a name="installation"></a>
 
@@ -52,7 +53,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.0
+npm i @tap-payments/gosell-sdk-react-native@1.0.1
 ```
 
 ### Install pods for iOS
