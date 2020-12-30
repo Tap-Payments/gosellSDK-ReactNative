@@ -16,5 +16,8 @@
   },
   "bugs": {
     "url": "https://github.com/Tap-Payments/gosellSDK-ReactNative/issues"
+  },
+  "dependencies": {
+    "react-native-unimodules": "^0.12.0"
   }
 }
