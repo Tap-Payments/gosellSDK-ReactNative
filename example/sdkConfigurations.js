@@ -1,11 +1,11 @@
 import RNGoSell from '@tap-payments/gosell-sdk-react-native';
 const {
-Languages,
-PaymentTypes,
-AllowedCadTypes,
-TrxMode,
-SDKMode
-}= RNGoSell.goSellSDKModels;
+    Languages,
+    PaymentTypes,
+    AllowedCadTypes,
+    TrxMode,
+    SDKMode
+} = RNGoSell.goSellSDKModels;
 
 const transactionCurrency = 'kwd';
 const shipping = [
@@ -104,7 +104,7 @@ const allConfigurations = {
         postURL: 'https://tap.company',
         paymentDescription: 'paymentDescription',
         destinations: 'null',
-        trxMode: TrxMode.SAVE_CARD,
+        trxMode: TrxMode.PURCHASE,
         taxes: taxes,
         merchantID: '',
         SDKMode: SDKMode.Sandbox,
