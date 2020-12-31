@@ -79,10 +79,10 @@ const paymentReference = {
 
 
 const appCredentials = {
-    production_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'YOUR_SANDBOX_SECRET_KEY',
+    production_secrete_key: (Platform.OS == 'ios') ? 'iOS-Live-KEY' : 'Android-Live-KEY',
     language: Languages.EN,
-    sandbox_secrete_key: (Platform.OS == 'ios') ? 'YOUR_SANDBOX_SECRET_KEY' : 'YOUR_SANDBOX_SECRET_KEY',
-    bundleID: (Platform.OS == 'ios') ? 'company.tap.goSellSDKExamplee' : 'company.tap.goSellSDKExample',
+    sandbox_secrete_key: (Platform.OS == 'ios') ? 'iOS-SANDBOX-KEY' : 'Android-SANDBOX-KEY',
+    bundleID: (Platform.OS == 'ios') ? 'iOS-PACKAGE-NAME' : 'ANDROIID-PACKAGE-NAME',
 }
 
 const allConfigurations = {
