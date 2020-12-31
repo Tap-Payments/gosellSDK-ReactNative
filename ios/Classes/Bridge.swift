@@ -428,6 +428,47 @@ extension Bridge: SessionDelegate {
 			reactResult([NSNull(), resultMap])
 		  }
 	  }
+
+	  public func cardSaved(_ cardVerification: CardVerification, on session: SessionProtocol) {
+        var resultMap:[String:Any] = [:]
+        resultMap["id"] = cardVerification.identifier
+        resultMap["source_id"] = cardVerification.source.identifier
+        resultMap["source_object"] = cardVerification.object
+        resultMap["source_payment_type"] = cardVerification.source.paymentType.textValue
+        resultMap["source_channel"] = cardVerification.source.channel.textValue
+
+        resultMap["customer_id"] = cardVerification.customer.identifier
+        if let tokenDataSource = session.dataSource,
+          let tokenCurrency:Currency = tokenDataSource.currency as? Currency {
+          resultMap["token_currency"] = tokenCurrency.isoCode
+        }
+        resultMap["card_first_six"] = cardVerification.card.firstSixDigits
+        resultMap["card_last_four"] = cardVerification.card.lastFourDigits
+        resultMap["card_object"] = cardVerification.card.object
+        resultMap["card_exp_month"] = cardVerification.card.expirationMonth
+        resultMap["card_exp_year"] = cardVerification.card.expirationYear
+        
+        resultMap["sdk_result"] = "SUCCESS"
+        resultMap["trx_mode"] = "SAVE_CARD"
+        
+        if let reactResult = reactResult {
+          reactResult([NSNull(), resultMap])
+        }
+    }
+    
+    public func cardSavingFailed(with cardVerification: CardVerification?, error: TapSDKError?, on session: SessionProtocol) {
+        var resultMap:[String:Any] = [:]
+        resultMap["sdk_result"] = "SDK_ERROR"
+        resultMap["sdk_error_code"] = ""//error.type
+        if let errorResult = error {
+            resultMap["sdk_error_message"] = errorResult.description
+            resultMap["sdk_error_description"] = errorResult.description
+        }
+        
+          if let reactResult = reactResult {
+            reactResult([NSNull(), resultMap])
+          }
+    }
 }
 
 extension Bridge: SessionAppearance {

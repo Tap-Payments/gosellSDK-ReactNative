@@ -204,13 +204,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
-        System.out.println("charge = " + charge + ", paymentStatus = " + paymentStatus + ", trx_mode = " + trx_mode);
         HashMap<String, String> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
-        resultMap.put("charge_id", charge.getId());
         resultMap.put("description", charge.getDescription());
         resultMap.put("message", charge.getResponse().getMessage());
+        resultMap.put("charge_id", charge.getId());
         if (charge.getCard() != null) {
             resultMap.put("card_first_six", charge.getCard().getFirstSix());
             resultMap.put("card_last_four", charge.getCard().getLast4());
@@ -264,6 +263,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
         callback = null;
     }
 
+   
+
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
         HashMap<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "SDK_ERROR");
@@ -277,8 +278,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void paymentSucceed(@NonNull Charge charge) {
-        System.out.println("paymentSucceed = " + charge.getCard() + " charge information" + charge.getId());
+        System.out.println("paymentSucceed = " + charge.getCard() + " charge information" + charge.getId()+"getTransactionMode");
         sendChargeResult(charge, "SUCCESS", "CHARGE");
+       
         Toast.makeText(activity, charge.getId(), Toast.LENGTH_SHORT).show();
     }
 
@@ -299,12 +301,13 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void cardSaved(@NonNull Charge charge) {
-        sendChargeResult(charge, "SUCCESS", "SAVE_CARD");
+        System.out.println("charge in save card"+charge)
+        sendSavedCardResult(charge, "SUCCESS", "SAVE_CARD");
     }
 
     @Override
     public void cardSavingFailed(@NonNull Charge charge) {
-        sendChargeResult(charge, "FAILED", "SAVE_CARD");
+        sendSavedCardFailure(charge, "FAILED", "SAVE_CARD");
     }
 
     @Override
@@ -379,6 +382,38 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @Override
     public void userEnabledSaveCardOption(boolean saveCardEnabled) {
         System.out.println("userEnabledSaveCardOption :  " + saveCardEnabled);
+    }
+    private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
+        HashMap<String, String> resultMap = new HashMap<>();
+        if (charge instanceof SaveCard) {
+            System.out.println("Card  are Saved Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
+        }
+        resultMap.put("card_first_six", ((SaveCard) charge).getCard().getFirstSix());
+        resultMap.put("card_last_four",((SaveCard) charge).getCard().getLast4());
+        resultMap.put("card_status",charge.getStatus().toString());
+        resultMap.put("card_brand",charge.getCard().getBrand());
+        resultMap.put("customer_id",charge.getCustomer().getIdentifier());
+        resultMap.put("card_message", charge.getResponse().getMessage());
+        resultMap.put("sdk_result", paymentStatus);
+        resultMap.put("trx_mode", trx_mode);
+        resultMap.put("charge_id", charge.getId());
+        callback.onSuccess(resultMap);
+        callback = null;
+        System.out.println("Card Saved is Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
+    }
+
+    private void sendSavedCardFailure(Charge charge, String paymentStatus, String trx_mode){
+        HashMap<String, String> resultMap = new HashMap<>();
+        if (charge instanceof SaveCard) {
+            resultMap.put("card_status", charge.getStatus().toString());
+            resultMap.put("card_description", charge.getDescription());
+            resultMap.put("card_message", charge.getResponse().getMessage());
+            resultMap.put("sdk_result", paymentStatus);
+            resultMap.put("trx_mode", trx_mode);
+            callback.onFailure(resultMap);
+            callback = null;
+            System.out.println("Card Saved is failed " + charge.getResponse().getMessage());
+        }
     }
 
 }
