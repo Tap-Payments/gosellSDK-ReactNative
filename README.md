@@ -2,6 +2,7 @@
 React-Ntive plugin compatible version of goSellSDK library for both Android and iOS that fully covers payment/authorization/card saving/card tokenization process inside your Android application.
 Original SDKS
 
+- React-Native (https://github.com/Tap-Payments/gosellSDK-ReactNative)
 - Android (https://github.com/Tap-Payments/goSellSDK-Android)
 - AndroidX (https://github.com/Tap-Payments/goSellSDK-AndroidX)
 - iOS (https://github.com/Tap-Payments/goSellSDK-ios)
