@@ -209,6 +209,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("status", charge.getStatus().name());
         resultMap.put("description", charge.getDescription());
         resultMap.put("message", charge.getResponse().getMessage());
+        resultMap.put("charge_id", charge.getId());
         if (charge.getCard() != null) {
             resultMap.put("card_first_six", charge.getCard().getFirstSix());
             resultMap.put("card_last_four", charge.getCard().getLast4());
@@ -395,7 +396,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("card_message", charge.getResponse().getMessage());
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
-        resultMap.put("id", charge.getId());
+        resultMap.put("charge_id", charge.getId());
         callback.onSuccess(resultMap);
         callback = null;
         System.out.println("Card Saved is Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
