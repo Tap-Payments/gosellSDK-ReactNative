@@ -207,7 +207,6 @@ public class GoSellSdKDelegate implements SessionDelegate {
         HashMap<String, String> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
-        resultMap.put("charge_id", charge.getId());
         resultMap.put("description", charge.getDescription());
         resultMap.put("message", charge.getResponse().getMessage());
         if (charge.getCard() != null) {
@@ -392,7 +391,6 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("card_last_four",((SaveCard) charge).getCard().getLast4());
         resultMap.put("card_status",charge.getStatus().toString());
         resultMap.put("card_brand",charge.getCard().getBrand());
-        resultMap.put("card_description",charge.getDescription());
         resultMap.put("customer_id",charge.getCustomer().getIdentifier());
         resultMap.put("card_message", charge.getResponse().getMessage());
         resultMap.put("sdk_result", paymentStatus);
