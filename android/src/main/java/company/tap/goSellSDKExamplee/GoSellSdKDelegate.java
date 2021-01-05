@@ -18,6 +18,7 @@ import company.tap.gosellapi.GoSellSDK;
 import company.tap.gosellapi.internal.api.callbacks.GoSellError;
 import company.tap.gosellapi.internal.api.models.Authorize;
 import company.tap.gosellapi.internal.api.models.Charge;
+import company.tap.gosellapi.internal.api.models.SaveCard;
 import company.tap.gosellapi.internal.api.models.Token;
 import company.tap.gosellapi.open.controllers.SDKSession;
 import company.tap.gosellapi.open.delegate.SessionDelegate;
@@ -301,7 +302,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void cardSaved(@NonNull Charge charge) {
-        System.out.println("charge in save card"+charge)
+        System.out.println("charge in save card"+charge);
         sendSavedCardResult(charge, "SUCCESS", "SAVE_CARD");
     }
 
