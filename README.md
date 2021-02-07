@@ -399,3 +399,12 @@ handleResult(error, status) {
 
    ###### Fix:
    - Add $(SDKROOT)/usr/lib/swift in **Build Settings > Library Search Paths**
+
+2. Event Config Error: <event2/event-config.h> error
+![error-react](https://user-images.githubusercontent.com/61692110/107148440-141ca600-6964-11eb-9334-39096262d55b.png)
+
+   ###### Fix:
+   1. In iOS Podfile, **replace use_flipper!** with   **use_flipper!({ 'Flipper-Folly' => '2.3.0' })**
+   2. Use command **pod deintegrate** then remove Podfile.lock
+   3. Use command **pod install** then **pod update**
+
