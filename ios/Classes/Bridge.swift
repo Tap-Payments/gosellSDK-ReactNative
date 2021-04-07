@@ -225,17 +225,14 @@ extension Bridge: SessionDataSource {
 		return Receipt(email: false, sms: false)
 	  }
 	  public var authorizeAction: AuthorizeAction {
-		if let authorizeActionString:String = argsSessionParameters?["authorizeAction"] as? String {
-		  if let data = authorizeActionString.data(using: .utf8) {
-			do {
-			  let decoder = JSONDecoder()
-			  let authorizeActionObject:AuthorizeAction = try decoder.decode(AuthorizeAction.self, from: data)
-			  return authorizeActionObject
-			} catch {
-			  print(error.localizedDescription)
-			}
-		  }
-		}
+        if let authorizeActionDictionary:[String: Any] = argsSessionParameters?["authorizeAction"] as? [String: Any] {
+            do {
+                let authorizeActionObject:AuthorizeAction = try AuthorizeAction(dictionary: authorizeActionDictionary)
+                return authorizeActionObject
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
 		  return .void(after: 0)
 	  }
 	  public var destinations: [Destination]? {
