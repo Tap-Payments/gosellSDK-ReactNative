@@ -312,7 +312,7 @@ extension Bridge: SessionDelegate {
 		  var resultMap = [String: Any]()
 		  resultMap["status"] = charge.status.textValue
 		  resultMap["charge_id"] = charge.identifier
-		  resultMap["description"] = charge.description
+		  resultMap["description"] = charge.descriptionText
 		  resultMap["message"] = charge.response?.message
 		  
 		  if let card = charge.card {
@@ -354,7 +354,7 @@ extension Bridge: SessionDelegate {
 		  if let charge = charge {
 			  resultMap["status"] = charge.status.textValue
 			  resultMap["charge_id"] = charge.identifier
-			  resultMap["description"] = charge.description
+			  resultMap["description"] = charge.descriptionText
 			  resultMap["message"] = charge.response?.message
 			  
 			  if let card = charge.card {
@@ -388,13 +388,98 @@ extension Bridge: SessionDelegate {
 			reactResult([NSNull(), resultMap])
 		  }
 	  }
-		public func sessionCancelled(_ session: SessionProtocol) {
-		  var resultMap:[String:Any] = [:]
-		  resultMap["sdk_result"] = "CANCELLED"
-		  if let reactResult = reactResult {
-			reactResult([NSNull(), resultMap])
-		  }
-	  }
+    
+    // MARK: Authorize
+    public func authorizationSucceed(_ authorize: Authorize, on session: SessionProtocol) {
+        print(authorize)
+          
+          var resultMap = [String: Any]()
+          resultMap["status"] = authorize.status.textValue
+        resultMap["charge_id"] = authorize.identifier
+          resultMap["description"] = authorize.descriptionText
+          resultMap["message"] = authorize.response?.message
+          
+          if let card = authorize.card {
+              resultMap["card_first_six"] = card.firstSixDigits
+              resultMap["card_last_four"] = card.lastFourDigits
+              resultMap["card_object"] = card.object
+  //            let cardBrand = CardBrand(rawValue: card.brand.rawValue)
+              resultMap["card_brand"] = card.brand.textValue
+              resultMap["card_exp_month"] = card.expirationMonth
+              resultMap["card_exp_year"] = card.expirationYear
+          }
+          
+          if let acquirer = authorize.acquirer {
+              if let response = acquirer.response {
+                  resultMap["acquirer_id"] = ""
+                  resultMap["acquirer_response_code"] = response.code
+                  resultMap["acquirer_response_message"] = response.message
+              }
+              
+          }
+          
+          resultMap["source_id"] = authorize.source.identifier
+          resultMap["source_channel"] = authorize.source.channel.textValue
+          resultMap["source_object"] = authorize.source.object.textValue
+          resultMap["source_payment_type"] = authorize.source.paymentType.textValue
+          
+          resultMap["sdk_result"] = "SUCCESS"
+          resultMap["trx_mode"] = "AUTHORIZE_CAPTURE"
+          
+          //pendingResult.success(resultMap);
+          if let reactResult = reactResult {
+            reactResult([NSNull(), resultMap])
+          }
+    }
+    
+    public func authorizationFailed(with authorize: Authorize?, error: TapSDKError?, on session: SessionProtocol) {
+        
+        var resultMap = [String: Any]()
+        if let authorize = authorize {
+            resultMap["status"] = authorize.status.textValue
+            resultMap["charge_id"] = authorize.identifier
+            resultMap["description"] = authorize.descriptionText
+            resultMap["message"] = authorize.response?.message
+            
+            if let card = authorize.card {
+                resultMap["card_first_six"] = card.firstSixDigits
+                resultMap["card_last_four"] = card.lastFourDigits
+                resultMap["card_object"] = card.object
+                resultMap["card_brand"] = card.brand.textValue
+                resultMap["card_exp_month"] = card.expirationMonth
+                resultMap["card_exp_year"] = card.expirationYear
+            }
+            
+            if let acquirer = authorize.acquirer {
+                if let response = acquirer.response {
+                    resultMap["acquirer_id"] = ""
+                    resultMap["acquirer_response_code"] = response.code
+                    resultMap["acquirer_response_message"] = response.message
+                }
+                
+            }
+            
+            resultMap["source_id"] = authorize.source.identifier
+            resultMap["source_channel"] = authorize.source.channel.textValue
+            resultMap["source_object"] = authorize.source.object.textValue
+            resultMap["source_payment_type"] = authorize.source.paymentType.textValue
+        }
+                
+        resultMap["sdk_result"] = "FAILED"
+        resultMap["trx_mode"] = "AUTHORIZE_CAPTURE"
+         
+        if let reactResult = reactResult {
+          reactResult([NSNull(), resultMap])
+        }
+    }
+    
+    public func sessionCancelled(_ session: SessionProtocol) {
+      var resultMap:[String:Any] = [:]
+      resultMap["sdk_result"] = "CANCELLED"
+      if let reactResult = reactResult {
+        reactResult([NSNull(), resultMap])
+      }
+    }
 	  
 	  
 	  public func cardTokenized(_ token: Token, on session: SessionProtocol, customerRequestedToSaveTheCard saveCard: Bool) {
