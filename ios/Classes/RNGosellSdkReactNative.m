@@ -17,6 +17,12 @@
 {
     return dispatch_get_main_queue();
 }
+
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
+
 RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(kareem:(RCTResponseSenderBlock)callback){
 	callback(@[@"kareem info"]);
