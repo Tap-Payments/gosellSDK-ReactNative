@@ -12,7 +12,8 @@ const PaymentTypes = {
 
 const AllowedCadTypes = {
     CREDIT: 'CREDIT',
-    DEBIT: 'DEBIT'
+    DEBIT: 'DEBIT',
+    ALL: 'ALL'
 }
 
 const TrxMode = {

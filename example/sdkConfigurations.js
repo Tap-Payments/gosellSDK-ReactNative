@@ -94,7 +94,7 @@ const allConfigurations = {
         paymentType: PaymentTypes.ALL,
         amount: '100',
         shipping: shipping,
-        allowedCadTypes: AllowedCadTypes.CREDIT,
+        allowedCadTypes: AllowedCadTypes.ALL,
         paymentitems: paymentitems,
         paymenMetaData: { a: 'a meta', b: 'b meta' },
         applePayMerchantID: 'applePayMerchantID',
