@@ -405,6 +405,6 @@ handleResult(error, status) {
 
    ###### Fix:
    1. In iOS Podfile, **replace ```use_flipper!``` with**   ```use_flipper!({ 'Flipper-Folly' => '2.3.0' })```
-   2. Use command **pod deintegrate** then remove Podfile.lock
-   3. Use command **pod install** then **pod update**
+   2. Use command ```pod deintegrate``` then **remove Podfile.lock**
+   3. Use command ```pod install``` then ```pod update```
 
