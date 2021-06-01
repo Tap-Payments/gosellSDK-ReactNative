@@ -199,10 +199,10 @@ public class DeserializationUtil {
                 "".equalsIgnoreCase(jsonString.trim())
         ) return CardType.ALL;
         System.out.println("card type >>>> " + jsonString);
-        if ("CardType.CREDIT".equalsIgnoreCase(jsonString)) {
+        if ("CREDIT".equalsIgnoreCase(jsonString)) {
             return CardType.CREDIT;
         }
-        else if ("CardType.DEBIT".equalsIgnoreCase(jsonString)) return CardType.DEBIT;
+        else if ("DEBIT".equalsIgnoreCase(jsonString)) return CardType.DEBIT;
         return CardType.ALL;
     }
 
