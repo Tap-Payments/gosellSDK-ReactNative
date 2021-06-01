@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNGosellSdkReactNative"
-  s.version      = "1.0.4"
+  s.version      = "1.0.8"
   s.summary      = "RNGosellSdkReactNative"
   s.description  = <<-DESC
                   RNGosellSdkReactNative
