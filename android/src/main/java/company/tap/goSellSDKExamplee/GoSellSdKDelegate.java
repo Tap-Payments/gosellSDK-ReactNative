@@ -236,6 +236,15 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("source_object", charge.getSource().getObject());
             resultMap.put("source_payment_type", charge.getSource().getPaymentType());
         }
+
+        if (charge.getCustomer() != null) {
+            resultMap.put("customer_id", charge.getCustomer().getIdentifier());
+            resultMap.put("customer_first_name", charge.getCustomer().getFirstName());
+            resultMap.put("customer_middle_name", charge.getCustomer().getMiddleName());
+            resultMap.put("customer_last_name", charge.getCustomer().getLastName());
+            resultMap.put("customer_email", charge.getCustomer().getEmail());
+        }
+        
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
         resultMap.put("id", charge.getId());

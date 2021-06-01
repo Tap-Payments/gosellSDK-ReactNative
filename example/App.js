@@ -47,8 +47,15 @@ export default class App extends Component {
 
   startSDK() {
     console.log('start SDK');
+    try {
+       if (require('expo-constants').default.appOwnership === 'expo') {
+        alert('PLEASE EJECT EXPO TO RUN native_modules')
+          return
+      }
+    } catch (error) {
+      console.log(error);
+    }
     console.log(this.sdkModule);
-
     this.sdkModule && this.sdkModule.startPayment(sdkConfigurations, this.handleResult)
   }
 
