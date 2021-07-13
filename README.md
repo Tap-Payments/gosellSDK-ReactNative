@@ -22,6 +22,7 @@ Original SDKS
    3. [Use Tap Pay Button](#tap_pay_button)
    4. [Start Payment](#start_payment)
    5. [Handle SDK Result](#handle_sdk_result)
+   6. [Apple Pay Setup](#apple_pay)
 4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
@@ -386,6 +387,14 @@ handleResult(error, status) {
     })
   }
 ```
+---
+
+<a name="apple_pay"></a>
+**Apple pay setup**
+
+Follow the steps shared in the following link to setup apple pay:<br/>
+https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
+
 ---
 
 <a name="common_issues"></a>
