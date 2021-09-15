@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.13.3'
+    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.13.3.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 }
