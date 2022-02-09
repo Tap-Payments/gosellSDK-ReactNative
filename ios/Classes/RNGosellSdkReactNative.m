@@ -30,4 +30,7 @@ RCT_EXPORT_METHOD(kareem:(RCTResponseSenderBlock)callback){
 RCT_EXPORT_METHOD(startPayment:(NSDictionary *)arguments callback:(RCTResponseSenderBlock)callback){
 	[bridge startPayment:arguments callback:callback];
 }
+RCT_EXPORT_METHOD(terminatePayment:(RCTResponseSenderBlock)callback){
+    [bridge terminateSession:callback];
+}
 @end
