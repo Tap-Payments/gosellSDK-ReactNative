@@ -114,4 +114,18 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
 
 
   }
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  @ReactMethod
+  public void terminatePayment(Callback callback) {
+    jsCallback = callback;
+    Activity currentActivity = getCurrentActivity();
+    if (currentActivity == null) {
+      jsCallback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
+      return;
+    }
+
+    System.out.println("terminate session!");
+    delegate.terminateSDKSession();
+  }
 }

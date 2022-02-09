@@ -37,6 +37,19 @@ public class Bridge: NSObject {
 	session.start()
 	reactResult = callback
   }
+  @objc public func terminateSession(_ callback: @escaping RCTResponseSenderBlock) {
+       
+	session.stop()
+	reactResult = callback
+	print("inside terminate session swift")
+	var resultMap = [String: Any]()
+	resultMap["sdk_result"] = "Session terminated"
+	resultMap["trx_mode"] = "Terminated"
+	
+	if let reactResult = reactResult {
+		reactResult([NSNull(), resultMap])
+	}
+  }
   
 //  @objc
 //  static func requiresMainQueueSetup() -> Bool {

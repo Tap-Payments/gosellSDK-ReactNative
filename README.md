@@ -55,7 +55,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.9
+npm i @tap-payments/gosell-sdk-react-native@1.0.12
 ```
 
 ### Install pods for iOS
@@ -66,8 +66,9 @@ pod update
 ```
 
 ### Install for Andoid
-1. Make sure to set **minimum version to 17 in gradle**
+1. Make sure to set **minimum version to 21 in gradle**
 2. Add **multiDexEnabled true** build gradle of app in android
+3. Make sure to support **JDK 8**
 
 ---
 
