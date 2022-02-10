@@ -57,7 +57,8 @@ export default class App extends Component {
     }
     console.log(this.sdkModule);
     
-    
+    // startPayment(sdkConfigurations, terminationTimeoutInMilliseconds, this.handleResult)
+    // Set terminationTimeoutInMilliseconds to 0 to prevent termination the session automatically
     this.sdkModule && this.sdkModule.startPayment(sdkConfigurations, 0, this.handleResult)    
   }
 
