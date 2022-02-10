@@ -317,12 +317,12 @@ const styles = StyleSheet.create({
 
 - In your `App.js` import RNGoSell from '@tap-payments/gosell-sdk-react-native'
 - Import `sdkConfigurations` from './sdkConfigurations'
-- Call start payment from 
+- Call start payment from
 
 ``` javascript
 import RNGoSell from '@tap-payments/gosell-sdk-react-native';
 import sdkConfigurations from './sdkConfigurations';
-RNGoSell.goSellSDK.startPayment(sdkConfigurations, this.handleResult)
+RNGoSell.goSellSDK.startPayment(sdkConfigurations, 0, this.handleResult) 
 ```
 ---
 <a name="handle_sdk_result"></a>

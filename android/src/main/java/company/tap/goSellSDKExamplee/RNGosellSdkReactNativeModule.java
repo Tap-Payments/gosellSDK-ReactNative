@@ -91,7 +91,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @ReactMethod
-  public void startPayment(ReadableMap readableMap, Callback callback) {
+  public void startPayment(ReadableMap readableMap, int timeout, Callback callback) {
     jsCallback = callback;
     HashMap<String, Object> args = readableMap.toHashMap();
     System.out.println("args : " + args);
@@ -103,29 +103,9 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
       return;
     }
 
-    if (readableMap.toHashMap().equals("terminate_session")) {
-      System.out.println("terminate session!");
-      delegate.terminateSDKSession();
-      return;
-    }
-
     System.out.println("call back invoked " + jsCallback);
-    delegate.startSDK(args, this , currentActivity);
-
+    delegate.startSDK(args, this , currentActivity, timeout);
 
   }
-
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-  @ReactMethod
-  public void terminatePayment(Callback callback) {
-    jsCallback = callback;
-    Activity currentActivity = getCurrentActivity();
-    if (currentActivity == null) {
-      jsCallback.invoke("no_activity", "SDK plugin requires a foreground activity.", null);
-      return;
-    }
-
-    System.out.println("terminate session!");
-    delegate.terminateSDKSession();
-  }
+  
 }

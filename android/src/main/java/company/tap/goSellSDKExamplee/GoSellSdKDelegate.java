@@ -2,6 +2,7 @@ package company.tap.goSellSDKExamplee;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startSDK(
-            HashMap<String, Object> sdkConfigurations, RNGosellSdkReactNativeModule result, Activity activity1) {
+            HashMap<String, Object> sdkConfigurations, RNGosellSdkReactNativeModule result, Activity activity1, int timeout) {
         activity = activity1;
 //Commented to testing
       /* if (!setPendingMethodCallAndResult(methodCall, result)) {
@@ -48,11 +49,22 @@ public class GoSellSdKDelegate implements SessionDelegate {
             return;
         }*/
 
+        if (timeout > 0) {
+            new CountDownTimer(timeout, 1) {
+                public void onTick(long millisUntilFinished) {}
+                public void onFinish() {
+                    terminatePayment();
+                }
+            }.start();
+        }
+
         // start SDK
         showSDK(sdkConfigurations, result);
     }
 
-    public void terminateSDKSession() {
+    public void terminatePayment() {
+        System.out.println("terminate session!");
+        Log.d("MainActivity", "Session Terminated.........");
         if (activity != null) {
             sdkSession.cancelSession(activity);
         }
@@ -393,6 +405,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
     public void userEnabledSaveCardOption(boolean saveCardEnabled) {
         System.out.println("userEnabledSaveCardOption :  " + saveCardEnabled);
     }
+
+    @Override
+    public void cardTokenizedSuccessfully(@NonNull Token token, boolean saveCardEnabled) {
+
+    }
+
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
         HashMap<String, String> resultMap = new HashMap<>();
         if (charge instanceof SaveCard) {

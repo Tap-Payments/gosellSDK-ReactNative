@@ -23,7 +23,7 @@ public class Bridge: NSObject {
 	}
   }
   
-  @objc public func startPayment(_ arguments: NSDictionary, callback: @escaping RCTResponseSenderBlock) {
+  @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock) {
 	argsDataSource = arguments as? [String: Any]
 	print("arguments: \(arguments)")
 	GoSellSDK.reset()
@@ -36,19 +36,15 @@ public class Bridge: NSObject {
 	session.appearance = self
 	session.start()
 	reactResult = callback
+    if timeout > 0 {
+        let timeoutSeconds = TimeInterval(timeout / 1000)
+        Timer.scheduledTimer(timeInterval: timeoutSeconds, target: self, selector: #selector(terminateSession), userInfo: nil, repeats: false)
+    }
   }
-  @objc public func terminateSession(_ callback: @escaping RCTResponseSenderBlock) {
-       
+  
+  @objc func terminateSession() {
+    print("inside terminate session swift")
 	session.stop()
-	reactResult = callback
-	print("inside terminate session swift")
-	var resultMap = [String: Any]()
-	resultMap["sdk_result"] = "Session terminated"
-	resultMap["trx_mode"] = "Terminated"
-	
-	if let reactResult = reactResult {
-		reactResult([NSNull(), resultMap])
-	}
   }
   
 //  @objc
