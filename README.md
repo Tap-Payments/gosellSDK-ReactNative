@@ -318,10 +318,16 @@ const styles = StyleSheet.create({
 - In your `App.js` import RNGoSell from '@tap-payments/gosell-sdk-react-native'
 - Import `sdkConfigurations` from './sdkConfigurations'
 - Call start payment from
+#### Parameters
 
+- First parameter is the `sdkConfigurations` dictionary
+-  Second parameter is integer value to set the `termination timeout in milliseconds`, the sdk will terminate the session after this time expire. `Set 0 if you don't want to terminate the session and keep it terminated normally clicking on cancel button by the user`
+-  Third parameter is the `result callback`, you can handle the required action on recieving the the result through this callback.
 ``` javascript
 import RNGoSell from '@tap-payments/gosell-sdk-react-native';
 import sdkConfigurations from './sdkConfigurations';
+// startPayment(sdkConfigurations, terminationTimeoutInMilliseconds, this.handleResult)
+// Set terminationTimeoutInMilliseconds to 0 to prevent termination the session automatically
 RNGoSell.goSellSDK.startPayment(sdkConfigurations, 0, this.handleResult) 
 ```
 ---
