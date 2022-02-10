@@ -33,7 +33,6 @@ export default class App extends Component {
     };
     this.changeState = this.changeState.bind(this);
     this.startSDK = this.startSDK.bind(this);
-    this.terminateSDKSession = this.terminateSDKSession.bind(this);
     this.handleResult = this.handleResult.bind(this);
     this.handleSDKResult = this.handleSDKResult.bind(this);
     this.printSDKResult = this.printSDKResult.bind(this);
@@ -48,10 +47,6 @@ export default class App extends Component {
 
   startSDK() {
     console.log('start SDK');
-    // setTimeout(()=> this.setState(this.terminateSDKSession), 2000)
-    // setTimeout(()=> this.setState(this.terminateSDKSession), 2000)
-    // this.setState({ dogs: 350 }, () => { console.log('The state has been updated.') })
-
     try {
        if (require('expo-constants').default.appOwnership === 'expo') {
         alert('PLEASE EJECT EXPO TO RUN native_modules')
@@ -61,32 +56,9 @@ export default class App extends Component {
       console.log(error);
     }
     console.log(this.sdkModule);
-    this.sdkModule && this.sdkModule.startPayment(sdkConfigurations, this.handleResult)
-    setTimeout(() => {
-      
-      // console.log('setTimeout');  // 1
-      this.setState(
-        console.log('calling terminateSDKSession.......'),
-        this.terminateSDKSession
-      ); // 2
-    }, 4000);
-  }
-
-  terminateSDKSession() {
-    console.log('terminate SDK session');
-    try {
-       if (require('expo-constants').default.appOwnership === 'expo') {
-        alert('PLEASE EJECT EXPO TO RUN native_modules')
-          return
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(this.sdkModule);
-
-    // this.sdkModule.terminateSDKSession(this.handleResult)
-    this.sdkModule && this.sdkModule.terminatePayment(this.handleResult)
-
+    
+    
+    this.sdkModule && this.sdkModule.startPayment(sdkConfigurations, 0, this.handleResult)    
   }
 
   handleResult(error, status) {

@@ -27,10 +27,7 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(kareem:(RCTResponseSenderBlock)callback){
 	callback(@[@"kareem info"]);
 }
-RCT_EXPORT_METHOD(startPayment:(NSDictionary *)arguments callback:(RCTResponseSenderBlock)callback){
-	[bridge startPayment:arguments callback:callback];
-}
-RCT_EXPORT_METHOD(terminatePayment:(RCTResponseSenderBlock)callback){
-    [bridge terminateSession:callback];
+RCT_EXPORT_METHOD(startPayment:(NSDictionary *)arguments timeout:(int)timeout callback:(RCTResponseSenderBlock)callback){
+    [bridge startPayment:arguments timeout:timeout callback:callback];
 }
 @end
