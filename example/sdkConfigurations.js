@@ -59,6 +59,8 @@ const taxes = [
     },
 ];
 const customer = {
+    // Here we can set the customer object as on of the available options on this URL:
+    // See [https://github.com/Tap-Payments/gosellSDK-ReactNative#customer] to get more details of setting the customer
     isdNumber: '965',
     number: '00000000',
     customerId: '',
@@ -104,7 +106,9 @@ const allConfigurations = {
         postURL: 'https://tap.company',
         paymentDescription: 'paymentDescription',
         destinations: 'null',
-        trxMode: TrxMode.PURCHASE,
+        // Here we can set the transaction mode as on of the available options on this URL:
+        // See [https://github.com/Tap-Payments/gosellSDK-ReactNative#transaction_modes] to get transaction modes
+        trxMode: TrxMode.TOKENIZE_CARD,
         taxes: taxes,
         merchantID: '',
         SDKMode: SDKMode.Sandbox,
