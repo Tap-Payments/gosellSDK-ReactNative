@@ -19,11 +19,12 @@ Original SDKS
 3. [Usage](#usage)
    1. [Configure Your App](#configure_your_app)
    2. [Configure SDK Session](#configure_sdk_session)
-   3. [Use Tap Pay Button](#tap_pay_button)
-   4. [Start Payment](#start_payment)
-   5. [Handle SDK Result](#handle_sdk_result)
-   6. [Apple Pay Setup](#apple_pay)
-   7. [Transaction Modes](#transaction_modes)
+   3. [Transaction Modes](#transaction_modes)
+   4. [Customer](#customer)
+   5. [Use Tap Pay Button](#tap_pay_button)
+   6. [Start Payment](#start_payment)
+   7. [Handle SDK Result](#handle_sdk_result)
+   8. [Apple Pay Setup](#apple_pay)
 4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
@@ -168,7 +169,12 @@ const taxes = [
     },
 ];
  ```
+
+<a name="customer"></a>
+
  ###### Customer
+ 
+- New Customer (First time to pay using goSell SDK)
 ``` javascript
 const customer = {
     isdNumber: '965',
@@ -180,6 +186,21 @@ const customer = {
     email: 'test@test.com',
 };
 ```
+> After the first transaction success, you receive the customerId in the response. Save it to be used in the next transaction.
+- Existed Customer (paid before using goSell SDK)
+ You need to set the customerId only and you can see the customer saved cards if the user has.
+``` javascript
+const customer = {
+    isdNumber: '965',
+    number: '00000000',
+    customerId: 'cus_smdnd3346nd3dks3jd9drd7d',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    email: '',
+};
+```
+
  ###### Payment Reference
  ``` javascript
 const paymentReference = {
@@ -227,6 +248,21 @@ const allConfigurations = {
 
 export default allConfigurations
 ```
+
+---
+<a name="transaction_modes"></a>
+**Transaction Modes**
+
+``` javascript 
+trxMode: TransactionMode.PURCHASE
+```
+
+
+You can set the transaction mode into one of the following modes:
+- **Purchase** ```TransactionMode.PURCHASE```
+- **Authorize** ```TransactionMode.AUTHORIZE_CAPTURE```
+- **Save Card** ```TransactionMode.SAVE_CARD```
+- **Tokenize Card** ```TransactionMode.TOKENIZE_CARD```
 
 ---
 
@@ -402,20 +438,6 @@ handleResult(error, status) {
 
 Follow the steps shared in the following link to setup apple pay:<br/>
 https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
-
----
-<a name="transaction_modes"></a>
-**Transaction Modes**
-
-```trxMode: TransactionMode.PURCHASE```
-
-
-You can set the transaction mode into one of the following modes:
-- **Purchase** ```TransactionMode.PURCHASE```
-- **Authorize** ```TransactionMode.AUTHORIZE_CAPTURE```
-- **Save Card** ```TransactionMode.SAVE_CARD```
-- **Tokenize Card** ```TransactionMode.TOKENIZE_CARD```
-
 
 ---
 
