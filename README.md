@@ -201,6 +201,8 @@ const customer = {
 };
 ```
 
+> Please note that goSell SDK using the customerId only if it's not Empty ('').
+
  ###### Payment Reference
  ``` javascript
 const paymentReference = {
