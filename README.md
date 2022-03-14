@@ -406,7 +406,10 @@ https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
 ---
 <a name="transaction_modes"></a>
 **Transaction Modes**
+
 ```trxMode: TransactionMode.PURCHASE```
+
+
 You can set the transaction mode into one of the following modes:
 - **Purchase** ```TransactionMode.PURCHASE```
 - **Authorize** ```TransactionMode.AUTHORIZE_CAPTURE```
