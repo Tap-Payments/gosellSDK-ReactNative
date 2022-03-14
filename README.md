@@ -23,6 +23,7 @@ Original SDKS
    4. [Start Payment](#start_payment)
    5. [Handle SDK Result](#handle_sdk_result)
    6. [Apple Pay Setup](#apple_pay)
+   7. [Transaction Modes](#transaction_modes)
 4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
@@ -401,6 +402,17 @@ handleResult(error, status) {
 
 Follow the steps shared in the following link to setup apple pay:<br/>
 https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
+
+---
+<a name="transaction_modes"></a>
+**Transaction Modes**
+```trxMode: TransactionMode.PURCHASE```
+You can set the transaction mode into one of the following modes:
+- **Purchase** ```TransactionMode.PURCHASE```
+- **Authorize** ```TransactionMode.AUTHORIZE_CAPTURE```
+- **Save Card** ```TransactionMode.SAVE_CARD```
+- **Tokenize Card** ```TransactionMode.TOKENIZE_CARD```
+
 
 ---
 
