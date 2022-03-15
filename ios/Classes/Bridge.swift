@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import goSellSDK
-import TapCardValidator
+import TapCardVlidatorKit_iOS
 
 @objc(Bridge)
 public class Bridge: NSObject {
