@@ -261,10 +261,18 @@ trxMode: TransactionMode.PURCHASE
 
 
 You can set the transaction mode into one of the following modes:
-- **Purchase** ```TransactionMode.PURCHASE```
-- **Authorize** ```TransactionMode.AUTHORIZE_CAPTURE```
-- **Save Card** ```TransactionMode.SAVE_CARD```
-- **Tokenize Card** ```TransactionMode.TOKENIZE_CARD```
+- **Purchase** 
+   - ```TransactionMode.PURCHASE```<br/>
+   > Normal customer charge.
+- **Authorize** 
+   - ```TransactionMode.AUTHORIZE_CAPTURE```<br/>
+   > Only authorization is happening. You should specify an action after successful authorization: either capture the amount or void the charge after specific period of time.
+- **Save Card** 
+   - ```TransactionMode.SAVE_CARD```<br/>
+   > Use this mode to save the card of the customer with Tap and use it later.
+- **Tokenize Card** 
+   - ```TransactionMode.TOKENIZE_CARD```<br/>
+   > Use this mode if you are willing to perform the charging/authorization manually. The purpose of this mode is only to collect and tokenize card information details of your customer if you don't have PCI compliance certificate but willing to process the payment manually using our services.
 
 ---
 
