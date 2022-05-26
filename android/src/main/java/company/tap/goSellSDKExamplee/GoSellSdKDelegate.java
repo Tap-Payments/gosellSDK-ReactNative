@@ -266,7 +266,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         callback = null;
     }
 
-    private void sendTokenResult(Token token, String paymentStatus) {
+    private void sendTokenResult(Token token, String paymentStatus, boolean saveCard) {
         HashMap<String, String> resultMap = new HashMap<>();
 
         resultMap.put("token", token.getId());
@@ -278,6 +278,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_exp_month", "" + token.getCard().getExpirationYear());
             resultMap.put("card_exp_year", "" + token.getCard().getExpirationMonth());
         }
+        resultMap.put("save_card", String.valueOf(saveCard));
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
 
@@ -334,7 +335,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void cardTokenizedSuccessfully(@NonNull Token token) {
-        sendTokenResult(token, "SUCCESS");
+        // sendTokenResult(token, "SUCCESS");
     }
 
     @Override
@@ -408,7 +409,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void cardTokenizedSuccessfully(@NonNull Token token, boolean saveCardEnabled) {
-
+        sendTokenResult(token, "SUCCESS", saveCardEnabled);
     }
 
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){

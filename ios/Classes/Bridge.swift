@@ -509,6 +509,7 @@ extension Bridge: SessionDelegate {
 			resultMap["card_object"] = token.card.object
 			resultMap["card_exp_month"] = token.card.expirationMonth
 			resultMap["card_exp_year"] = token.card.expirationYear
+			resultMap["save_card"] = saveCard
 			resultMap["sdk_result"] = "SUCCESS"
 			resultMap["trx_mode"] = "TOKENIZE"
   //          result.success(resultMap)
