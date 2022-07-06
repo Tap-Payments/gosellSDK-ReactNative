@@ -277,7 +277,7 @@ extension Bridge: SessionDataSource {
 		  let paymentTypeComponents: [String] = paymentTypeString.components(separatedBy: ".")
 		  if paymentTypeComponents.count == 2 {
 		  do {
-			  let data = try JSONEncoder().encode(paymentTypeComponents[1])
+			  let data = try JSONEncoder().encode(paymentTypeComponents[1].lowercased())
 			  let decoder = JSONDecoder()
 			  let paymentTypeMode:PaymentType = try decoder.decode(PaymentType.self, from: data)
 			  return paymentTypeMode
