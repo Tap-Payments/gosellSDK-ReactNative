@@ -22,7 +22,9 @@ import company.tap.gosellapi.internal.api.models.Charge;
 import company.tap.gosellapi.internal.api.models.SaveCard;
 import company.tap.gosellapi.internal.api.models.Token;
 import company.tap.gosellapi.open.controllers.SDKSession;
+import company.tap.gosellapi.open.controllers.ThemeObject;
 import company.tap.gosellapi.open.delegate.SessionDelegate;
+import company.tap.gosellapi.open.enums.AppearanceMode;
 import company.tap.gosellapi.open.exception.CurrencyException;
 import company.tap.gosellapi.open.models.CardsList;
 import company.tap.gosellapi.open.models.TapCurrency;
@@ -94,6 +96,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
          * Required step. Configure SDK Session with all required data.
          */
         configureSDKSession(sessionParameters, result);
+        ThemeObject.getInstance()
+                .setAppearanceMode(AppearanceMode.WINDOWED_MODE).setPayButtonText("Save Card");
         sdkSession.start(activity);
     }
 
