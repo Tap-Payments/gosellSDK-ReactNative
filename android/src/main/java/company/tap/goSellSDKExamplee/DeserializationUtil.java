@@ -151,27 +151,41 @@ public class DeserializationUtil {
     }
 
 
-    public static Customer getCustomer(HashMap<String, Object> sessionParameters) {
+    public static Customer getCustomer(HashMap<String, Object> sessionParameters) throws JSONException {
         System.out.println("customer object >>>>> " + sessionParameters.get("customer"));
+        JSONObject jsonObject = null;
         if (sessionParameters.get("customer") == null || "null".equalsIgnoreCase(sessionParameters.get("customer").toString()))
             return null;
         //  String customerString = (String) sessionParameters.get("customer");
-
+        try {
         Gson gson = new Gson();
         String customerString = gson.toJson(sessionParameters.get("customer"));
         System.out.println("sessionParameters = " + sessionParameters + "customerString" + customerString);
-        JSONObject jsonObject;
-        try {
 
-            jsonObject = new JSONObject(customerString);
-            PhoneNumber phoneNumber = new PhoneNumber(jsonObject.get("isdNumber").toString(), jsonObject.get("number").toString());
-            return new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).email(jsonObject.get("email").toString()).firstName(jsonObject.get("first_name").toString())
-                    .lastName(jsonObject.get("last_name").toString()).phone(phoneNumber)
-                    .middleName(jsonObject.get("middle_name").toString()).build();
-        } catch (JSONException e) {
+
+        jsonObject = new JSONObject(customerString);
+        PhoneNumber phoneNumber = new PhoneNumber(jsonObject.get("isdNumber").toString(), jsonObject.get("number").toString());
+
+
+
+            if (jsonObject != null && jsonObject.get("customerId").toString() != null) {
+                new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
+            } else {
+
+                return new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).email(jsonObject.get("email").toString()).firstName(jsonObject.get("first_name").toString())
+                        .lastName(jsonObject.get("last_name").toString()).phone(phoneNumber)
+                        .middleName(jsonObject.get("middle_name").toString()).build();
+            }
+
+
+        }catch(JSONException e){
             e.printStackTrace();
         }
-        return null;
+
+
+        return  new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
+
+
     }
 
     public static TransactionMode getTransactionMode(String jsonString) {
