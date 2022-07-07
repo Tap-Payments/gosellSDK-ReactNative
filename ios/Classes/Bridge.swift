@@ -81,6 +81,14 @@ extension Bridge: SessionDataSource {
 		return ""
 	  }
 
+	  internal var isScanButtonVisible: Bool {
+        #if canImport(CardIO)
+            return CardIOUtilities.canReadCardWithCamera() && TapApplicationPlistInfo.shared.hasUsageDescription(for: .camera)
+        #else
+            return false
+        #endif
+	  }
+
 	public var cardHolderNameIsEditable: Bool{
 		 if let cardHolderNameIsEditableValue:Bool = argsSessionParameters?["editCardHolderName"] as? Bool {
 		  return cardHolderNameIsEditableValue

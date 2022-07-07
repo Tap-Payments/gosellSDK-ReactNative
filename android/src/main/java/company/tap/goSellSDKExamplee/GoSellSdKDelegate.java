@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import org.json.JSONException;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,8 +98,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
          * Required step. Configure SDK Session with all required data.
          */
         configureSDKSession(sessionParameters, result);
-        ThemeObject.getInstance()
-                .setAppearanceMode(AppearanceMode.WINDOWED_MODE).setPayButtonText("Save Card");
+        if(sessionParameters.get("trxMode").toString().equals("TransactionMode.SAVE_CARD")){
+            ThemeObject.getInstance()
+                    .setAppearanceMode(AppearanceMode.WINDOWED_MODE).setPayButtonText(String.valueOf(R.string.save_card);
+        }
         sdkSession.start(activity);
     }
 
@@ -153,7 +157,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
         // Using static CustomerBuilder method available inside TAP Customer Class you
         // can populate TAP Customer object and pass it to SDK
-        sdkSession.setCustomer(DeserializationUtil.getCustomer(sessionParameters)); // ** Required **
+        try {
+            sdkSession.setCustomer(DeserializationUtil.getCustomer(sessionParameters)); // ** Required **
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
 
         // Set Total Amount. The Total amount will be recalculated according to provided
         // Taxes and Shipping
