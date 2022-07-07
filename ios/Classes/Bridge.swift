@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import goSellSDK
 import TapCardVlidatorKit_iOS
+import CardIO
+import TapApplicationV2
 
 @objc(Bridge)
 public class Bridge: NSObject {
