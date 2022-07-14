@@ -168,7 +168,7 @@ public class DeserializationUtil {
 
 
 
-            if (jsonObject != null && jsonObject.get("customerId").toString() != null) {
+            if (jsonObject != null && jsonObject.get("customerId").toString() != null && jsonObject.get("customerId").toString() != "") {
                 new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
             } else {
 
