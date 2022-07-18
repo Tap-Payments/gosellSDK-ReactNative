@@ -157,22 +157,20 @@ public class DeserializationUtil {
         if (sessionParameters.get("customer") == null || "null".equalsIgnoreCase(sessionParameters.get("customer").toString()))
             return null;
         //  String customerString = (String) sessionParameters.get("customer");
+        
+        Customer customer = null;
         try {
         Gson gson = new Gson();
         String customerString = gson.toJson(sessionParameters.get("customer"));
         System.out.println("sessionParameters = " + sessionParameters + "customerString" + customerString);
 
-
         jsonObject = new JSONObject(customerString);
-        PhoneNumber phoneNumber = new PhoneNumber(jsonObject.get("isdNumber").toString(), jsonObject.get("number").toString());
 
-
-
-            if (jsonObject != null && jsonObject.get("customerId").toString() != null && jsonObject.get("customerId").toString() != "") {
-                new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
+            if (jsonObject != null && jsonObject.get("customerId").toString() != null && jsonObject.get("customerId").toString().length() > 0) {
+                customer = new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
             } else {
-
-                return new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).email(jsonObject.get("email").toString()).firstName(jsonObject.get("first_name").toString())
+                PhoneNumber phoneNumber = new PhoneNumber(jsonObject.get("isdNumber").toString(), jsonObject.get("number").toString());
+                customer = new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).email(jsonObject.get("email").toString()).firstName(jsonObject.get("first_name").toString())
                         .lastName(jsonObject.get("last_name").toString()).phone(phoneNumber)
                         .middleName(jsonObject.get("middle_name").toString()).build();
             }
@@ -183,7 +181,7 @@ public class DeserializationUtil {
         }
 
 
-        return  new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
+        return  customer;//new Customer.CustomerBuilder(jsonObject.get("customerId").toString()).build();
 
 
     }
