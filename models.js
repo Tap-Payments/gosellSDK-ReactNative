@@ -16,6 +16,12 @@ const AllowedCadTypes = {
     ALL: 'ALL'
 }
 
+const UiDisplayModes = {
+    FOLLOW_DEVICE: 'FOLLOW_DEVICE',
+    LIGHT: 'LIGHT',
+    DARK: 'DARK'
+}
+
 const TrxMode = {
     PURCHASE: 'TransactionMode.PURCHASE',
     AUTHORIZE_CAPTURE: 'TransactionMode.AUTHORIZE_CAPTURE',
@@ -34,5 +40,6 @@ module.exports = {
     PaymentTypes: PaymentTypes,
     AllowedCadTypes: AllowedCadTypes,
     TrxMode: TrxMode,
-    SDKMode: SDKMode
+    SDKMode: SDKMode,
+    UiDisplayModes: UiDisplayModes
 }

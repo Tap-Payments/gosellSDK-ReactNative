@@ -4,7 +4,8 @@ const {
     PaymentTypes,
     AllowedCadTypes,
     TrxMode,
-    SDKMode
+    SDKMode,
+    UiDisplayModes
 } = RNGoSell.goSellSDKModels;
 
 const transactionCurrency = 'kwd';
@@ -117,6 +118,7 @@ const allConfigurations = {
         receiptSettings: { id: null, email: false, sms: true },
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
+        uiDisplayMode: UiDisplayModes.DARK
     },
 };
 

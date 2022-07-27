@@ -319,6 +319,21 @@ extension Bridge: SessionDataSource {
 		}
 		return [CardType(cardType: .Debit), CardType(cardType: .Credit)]
 	  }
+
+	public var uiModeDisplay: UIModeDisplayEnum {
+        if let modeDisplayString = argsSessionParameters?["uiDisplayMode"] as? String {
+                var finalMode: UIModeDisplayEnum = .followDevice
+                switch modeDisplayString.uppercased() {
+                case "LIGHT": finalMode = .light
+                case "DARK": finalMode = .dark
+                case "FOLLOW_DEVICE": finalMode = .followDevice
+                default:
+                    finalMode = .followDevice
+                }
+                return finalMode
+        }
+		return .followDevice
+    }
 }
 
 extension Bridge: SessionDelegate {
