@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Classes/**/*.h'
   s.requires_arc = true
   s.dependency 'goSellSDK', '2.3.13'
+  s.dependency 'TapCardVlidatorKit-iOS', '1.0.17'
   s.dependency "React"
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES'}
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
