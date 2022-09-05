@@ -57,7 +57,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.21
+npm i @tap-payments/gosell-sdk-react-native@1.0.23
 ```
 
 ### Install pods for iOS
@@ -66,6 +66,13 @@ cd ios
 pod install
 pod update
 ```
+
+### Install pods for iOS for M1
+```
+sudo arch -x86_64 gem install ffi
+arch -x86_64 pod install
+```
+
 
 ### Install for Andoid
 1. Make sure to set **minimum version to 21 in gradle**
