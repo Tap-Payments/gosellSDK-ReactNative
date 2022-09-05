@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNGosellSdkReactNative"
-  s.version      = "1.0.8"
+  s.version      = "1.0.9"
   s.summary      = "RNGosellSdkReactNative"
   s.description  = <<-DESC
                   RNGosellSdkReactNative
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.requires_arc = true
-  s.dependency 'goSellSDK', '2.3.13'
+  s.dependency 'goSellSDK', '2.3.16'
   s.dependency "React"
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES'}
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
