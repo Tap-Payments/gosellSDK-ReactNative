@@ -178,7 +178,7 @@ extension Bridge: SessionDataSource {
 			}
 		  }
 		}
-		throw "Invalid transaction mode passed."
+		return TransactionMode.invalidTransactionMode
 	  }
 	  public var applePayMerchantID: String
 	  {
