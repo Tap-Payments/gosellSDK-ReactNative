@@ -307,6 +307,13 @@ public class GoSellSdKDelegate implements SessionDelegate {
         callback = null;
     }
 
+    @Override
+    public void asyncPaymentStarted(@NonNull Charge charge) {
+        System.out.println(“asyncPaymentStarted :  “);
+        System.out.println(“Charge id:“+ charge.getId());
+        System.out.println(“Fawry reference:“+charge.getTransaction().getOrder().getReference());
+    }
+
    
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
