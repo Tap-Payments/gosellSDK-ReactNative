@@ -186,7 +186,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -194,7 +194,7 @@
 			name = "Bundle React Native code and images";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n../node_modules/expo-updates/scripts/create-manifest-ios.sh\n";
 		};
@@ -268,7 +268,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = company.tap.goSellSDKExamplee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.perfectly.pressed;
 				PRODUCT_NAME = sample;
 				SWIFT_OBJC_BRIDGING_HEADER = "sample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -294,7 +294,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = company.tap.goSellSDKExamplee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.perfectly.pressed;
 				PRODUCT_NAME = sample;
 				SWIFT_OBJC_BRIDGING_HEADER = "sample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
