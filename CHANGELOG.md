@@ -1,20 +1,20 @@
 - Android> asyncPaymentStarted methods prints bug fixed
-## 1.0.29
+## 1.0.29 - 2022-09-28
 
 - Android> asyncPaymentStarted methods prints bug fixed
-## 1.0.29
+## 1.0.29 - 2022-09-27
 
 - Android> asyncPaymentStarted methods prints bug fixed retrofit version corrected
-## 1.0.29
+## 1.0.29 - 2022-09-27
 
 - Android> asyncPaymentStarted methods prints bug fixed and Retrofit version updated
-## 1.0.29
+## 1.0.29 - 2022-09-27
 
 - Android> Inside GoSellSDKDelegate asyncPaymentStarted method added
-## 1.0.28
+## 1.0.28 - 2022-09-20
 
 - Android> Retrofit library and androix version updated
-## 1.0.27
+## 1.0.27 - 2022-09-19
 
 - iOS> Transaction mode default value updated and will thorw exception on Invalid Trx mode
 
