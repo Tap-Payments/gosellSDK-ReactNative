@@ -1,3 +1,16 @@
+## 1.0.30 - 2022-11-02
+
+- iOS> goSellSDK pods issue fixed
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+- iOS> goSellSDK pods issue fixing
+
+
 ## 1.0.29 - 2022-09-27
 
 - Android> asyncPaymentStarted methods prints bug fixed
