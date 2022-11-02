@@ -82,7 +82,6 @@ const paymentReference = {
 
 
 const appCredentials = {
-
     production_secrete_key: (Platform.OS == 'ios') ? 'iOS-Live-KEY' : 'Android-Live-KEY',
     language: Languages.EN,
     sandbox_secrete_key: (Platform.OS == 'ios') ? 'iOS-SANDBOX-KEY' :  'Android-SANDBOX-KEY',
