@@ -28,6 +28,7 @@ import company.tap.gosellapi.open.models.Receipt;
 import company.tap.gosellapi.open.models.Reference;
 import company.tap.gosellapi.open.models.Shipping;
 import company.tap.gosellapi.open.models.Tax;
+import company.tap.gosellapi.open.enums.GPayWalletMode;
 
 public class DeserializationUtil {
 
@@ -203,6 +204,21 @@ public class DeserializationUtil {
                 return TransactionMode.TOKENIZE_CARD;
         }
         return TransactionMode.PURCHASE;
+    }
+
+    public static GPayWalletMode getGPayWalletMode(String jsonString) {
+        if (jsonString == null ||
+                "null".equalsIgnoreCase(jsonString) ||
+                "".equalsIgnoreCase(jsonString.trim())
+        ) return GPayWalletMode.ENVIRONMENT_TEST;
+        System.out.println("gPayWalletMode >>>> " + jsonString);
+        switch (jsonString) {
+            case "GPayWalletMode.ENVIRONMENT_TEST":
+                return GPayWalletMode.ENVIRONMENT_TEST;
+            case "GPayWalletMode.ENVIRONMENT_PRODUCTION":
+                return GPayWalletMode.ENVIRONMENT_PRODUCTION;
+        }
+        return GPayWalletMode.ENVIRONMENT_TEST;
     }
 
     public static CardType getCardType(String jsonString) {

@@ -1,3 +1,21 @@
+## 1.0.31 - 2022-12-01
+
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+- Abdroid> googlePay issue fixing
+
 ## 1.0.30 - 2022-11-02
 
 - iOS> goSellSDK pods issue fixed

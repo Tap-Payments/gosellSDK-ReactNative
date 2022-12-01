@@ -230,6 +230,8 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
         sdkSession.setPaymentType(DeserializationUtil.getPaymentType(sessionParameters.get("paymentType").toString()));
 
+         sdkSession.setGooglePayWalletMode(DeserializationUtil.getGPayWalletMode(sessionParameters.get("GPayWalletMode").toString())); //** Required ** For setting GooglePAY Environment
+
         sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you can pass default CardHolderName of the user .So you don't need to type it.
 
         sdkSession.isUserAllowedToEnableCardHolderName((boolean) sessionParameters.get("editCardHolderName")); // **Optional** you can enable/ disable  default CardHolderName .
@@ -307,12 +309,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
         callback = null;
     }
 
-   @Override
-    public void asyncPaymentStarted(@NonNull Charge charge) {
-      System.out.println("asyncPaymentStarted: ");
-      System.out.println("Charge id:"+charge.getId());
-      System.out.println("Fawry reference:"+charge.getTransaction().getOrder().getReference());
-    }
+//    @Override
+//     public void asyncPaymentStarted(@NonNull Charge charge) {
+//       System.out.println("asyncPaymentStarted: ");
+//       System.out.println("Charge id:"+charge.getId());
+//       System.out.println("Fawry reference:"+charge.getTransaction().getOrder().getReference());
+//     }
    
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
@@ -389,6 +391,18 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @Override
     public void sessionHasStarted() {
         System.out.println(" Session Has Started .......");
+    }
+
+    @Override
+    public void googlePayFailed(String error) {
+    System.out.println("googlePayFailed :  " + error);
+    sendSDKError(303, error, error);
+    
+    Toast.makeText(activity.getBaseContext(), error, Toast.LENGTH_LONG).show();
+
+    //   System.out.println("googlePayFailed :  " + error);
+    //  showDialog(error, "googlePayFailed", company.tap.gosellapi.R.drawable.icon_failed);
+
     }
 
     @Override
