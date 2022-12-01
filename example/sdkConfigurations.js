@@ -5,7 +5,8 @@ const {
     AllowedCadTypes,
     TrxMode,
     SDKMode,
-    UiDisplayModes
+    UiDisplayModes,
+    GPayWalletMode,
 } = RNGoSell.goSellSDKModels;
 
 const transactionCurrency = 'kwd';
@@ -109,7 +110,7 @@ const allConfigurations = {
         destinations: 'null',
         // Here we can set the transaction mode as on of the available options on this URL:
         // See [https://github.com/Tap-Payments/gosellSDK-ReactNative#transaction_modes] to get transaction modes
-        trxMode: TrxMode.TOKENIZE_CARD,
+        trxMode: TrxMode.PURCHASE,
         taxes: taxes,
         merchantID: '',
         SDKMode: SDKMode.Sandbox,
@@ -118,7 +119,8 @@ const allConfigurations = {
         receiptSettings: { id: null, email: false, sms: true },
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
-        uiDisplayMode: UiDisplayModes.DARK
+        uiDisplayMode: UiDisplayModes.LIGHT,
+        GPayWalletMode: GPayWalletMode.EnvironmentTest,
     },
 };
 

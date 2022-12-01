@@ -57,7 +57,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.30
+npm i @tap-payments/gosell-sdk-react-native@1.0.31-alpha.15
 ```
 
 ### Install pods for iOS
@@ -252,7 +252,9 @@ const allConfigurations = {
         receiptSettings: { id: null, email: false, sms: true },
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
-        uiDisplayMode: UiDisplayModes.DARK
+        uiDisplayMode: UiDisplayModes.DARK,
+        GPayWalletMode: GPayWalletMode.EnvironmentTest,
+
     },
 };
 
