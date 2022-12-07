@@ -492,20 +492,7 @@ https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
 
 3. Ask for Enabling googlePay as payment option from Tap team.
 
-4. Please setup your Mode of Test as below in Tap's SDK Configuration:
-   
-*Java:*
-   
-```java
- sdkSession.setGooglePayWalletMode(GPayWalletMode.ENVIRONMENT_TEST);//** Required ** For setting GooglePAY Environment
-```
-*Kotlin:*
-
-```kotlin
- sdkSession.setGooglePayWalletMode(GPayWalletMode.ENVIRONMENT_TEST)//** Required ** For setting GooglePAY Environment
-```
-
-5. In Manifest file of your app enable gms wallet:
+4. In Manifest file of your app enable gms wallet:
    
    ```java
    <meta-data
