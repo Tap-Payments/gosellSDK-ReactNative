@@ -293,10 +293,10 @@ GPayWalletMode: GPayWalletMode.EnvironmentTest
 ```
 
 You can set the gpay wallet mode into one of the following modes:
-- **ENVIRONMENT_TEST** 
+- **EnvironmentTest** 
    - ```GPayWalletMode.EnvironmentTest```<br/>
    > GPayWallet testing environment.
-- **ENVIRONMENT_PRODUCTION** 
+- **EnvironmentProduction** 
    - ```GPayWalletMode.EnvironmentProduction```<br/>
    > GPayWallet production environment.
 
@@ -475,6 +475,48 @@ handleResult(error, status) {
 Follow the steps shared in the following link to setup apple pay:<br/>
 https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
 
+---
+
+---
+
+<a name="google_pay"></a>
+**Google pay setup**
+
+
+<a name="requirements_googlepay"></a>
+## Requirements And SetUp
+
+1. Make sure, your current goSellSDK version is >= 3.16.0
+
+2. To use Google Pay™, first ensure your device supports GooglePay and is above api version 22
+
+3. Ask for Enabling googlePay as payment option from Tap team.
+
+4. Please setup your Mode of Test as below in Tap's SDK Configuration:
+   
+*Java:*
+   
+```java
+ sdkSession.setGooglePayWalletMode(GPayWalletMode.ENVIRONMENT_TEST);//** Required ** For setting GooglePAY Environment
+```
+*Kotlin:*
+
+```kotlin
+ sdkSession.setGooglePayWalletMode(GPayWalletMode.ENVIRONMENT_TEST)//** Required ** For setting GooglePAY Environment
+```
+
+5. In Manifest file of your app enable gms wallet:
+   
+   ```java
+   <meta-data
+   android:name="com.google.android.gsm.wallet.api.enabled"
+   android:value="true"
+   />
+   ```
+
+
+You may refer to https://github.com/Tap-Payments/goSellSDK-AndroidX/tree/FT_Google_Pay_Integration#requirements_googlepay<br/>
+for more info
 ---
 
 <a name="common_issues"></a>
