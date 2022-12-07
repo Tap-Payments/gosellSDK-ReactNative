@@ -293,11 +293,11 @@ GPayWalletMode: GPayWalletMode.EnvironmentTest
 ```
 
 You can set the gpay wallet mode into one of the following modes:
-- **EnvironmentTest** 
+- **ENVIRONMENT_TEST** 
    - ```GPayWalletMode.EnvironmentTest```<br/>
    > GPayWallet testing environment.
 - **ENVIRONMENT_PRODUCTION** 
-   - ```GPayWalletMode.ENVIRONMENT_PRODUCTION```<br/>
+   - ```GPayWalletMode.EnvironmentProduction```<br/>
    > GPayWallet production environment.
 
 ---
