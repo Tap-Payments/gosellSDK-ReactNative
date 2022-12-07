@@ -284,6 +284,22 @@ You can set the transaction mode into one of the following modes:
    - ```TransactionMode.TOKENIZE_CARD```<br/>
    > Use this mode if you are willing to perform the charging/authorization manually. The purpose of this mode is only to collect and tokenize card information details of your customer if you don't have PCI compliance certificate but willing to process the payment manually using our services.
 
+
+<a name="gpay_wallet_modes"></a>
+**GPayWallet Modes**
+
+``` javascript 
+GPayWalletMode: GPayWalletMode.EnvironmentTest
+```
+
+You can set the gpay wallet mode into one of the following modes:
+- **EnvironmentTest** 
+   - ```GPayWalletMode.EnvironmentTest```<br/>
+   > GPayWallet testing environment.
+- **ENVIRONMENT_PRODUCTION** 
+   - ```GPayWalletMode.ENVIRONMENT_PRODUCTION```<br/>
+   > GPayWallet production environment.
+
 ---
 
 <a name="tap_pay_button"></a>
