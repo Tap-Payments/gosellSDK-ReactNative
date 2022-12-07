@@ -484,7 +484,7 @@ https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
 
 
 <a name="requirements_googlepay"></a>
-## Requirements And SetUp
+** Requirements And SetUp
 
 1. Make sure, your current goSellSDK version is >= 3.16.0
 
@@ -515,8 +515,8 @@ https://github.com/Tap-Payments/goSellSDK-ios#apple-pay
    ```
 
 
-You may refer to https://github.com/Tap-Payments/goSellSDK-AndroidX/tree/FT_Google_Pay_Integration#requirements_googlepay<br/>
-for more info
+You may refer to https://github.com/Tap-Payments/goSellSDK-AndroidX/tree/FT_Google_Pay_Integration#requirements_googlepay for more info
+
 ---
 
 <a name="common_issues"></a>
