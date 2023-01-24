@@ -1,8 +1,10 @@
 
-import { NativeModules } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 import goSellModels from './models'
 const { RNGosellSdkReactNative } = NativeModules;
 
-module.exports = { goSellSDK: RNGosellSdkReactNative, goSellSDKModels: { ...goSellModels } };
+const RNGosellEmitter = new NativeEventEmitter(RNGosellSdkReactNative);
+
+module.exports = { goSellSDK: RNGosellSdkReactNative, goSellSDKModels: { ...goSellModels }, goSellListener: RNGosellEmitter };
 
 

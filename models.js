@@ -39,6 +39,10 @@ const GPayWalletMode = {
     EnvironmentProduction: 'GPayWalletMode.ENVIRONMENT_PRODUCTION'
 }
 
+const Listener = {
+    paymentInit: 'paymentInit',
+}
+
 
 module.exports = {
     Languages: Languages,
@@ -47,5 +51,6 @@ module.exports = {
     TrxMode: TrxMode,
     SDKMode: SDKMode,
     GPayWalletMode: GPayWalletMode,
-    UiDisplayModes: UiDisplayModes
+    UiDisplayModes: UiDisplayModes,
+    Listener: Listener,
 }
