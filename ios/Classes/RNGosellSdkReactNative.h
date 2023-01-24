@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
-@interface RNGosellSdkReactNative : NSObject <RCTBridgeModule>
+#import <React/RCTEventEmitter.h>
+@interface RNGosellSdkReactNative : RCTEventEmitter <RCTBridgeModule>
 @end
