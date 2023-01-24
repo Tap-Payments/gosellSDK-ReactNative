@@ -393,16 +393,16 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println(" Session Has Started .......");
     }
 
-    public void googlePayFailed(String error) {
-        System.out.println("googlePayFailed :  " + error);
-        sendSDKError(303, error, error);
+    // public void googlePayFailed(String error) {
+    //     System.out.println("googlePayFailed :  " + error);
+    //     sendSDKError(303, error, error);
 
-        Toast.makeText(activity.getBaseContext(), error, Toast.LENGTH_LONG).show();
+    //     Toast.makeText(activity.getBaseContext(), error, Toast.LENGTH_LONG).show();
 
-        //   System.out.println("googlePayFailed :  " + error);
-        //  showDialog(error, "googlePayFailed", company.tap.gosellapi.R.drawable.icon_failed);
+    //     //   System.out.println("googlePayFailed :  " + error);
+    //     //  showDialog(error, "googlePayFailed", company.tap.gosellapi.R.drawable.icon_failed);
 
-    }
+    // }
 
     @Override
     public void sessionCancelled() {
