@@ -18,6 +18,7 @@ public class Bridge: NSObject {
   public var argsSessionParameters:[String:Any]?
   public var argsAppCredentials:[String:String]?
   var reactResult: RCTResponseSenderBlock?
+  var paymentInit: ((_ chargeId: String) -> Void)?
   var argsDataSource:[String:Any]?{
 	didSet{
 	  argsSessionParameters = argsDataSource?["sessionParameters"] as? [String : Any]
@@ -25,7 +26,7 @@ public class Bridge: NSObject {
 	}
   }
   
-  @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock) {
+  @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock, paymentInitCallback: @escaping (_ chargeId: String) -> Void) {
 	argsDataSource = arguments as? [String: Any]
 	print("arguments: \(arguments)")
 	GoSellSDK.reset()
@@ -38,6 +39,7 @@ public class Bridge: NSObject {
 	session.appearance = self
 	session.start()
 	reactResult = callback
+    paymentInit = paymentInitCallback
     if timeout > 0 {
         let timeoutSeconds = TimeInterval(timeout / 1000)
         Timer.scheduledTimer(timeInterval: timeoutSeconds, target: self, selector: #selector(terminateSession), userInfo: nil, repeats: false)
@@ -337,6 +339,14 @@ extension Bridge: SessionDataSource {
 }
 
 extension Bridge: SessionDelegate {
+	
+  public func paymentInitiated(with charge: Charge?, on session: SessionProtocol) {
+		guard let paymentInit, let chargeId = charge?.identifier else {
+			return
+		}
+		paymentInit(chargeId)
+  }
+
   public func paymentSucceed(_ charge: Charge, on session: SessionProtocol) {
 		print(charge)
 		  
