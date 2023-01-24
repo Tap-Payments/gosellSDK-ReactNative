@@ -6,7 +6,6 @@ const {
     TrxMode,
     SDKMode,
     UiDisplayModes,
-    GPayWalletMode,
 } = RNGoSell.goSellSDKModels;
 
 const transactionCurrency = 'kwd';
@@ -120,7 +119,6 @@ const allConfigurations = {
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
         uiDisplayMode: UiDisplayModes.LIGHT,
-        GPayWalletMode: GPayWalletMode.EnvironmentTest,
     },
 };
 

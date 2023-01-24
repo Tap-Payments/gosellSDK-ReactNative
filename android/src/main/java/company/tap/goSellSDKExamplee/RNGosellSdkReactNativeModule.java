@@ -7,6 +7,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -14,6 +15,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +46,15 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   }
 
   @Override
+  public void onPaymentInit(String chargeId) {
+  WritableMap payload = Arguments.createMap();
+  payload.putString("chargeId", chargeId);
+  this.reactContext
+    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+    .emit("paymentInit", payload);
+  }
+
+  @Override
   public void onSuccess(HashMap<String,String> result) {
     System.out.println(" on success callback : "+ result);
     WritableMap writableMap = new WritableNativeMap();
@@ -56,7 +67,6 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
 
   @Override
   public void onFailure(Map<String, String> resultMap) {
-
     System.out.println(" on failure callback : "+resultMap);
       WritableMap writableMap = new WritableNativeMap();
       for (Map.Entry<String, String> entry : resultMap.entrySet()) {

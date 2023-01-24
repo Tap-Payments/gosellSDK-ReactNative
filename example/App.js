@@ -43,6 +43,14 @@ export default class App extends Component {
     if (!this.sdkModule && RNGoSell && RNGoSell.goSellSDKModels) {
       this.sdkModels = RNGoSell.goSellSDKModels
     }
+     this.subscription = RNGoSell.goSellListener.addListener(RNGoSell.goSellSDKModels.Listener.paymentInit, (chargeId) => {
+      console.log("chargeId", chargeId)
+    })
+
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove() // to clear the listener
   }
 
   startSDK() {

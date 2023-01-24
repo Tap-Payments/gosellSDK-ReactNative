@@ -109,7 +109,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             ThemeObject.getInstance()
                     .setAppearanceMode(AppearanceMode.WINDOWED_MODE);
         }
-        
+
         sdkSession.start(activity);
     }
 
@@ -230,7 +230,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
         sdkSession.setPaymentType(DeserializationUtil.getPaymentType(sessionParameters.get("paymentType").toString()));
 
-         sdkSession.setGooglePayWalletMode(DeserializationUtil.getGPayWalletMode(sessionParameters.get("GPayWalletMode").toString())); //** Required ** For setting GooglePAY Environment
+//        sdkSession.setGooglePayWalletMode(DeserializationUtil.getGPayWalletMode(sessionParameters.get("GPayWalletMode").toString())); //** Required ** For setting GooglePAY Environment
 
         sdkSession.setDefaultCardHolderName(sessionParameters.get("cardHolderName").toString()); // ** Optional ** you can pass default CardHolderName of the user .So you don't need to type it.
 
@@ -279,7 +279,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("customer_last_name", charge.getCustomer().getLastName());
             resultMap.put("customer_email", charge.getCustomer().getEmail());
         }
-        
+
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
         resultMap.put("id", charge.getId());
@@ -315,7 +315,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 //       System.out.println("Charge id:"+charge.getId());
 //       System.out.println("Fawry reference:"+charge.getTransaction().getOrder().getReference());
 //     }
-   
+
 
     private void sendSDKError(int errorCode, String errorMessage, String errorBody) {
         HashMap<String, String> resultMap = new HashMap<>();
@@ -332,7 +332,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     public void paymentSucceed(@NonNull Charge charge) {
         System.out.println("paymentSucceed = " + charge.getCard() + " charge information" + charge.getId()+"getTransactionMode");
         sendChargeResult(charge, "SUCCESS", "CHARGE");
-       
+
         Toast.makeText(activity, charge.getId(), Toast.LENGTH_SHORT).show();
     }
 
@@ -393,15 +393,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println(" Session Has Started .......");
     }
 
-    @Override
     public void googlePayFailed(String error) {
-    System.out.println("googlePayFailed :  " + error);
-    sendSDKError(303, error, error);
-    
-    Toast.makeText(activity.getBaseContext(), error, Toast.LENGTH_LONG).show();
+        System.out.println("googlePayFailed :  " + error);
+        sendSDKError(303, error, error);
 
-    //   System.out.println("googlePayFailed :  " + error);
-    //  showDialog(error, "googlePayFailed", company.tap.gosellapi.R.drawable.icon_failed);
+        Toast.makeText(activity.getBaseContext(), error, Toast.LENGTH_LONG).show();
+
+        //   System.out.println("googlePayFailed :  " + error);
+        //  showDialog(error, "googlePayFailed", company.tap.gosellapi.R.drawable.icon_failed);
 
     }
 
@@ -451,6 +450,16 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @Override
     public void cardTokenizedSuccessfully(@NonNull Token token, boolean saveCardEnabled) {
         sendTokenResult(token, "SUCCESS", saveCardEnabled);
+    }
+
+    @Override
+    public void asyncPaymentStarted(@NonNull Charge charge) {
+
+    }
+
+    @Override
+    public void paymentInitiated(@Nullable Charge charge) {
+        callback.onPaymentInit(charge.getId());
     }
 
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
