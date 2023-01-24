@@ -1,6 +1,10 @@
+## 1.0.33 - 2023-01-24
+
+- add charge id callback
+
 ## 1.0.32 - 2023-01-12
 
-- iOS> update iOS sdk version 
+- iOS> update iOS sdk version
 
 ## 1.0.31 - 2022-12-01
 
