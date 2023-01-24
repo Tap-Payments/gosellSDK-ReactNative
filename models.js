@@ -34,10 +34,6 @@ const SDKMode = {
     Production: 'SDKMode.Production'
 }
 
-const GPayWalletMode = {
-    EnvironmentTest: 'GPayWalletMode.ENVIRONMENT_TEST',
-    EnvironmentProduction: 'GPayWalletMode.ENVIRONMENT_PRODUCTION'
-}
 
 const Listener = {
     paymentInit: 'paymentInit',
@@ -50,7 +46,6 @@ module.exports = {
     AllowedCadTypes: AllowedCadTypes,
     TrxMode: TrxMode,
     SDKMode: SDKMode,
-    GPayWalletMode: GPayWalletMode,
     UiDisplayModes: UiDisplayModes,
     Listener: Listener,
 }

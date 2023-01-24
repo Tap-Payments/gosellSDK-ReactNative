@@ -22,9 +22,10 @@ Original SDKS
    3. [Transaction Modes](#transaction_modes)
    4. [Customer](#customer)
    5. [Use Tap Pay Button](#tap_pay_button)
-   6. [Start Payment](#start_payment)
-   7. [Handle SDK Result](#handle_sdk_result)
-   8. [Apple Pay Setup](#apple_pay)
+   6. [Use Charge Id callback](#charge_id_callback)
+   7. [Start Payment](#start_payment)
+   8. [Handle SDK Result](#handle_sdk_result)
+   9. [Apple Pay Setup](#apple_pay)
 4. [Common Issues](#common_issues)
 
 <a href="requirements"></a>
@@ -57,7 +58,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.32
+npm i @tap-payments/gosell-sdk-react-native@1.0.33-alpha.0
 ```
 
 ### Install pods for iOS
@@ -96,7 +97,8 @@ Languages,
 PaymentTypes,
 AllowedCadTypes,
 TrxMode,
-SDKMode
+SDKMode,
+Listener,
 }= RNGoSell.goSellSDKModels;
 ```
 
@@ -253,8 +255,6 @@ const allConfigurations = {
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
         uiDisplayMode: UiDisplayModes.DARK,
-        GPayWalletMode: GPayWalletMode.EnvironmentTest,
-
     },
 };
 
@@ -285,22 +285,7 @@ You can set the transaction mode into one of the following modes:
    > Use this mode if you are willing to perform the charging/authorization manually. The purpose of this mode is only to collect and tokenize card information details of your customer if you don't have PCI compliance certificate but willing to process the payment manually using our services.
 
 
-<a name="gpay_wallet_modes"></a>
-**GPayWallet Modes**
 
-``` javascript 
-GPayWalletMode: GPayWalletMode.EnvironmentTest
-```
-
-You can set the gpay wallet mode into one of the following modes:
-- **EnvironmentTest** 
-   - ```GPayWalletMode.EnvironmentTest```<br/>
-   > GPayWallet testing environment.
-- **EnvironmentProduction** 
-   - ```GPayWalletMode.EnvironmentProduction```<br/>
-   > GPayWallet production environment.
-
----
 
 <a name="tap_pay_button"></a>
 **Use Tap Pay Button UI**
@@ -333,6 +318,20 @@ render() {
         </View>
       </SafeAreaView>
     );
+  }
+```
+<a name="charge_id_callback"></a>
+**Use Charge Id callback**
+``` javascript
+  constructor(props) {
+    super(props);
+     this.subscription = RNGoSell.goSellListener.addListener(RNGoSell.goSellSDKModels.Listener.paymentInit, (chargeId) => {
+      console.log("chargeId", chargeId)
+    })
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove() // to clear the listener
   }
 ```
 ``` javascript
