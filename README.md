@@ -73,15 +73,23 @@ pod update
 sudo arch -x86_64 gem install ffi
 arch -x86_64 pod install
 ```
-Force Xcode to run under Rosetta
-If you need to run a newer simulator than 13.7, you can force Xcode itself to run under Rosetta.
+## M1 based Macs
 
-To force Xcode to run in Rosetta: 
+You may face a compilation error when compiled using M1 based Mac devices, to solve this please follow these steps:
 
-1. Quit Xcode if it is running.
-2. Use Finder to locate Xcode.app in the Applications folder of your Mac.
-3. Right click Xcode.app and select ‘Get Info’
-4. Click the ‘Open using Rosetta’ check box.
+1. Close the Xcode.
+  
+2. Go to the `application` folder.
+  
+3. Find the `Xcode` icon.
+  
+4. Right click on Xcode icon.
+  
+5. Choose `Get info`
+  
+6. Check the option `Open using Rosetta`
+
+![img](https://i.ibb.co/vQDnnwG/Stephen-Mickelsen-2-1645220554524.png)
 
 
 ### Install for Andoid
