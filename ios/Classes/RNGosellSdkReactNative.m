@@ -1,7 +1,12 @@
+#if __has_include(<RNGosellSdkReactNative/RNGosellSdkReactNative-Swift.h>)
+// For cocoapods framework, the generated swift header will be inside ExpoModulesCore module
+#import <RNGosellSdkReactNative/RNGosellSdkReactNative-Swift.h>
+#else
 #import "RNGosellSdkReactNative-Swift.h"
+#endif
 #import "RNGosellSdkReactNative.h"
 #import <React/RCTLog.h>
-//#import <RNGosellSdkReactNative/RNGosellSdkReactNative-Swift.h>
+
 @class Bridge;
 @implementation RNGosellSdkReactNative {
     Bridge* bridge;
