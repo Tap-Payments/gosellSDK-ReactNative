@@ -1,3 +1,6 @@
+## 1.0.34 - 2023-02-17
+
+- Fix static framrworks option in iOS
 ## 1.0.33 - 2023-01-24
 
 - add charge id callback
