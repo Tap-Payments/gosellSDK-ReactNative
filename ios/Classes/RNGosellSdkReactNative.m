@@ -53,10 +53,10 @@ RCT_EXPORT_METHOD(kareem:(RCTResponseSenderBlock)callback){
 	callback(@[@"kareem info"]);
 }
 RCT_EXPORT_METHOD(startPayment:(NSDictionary *)arguments timeout:(int)timeout callback:(RCTResponseSenderBlock)callback){
-  [bridge startPayment:arguments timeout:timeout callback:callback paymentInitCallback: ^(NSString * value) {
+  [bridge startPayment:arguments timeout:timeout callback:callback paymentInitCallback: ^(NSDictionary* value) {
     if (self->hasListeners) { // Only send events if anyone is listening
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self sendEventWithName:@"paymentInit" body: @{@"chargeId": value}];
+        [self sendEventWithName:@"paymentInit" body:value];
       });
     }
 }];
