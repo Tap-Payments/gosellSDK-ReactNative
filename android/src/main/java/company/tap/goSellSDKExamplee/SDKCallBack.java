@@ -12,5 +12,5 @@ import java.util.Map;
 public interface SDKCallBack {
     public void onSuccess(HashMap<String,String> result);
     public void onFailure(Map<String, String> error);
-    public void onPaymentInit(String chargeId);
+    public void onPaymentInit(HashMap<String,String> result);
 }
