@@ -459,7 +459,54 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void paymentInitiated(@Nullable Charge charge) {
-        callback.onPaymentInit(charge.getId());
+        if (charge != null) {
+            HashMap<String, String> resultMap = new HashMap<>();
+            if (charge.getStatus() != null)
+                resultMap.put("status", charge.getStatus().name());
+            resultMap.put("description", charge.getDescription());
+            resultMap.put("message", charge.getResponse().getMessage());
+            resultMap.put("charge_id", charge.getId());
+            if (charge.getCard() != null) {
+                resultMap.put("card_first_six", charge.getCard().getFirstSix());
+                resultMap.put("card_last_four", charge.getCard().getLast4());
+                resultMap.put("card_object", charge.getCard().getObject());
+                resultMap.put("card_brand", charge.getCard().getBrand());
+                if (charge.getCard().getExpiry() != null) {
+                    resultMap.put("card_exp_month", charge.getCard().getExpiry().getMonth());
+                    resultMap.put("card_exp_year", charge.getCard().getExpiry().getYear());
+                } else {
+                    resultMap.put("card_exp_month", charge.getCard().getExp_month());
+                    resultMap.put("card_exp_year", charge.getCard().getExp_year());
+                }
+            }
+            if (charge.getAcquirer() != null) {
+                resultMap.put("acquirer_id", charge.getAcquirer().getId());
+                resultMap.put("acquirer_response_code", charge.getAcquirer().getResponse().getCode());
+                resultMap.put("acquirer_response_message", charge.getAcquirer().getResponse().getMessage());
+            }
+            if (charge.getSource() != null) {
+                resultMap.put("source_id", charge.getSource().getId());
+                if (charge.getSource().getChannel() != null)
+                    resultMap.put("source_channel", charge.getSource().getChannel().name());
+                resultMap.put("source_object", charge.getSource().getObject());
+                resultMap.put("source_payment_type", charge.getSource().getPaymentType());
+            }
+
+            if (charge.getCustomer() != null) {
+                resultMap.put("customer_id", charge.getCustomer().getIdentifier());
+                resultMap.put("customer_first_name", charge.getCustomer().getFirstName());
+                resultMap.put("customer_middle_name", charge.getCustomer().getMiddleName());
+                resultMap.put("customer_last_name", charge.getCustomer().getLastName());
+                resultMap.put("customer_email", charge.getCustomer().getEmail());
+            }
+
+            resultMap.put("sdk_result", "SUCCESS");
+            resultMap.put("trx_mode", "CHARGE");
+            resultMap.put("charge_id", charge.getId());
+            System.out.println("resultMap on success = " + resultMap);
+            System.out.println("callback on success = " + callback);
+            callback.onPaymentInit(resultMap);
+        }
     }
 
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
