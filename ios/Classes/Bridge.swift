@@ -18,7 +18,7 @@ public class Bridge: NSObject {
   public var argsSessionParameters:[String:Any]?
   public var argsAppCredentials:[String:String]?
   var reactResult: RCTResponseSenderBlock?
-  var paymentInit: ((_ chargeId: String) -> Void)?
+  var paymentInit: ((_ charge: [String: Any]) -> Void)?
   var argsDataSource:[String:Any]?{
 	didSet{
 	  argsSessionParameters = argsDataSource?["sessionParameters"] as? [String : Any]
@@ -26,7 +26,7 @@ public class Bridge: NSObject {
 	}
   }
   
-  @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock, paymentInitCallback: @escaping (_ chargeId: String) -> Void) {
+  @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock, paymentInitCallback: @escaping (_ chargeId: [String: Any]) -> Void) {
 	argsDataSource = arguments as? [String: Any]
 	print("arguments: \(arguments)")
 	GoSellSDK.reset()
@@ -341,10 +341,54 @@ extension Bridge: SessionDataSource {
 extension Bridge: SessionDelegate {
 	
   public func paymentInitiated(with charge: Charge?, on session: SessionProtocol) {
-		guard let paymentInit, let chargeId = charge?.identifier else {
+		guard let paymentInit, let charge = charge else {
 			return
 		}
-		paymentInit(chargeId)
+    var resultMap = [String: Any]()
+    resultMap["status"] = charge.status.textValue
+    resultMap["charge_id"] = charge.identifier
+    resultMap["description"] = charge.descriptionText
+    resultMap["message"] = charge.response?.message
+    
+    if let card = charge.card {
+      resultMap["card_first_six"] = card.firstSixDigits
+      resultMap["card_last_four"] = card.lastFourDigits
+      resultMap["card_object"] = card.object
+//            let cardBrand = CardBrand(rawValue: card.brand.rawValue)
+      resultMap["card_brand"] = card.brand.textValue
+      resultMap["card_exp_month"] = card.expirationMonth
+      resultMap["card_exp_year"] = card.expirationYear
+    }
+  
+          resultMap["customer_id"] = charge.customer.identifier ?? ""
+          resultMap["customer_first_name"] = charge.customer.firstName ?? ""
+          resultMap["customer_middle_name"] = charge.customer.middleName ?? ""
+          resultMap["customer_last_name"] = charge.customer.lastName ?? ""
+          
+          if let emailAddress = charge.customer.emailAddress {
+              resultMap["customer_email"] = emailAddress.value
+          }
+    
+    if let acquirer = charge.acquirer {
+      if let response = acquirer.response {
+        resultMap["acquirer_id"] = ""
+        resultMap["acquirer_response_code"] = response.code
+        resultMap["acquirer_response_message"] = response.message
+      }
+      
+    }
+    
+    resultMap["source_id"] = charge.source.identifier
+    resultMap["source_channel"] = charge.source.channel.textValue
+    resultMap["source_object"] = charge.source.object.textValue
+    resultMap["source_payment_type"] = charge.source.paymentType.textValue
+    
+    resultMap["sdk_result"] = "SUCCESS"
+    resultMap["trx_mode"] = "CHARGE"
+    print("------&&&&-----------")
+    print(resultMap)
+    print("------&&&&-----------")
+		paymentInit(resultMap)
   }
 
   public func paymentSucceed(_ charge: Charge, on session: SessionProtocol) {

@@ -46,12 +46,15 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
   }
 
   @Override
-  public void onPaymentInit(String chargeId) {
-  WritableMap payload = Arguments.createMap();
-  payload.putString("chargeId", chargeId);
+  public void onPaymentInit(HashMap<String,String> result) {
+    System.out.println(result);
+    WritableMap writableMap = new WritableNativeMap();
+    for (Map.Entry<String, String> entry : result.entrySet()) {
+      writableMap.putString(entry.getKey(), (String) entry.getValue());
+    }
   this.reactContext
     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-    .emit("paymentInit", payload);
+    .emit("paymentInit", writableMap);
   }
 
   @Override
