@@ -58,7 +58,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.35.alpha.0
+npm i @tap-payments/gosell-sdk-react-native@1.0.36
 ```
 
 ### Install pods for iOS
