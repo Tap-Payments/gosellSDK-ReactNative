@@ -71,7 +71,7 @@ export default class App extends Component {
   }
 
   handleResult(error, status) {
-    var myString = JSON.stringify(status);
+    var myString = JSON.stringify(status,null,2);
     console.log('status is ' + status.sdk_result);
     console.log(myString);
     var resultStr = String(status.sdk_result);
@@ -117,7 +117,8 @@ export default class App extends Component {
 
       case "TOKENIZE":
         Object.keys(result).map((key) => {
-          console.log(`TOKENIZE \t${key}:\t\t\t${result[key]}`);
+       
+          console.log(`TOKENIZE \t${key}:\t\t\t${JSON.stringify(result[key])}`);
         })
 
         // responseID = tapSDKResult['token'];
