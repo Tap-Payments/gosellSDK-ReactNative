@@ -591,6 +591,10 @@ extension Bridge: SessionDelegate {
 			resultMap["save_card"] = saveCard
 			resultMap["sdk_result"] = "SUCCESS"
 			resultMap["trx_mode"] = "TOKENIZE"
+            if token.card.issuer != nil {
+              resultMap["issuer"] =  token.card.issuer?.dictionary
+           }
+         
   //          result.success(resultMap)
 		  if let reactResult = reactResult {
 			reactResult([NSNull(), resultMap])
@@ -627,7 +631,7 @@ extension Bridge: SessionDelegate {
         resultMap["card_object"] = cardVerification.card.object
         resultMap["card_exp_month"] = cardVerification.card.expirationMonth
         resultMap["card_exp_year"] = cardVerification.card.expirationYear
-        
+         
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "SAVE_CARD"
         
@@ -799,4 +803,11 @@ extension CardBrand {
 
 		@available(*, unavailable) private init() {}
 	}
+}
+
+extension Encodable {
+  var dictionary: [String: Any]? {
+    guard let data = try? JSONEncoder().encode(self) else { return nil }
+    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+  }
 }

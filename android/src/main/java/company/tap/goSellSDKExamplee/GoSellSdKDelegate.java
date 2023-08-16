@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
+
 import org.json.JSONException;
 
 import java.math.BigDecimal;
@@ -240,7 +243,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
-        HashMap<String, String> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
         resultMap.put("description", charge.getDescription());
@@ -290,7 +293,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
     private void sendTokenResult(Token token, String paymentStatus, boolean saveCard) {
-        HashMap<String, String> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
 
         resultMap.put("token", token.getId());
         resultMap.put("token_currency", token.getCurrency());
@@ -300,11 +303,18 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_object", token.getCard().getObject());
             resultMap.put("card_exp_month", "" + token.getCard().getExpirationYear());
             resultMap.put("card_exp_year", "" + token.getCard().getExpirationMonth());
+            WritableMap issuerMap = new WritableNativeMap();
+
+            if (token.getCard().getIssuer() != null ){
+                issuerMap.putString("id", token.getCard().getIssuer().getId());
+                issuerMap.putString("bank", token.getCard().getIssuer().getBank());
+                issuerMap.putString("country", token.getCard().getIssuer().getCountry());
+                resultMap.put("issuer", issuerMap);
+            }
         }
         resultMap.put("save_card", String.valueOf(saveCard));
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
-
         callback.onSuccess(resultMap);
         callback = null;
     }
@@ -510,7 +520,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     }
 
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
-        HashMap<String, String> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         if (charge instanceof SaveCard) {
             System.out.println("Card  are Saved Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
         }

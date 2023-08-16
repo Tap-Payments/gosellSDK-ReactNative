@@ -10,7 +10,7 @@ import java.util.Map;
  * All rights reserved.
  **/
 public interface SDKCallBack {
-    public void onSuccess(HashMap<String,String> result);
+    public void onSuccess(HashMap<String,Object> result);
     public void onFailure(Map<String, String> error);
     public void onPaymentInit(HashMap<String,String> result);
 }
