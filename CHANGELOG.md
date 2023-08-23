@@ -1,3 +1,15 @@
+## 1.0.37 - 2023-08-23
+
+- Update iOS GoSellSdk
+## 1.0.36 - 2023-02-17
+
+- Add issuer response
+
+## 1.0.35- 2023-02-17
+
+- Update iOS/Android GoSellSdk
+## 1.0.34 - 2023-02-17
+
 ## 1.0.34 - 2023-02-17
 
 - Fix static framrworks option in iOS
