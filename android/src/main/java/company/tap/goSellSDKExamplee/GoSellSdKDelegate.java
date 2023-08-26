@@ -203,7 +203,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
 
         // Payment Extra Info
-        sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymenMetaData")));// **Optional** you can pass empty array hashmap//
+        sdkSession.setPaymentMetadata(DeserializationUtil.getMetaData(sessionParameters.get("paymentMetadata")));// **Optional** you can pass empty array hashmap//
 
         // Payment Reference
         sdkSession.setPaymentReference(DeserializationUtil.getReference(sessionParameters.get("paymentReference"))); // **Optional**you can pass null

@@ -231,6 +231,13 @@ extension Bridge: SessionDataSource {
 		}
 		return nil
 	  }
+	   public var paymentMetadata: Metadata? {
+		if let paymentMetadataString:[String: Any] = argsSessionParameters?["paymentMetadata"] as? [String: Any] {
+		  let paymentMetadataItems:Metadata = try! Metadata.init(dictionary: paymentMetadataString)
+		  return paymentMetadataItems
+		}
+		return nil
+	  }
 	  public var receiptSettings: Receipt? {
 		if let receiptSettingsString:String = argsSessionParameters?["receiptSettings"] as? String {
 		  if let data = receiptSettingsString.data(using: .utf8) {

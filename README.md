@@ -254,7 +254,7 @@ const allConfigurations = {
         shipping: shipping,
         allowedCadTypes:AllowedCadTypes.ALL,
         paymentitems: paymentitems,
-        paymenMetaData: { a: 'a meta', b: 'b meta' },
+        paymentMetadata: { a: 'a meta', b: 'b meta' },
         applePayMerchantID: 'applePayMerchantID',
         authorizeAction: { timeInHours: 10, time: 10, type: 'CAPTURE' },
         cardHolderName: 'Card Holder NAME',
