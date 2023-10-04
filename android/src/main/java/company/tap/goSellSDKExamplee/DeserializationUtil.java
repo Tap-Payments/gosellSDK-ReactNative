@@ -56,12 +56,17 @@ public class DeserializationUtil {
     static public ArrayList<Shipping> getShipping(Object jsonString) {
         Gson gson = new GsonBuilder().create();
         String jsonString1 = gson.toJson(jsonString);
-        if (!validJsonString(jsonString1.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "array");
-        Type listType = new TypeToken<List<Shipping>>() {
-        }.getType();
-        List<Shipping> shippingList = new Gson().fromJson(jsonElement, listType);
-        return (ArrayList<Shipping>) shippingList;
+        try{
+            JsonArray parsed = gson.fromJson(jsonString1, JsonArray.class);
+            if (!validJsonString(jsonString1.toString())) return null;
+            JsonElement jsonElement = getJsonElement(jsonString1.toString(), "array");
+            Type listType = new TypeToken<List<Shipping>>() {
+            }.getType();
+            List<Shipping> shippingList = new Gson().fromJson(jsonElement, listType);
+            return (ArrayList<Shipping>) shippingList;
+        }catch (Exception e) {
+            return  null;
+        }
     }
 
     // taxes
@@ -106,8 +111,10 @@ public class DeserializationUtil {
 
 
     public static Reference getReference(Object jsonString) {
-        if (!validJsonString(jsonString.toString())) return null;
-        JsonElement jsonElement = getJsonElement(jsonString.toString(), "object");
+        Gson gson = new GsonBuilder().create();
+        String jsonString1 = gson.toJson(jsonString);
+        if (!validJsonString(jsonString1.toString())) return null;
+        JsonElement jsonElement = getJsonElement(jsonString1.toString(), "object");
         Type listType = new TypeToken<Reference>() {
         }.getType();
         Reference reference = new Gson().fromJson(jsonElement, listType);
