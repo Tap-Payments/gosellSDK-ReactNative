@@ -1,3 +1,6 @@
+## 1.0.39 - 2023-08-23
+
+- Update Android GoSellSdk
 ## 1.0.38 - 2023-08-23
 
 - Update Android GoSellSdk
