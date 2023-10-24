@@ -1,3 +1,8 @@
+## 1.0.41 - 2023-10-24
+
+- Add apple pay tokenized failed callback
+- Add apple pay tokenized success callback
+
 ## 1.0.40 - 2023-08-23
 
 - Update Android GoSellSdk
