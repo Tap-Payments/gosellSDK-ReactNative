@@ -312,14 +312,14 @@ extension Bridge: SessionDataSource {
                     }
                 }
                 if cardType == .All {
-                    return [CardType(cardType: .Debit), CardType(cardType: .Credit)]
+                    return [CardType(cardType: .All)]
                 }else
                 {
                     return [CardType(cardType: cardType)]
                 }
             }
         }
-        return [CardType(cardType: .Debit), CardType(cardType: .Credit)]
+        return [CardType(cardType: .All)]
     }
     
     public var uiModeDisplay: UIModeDisplayEnum {
