@@ -1,3 +1,8 @@
+## 1.0.42 - 2023-11-06
+
+- Add allowed payment types
+
+
 ## 1.0.41 - 2023-10-24
 
 - Add apple pay tokenized failed callback
