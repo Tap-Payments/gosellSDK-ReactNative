@@ -1,3 +1,8 @@
+## 1.0.43 - 2023-11-26
+
+- min sdk for android 21
+
+
 ## 1.0.42 - 2023-11-06
 
 - Add allowed payment types
