@@ -16,7 +16,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.18.5'
+    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.18.12'
     implementation 'com.github.Tap-Payments:TapGLKit-Android:1.18'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
