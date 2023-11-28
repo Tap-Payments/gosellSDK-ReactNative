@@ -519,6 +519,11 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
     }
 
+    @Override
+    public void googlePayFailed(String error) {
+
+    }
+
     private void sendSavedCardResult(Charge charge, String paymentStatus, String trx_mode){
         HashMap<String, Object> resultMap = new HashMap<>();
         if (charge instanceof SaveCard) {
