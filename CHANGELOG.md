@@ -1,3 +1,8 @@
+## 1.0.45 - 2023-11-28
+
+- Update ios native lib
+
+
 ## 1.0.44 - 2023-11-26
 
 - min sdk for android 21
