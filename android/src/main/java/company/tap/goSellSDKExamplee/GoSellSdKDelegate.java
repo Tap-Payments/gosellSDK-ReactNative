@@ -16,6 +16,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import org.json.JSONException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -111,6 +112,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 sessionParameters.get("trxMode").toString().equals("TransactionMode.TOKENIZE_CARD")) {
             ThemeObject.getInstance()
                     .setAppearanceMode(AppearanceMode.WINDOWED_MODE);
+        }else {
+            ThemeObject.getInstance()
+                    .setAppearanceMode(AppearanceMode.FULLSCREEN_MODE);
         }
 
         sdkSession.start(activity);
@@ -212,8 +216,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
         sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **Optional**//
 
         // Enable or Disable Saving Card
-        sdkSession.isUserAllowedToSaveCard((boolean) sessionParameters.get("isUserAllowedToSaveCard")); // ** Required you can pass boolean //
-
+        sdkSession.isUserAllowedToSaveCard((boolean) sessionParameters.get("isUserAllowedToSaveCard"));
+        // ** Required you can pass boolean //
+        sdkSession.setSupportedPaymentMethods((ArrayList<String>) sessionParameters.get("supportedPaymentMethods"));
 
         // Enable or Disable 3DSecure
         sdkSession.isRequires3DSecure((boolean) sessionParameters.get("isRequires3DSecure"));

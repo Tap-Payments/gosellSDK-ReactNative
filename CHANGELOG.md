@@ -1,3 +1,7 @@
+## 1.0.46 - 2023-11-28
+
+- Add supported payments methods
+
 ## 1.0.45 - 2023-11-28
 
 - Update ios native lib

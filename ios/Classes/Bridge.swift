@@ -280,6 +280,14 @@ extension Bridge: SessionDataSource {
         return nil
     }
     
+    public var supportedPaymentMethods: [String] {
+        if let paymentTypeString:[String] = argsSessionParameters?["supportedPaymentMethods"] as? [String] {
+            return paymentTypeString
+        }else {
+            return []
+        }
+    }
+    
     public var paymentType: PaymentType {
         if let paymentTypeString:String = argsSessionParameters?["paymentType"] as? String {
             let paymentTypeComponents: [String] = paymentTypeString.components(separatedBy: ".")
