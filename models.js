@@ -10,6 +10,7 @@ const PaymentTypes = {
     APPLE_PAY: 'PaymentType.APPLE_PAY'
 }
 
+
 const AllowedCadTypes = {
     CREDIT: 'CREDIT',
     DEBIT: 'DEBIT',
@@ -39,6 +40,11 @@ const Listener = {
     paymentInit: 'paymentInit',
 }
 
+const SDKAppearanceMode = {
+    Fullscreen: 1,
+    Windowed: 0,
+}
+
 
 module.exports = {
     Languages: Languages,
@@ -48,4 +54,5 @@ module.exports = {
     SDKMode: SDKMode,
     UiDisplayModes: UiDisplayModes,
     Listener: Listener,
+    SDKAppearanceMode: SDKAppearanceMode
 }

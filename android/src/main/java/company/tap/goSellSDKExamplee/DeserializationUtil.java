@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import company.tap.gosellapi.internal.api.models.PhoneNumber;
+import company.tap.gosellapi.open.enums.AppearanceMode;
 import company.tap.gosellapi.open.enums.CardType;
 import company.tap.gosellapi.open.enums.TransactionMode;
 import company.tap.gosellapi.open.models.AuthorizeAction;
@@ -192,7 +194,13 @@ public class DeserializationUtil {
 
 
     }
-
+    public static AppearanceMode getAppearanceMode(double value)  {
+        if (value == 0 ) {
+            return AppearanceMode.WINDOWED_MODE;
+        } else {
+            return AppearanceMode.FULLSCREEN_MODE;
+        }
+    }
     public static TransactionMode getTransactionMode(String jsonString) {
         if (jsonString == null ||
                 "null".equalsIgnoreCase(jsonString) ||

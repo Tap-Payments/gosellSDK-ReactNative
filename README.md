@@ -58,7 +58,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.46
+npm i @tap-payments/gosell-sdk-react-native@1.0.47
 ```
 
 ### Install pods for iOS
@@ -272,6 +272,8 @@ const allConfigurations = {
         allowsToSaveSameCardMoreThanOnce: false,
         paymentReference: paymentReference,
         uiDisplayMode: UiDisplayModes.DARK,
+        appearanceMode: SDKAppearanceMode.Windowed,
+        supportedPaymentMethods: ['Knet'],
     },
 };
 
@@ -279,6 +281,50 @@ export default allConfigurations
 ```
 
 ---
+<a name="supported_payments_methods"></a>
+**Supported payments Methods**
+``` javascript 
+  supportedPaymentMethods: ['Knet'],
+```
+Optional when you pass this values it will be only enabled methods for payment
+if you not pass it or pass it as empty array you will have all available payment methods to your account
+
+You can pass the supported payment Methods as array of string to supportedPaymentMethods key:
+- **Available values** 
+  - AMERICAN_EXPRESS
+  - APPLE_PAY
+  - BENEFIT
+  - BENEFITPAY
+  - CAREEMPAY
+  - FAWRY
+  - GOOGLE_PAY
+  - KNET
+  - MADA
+  - MASTERCARD
+  - MEEZA
+  - OMANNET
+  - PAYPAL
+  - POST_PAY
+  - NAPS
+  - STC_PAY
+  - TABBY
+  - VISA
+
+  <a name="appernace_mode"></a>
+**Appearance Mode**
+
+``` javascript 
+appearanceMode: SDKAppearanceMode.Fullscreen
+```
+
+Optional You can set the appearance mode into one of the following modes:
+- **Fullscreen** 
+   - ```SDKAppearanceMode.Fullscreen```<br/>
+   > Show sheet as full screen
+- **Windowed** 
+   - ```SDKAppearanceMode.Windowed```<br/>
+   > Show sheet as window.
+
 <a name="transaction_modes"></a>
 **Transaction Modes**
 

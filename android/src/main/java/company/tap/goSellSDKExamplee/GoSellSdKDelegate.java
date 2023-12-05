@@ -107,14 +107,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
         } else {
             ThemeObject.getInstance().setPayButtonText(activity.getResources().getString(company.tap.gosellapi.R.string.pay));
         }
-
-        if(sessionParameters.get("trxMode").toString().equals("TransactionMode.SAVE_CARD") ||
-                sessionParameters.get("trxMode").toString().equals("TransactionMode.TOKENIZE_CARD")) {
+        if (sessionParameters.get("appearanceMode") != null) {
             ThemeObject.getInstance()
-                    .setAppearanceMode(AppearanceMode.WINDOWED_MODE);
-        }else {
-            ThemeObject.getInstance()
-                    .setAppearanceMode(AppearanceMode.FULLSCREEN_MODE);
+                    .setAppearanceMode(DeserializationUtil.getAppearanceMode((double) sessionParameters.get("appearanceMode")));
         }
 
         sdkSession.start(activity);
