@@ -260,9 +260,9 @@ extension Bridge: SessionDataSource {
         if let destinationsGroupString: [String : Any] = argsSessionParameters?["destinations"] as?  [String : Any] {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: destinationsGroupString, options: .prettyPrinted)
-                    let decoder = JSONDecoder()
-                    let destinationsItems: DestinationGroup = try decoder.decode(DestinationGroup.self, from: jsonData)
-                    return destinationsItems
+                let decoder = JSONDecoder()
+                let destinationsItems: DestinationGroup = try decoder.decode(DestinationGroup.self, from: jsonData)
+                return destinationsItems
             } catch  {
                 return nil
                 print(error.localizedDescription)
@@ -699,6 +699,18 @@ extension Bridge: SessionDelegate {
 extension Bridge: SessionAppearance {
     public func sessionShouldShowStatusPopup(_ session: SessionProtocol) -> Bool {
         return false
+    }
+    public func appearanceMode(for session: SessionProtocol) -> SDKAppearanceMode {
+        if let appearanceMode: Int = argsSessionParameters?["appearanceMode"] as? Int {
+            if (appearanceMode == 0 ){
+                return SDKAppearanceMode.windowed
+            } else if (appearanceMode == 1) {
+                return SDKAppearanceMode.fullscreen
+            }
+            return SDKAppearanceMode.default
+        }else {
+            return SDKAppearanceMode.default
+        }
     }
 }
 

@@ -1,4 +1,8 @@
-## 1.0.46 - 2023-11-28
+## 1.0.47 - 2023-12-05
+
+- Add sdk appearance param
+
+## 1.0.46 - 2023-12-05
 
 - Add supported payments methods
 
