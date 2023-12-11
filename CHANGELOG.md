@@ -1,3 +1,7 @@
+## 1.0.48 - 2023-12-11
+
+- Update ios native lib
+
 ## 1.0.47 - 2023-12-05
 
 - Add sdk appearance param
