@@ -1,3 +1,7 @@
+## 1.0.49 - 2023-12-14
+
+- Update Android native lib
+
 ## 1.0.48 - 2023-12-11
 
 - Update ios native lib
