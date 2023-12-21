@@ -1,3 +1,7 @@
+## 1.0.51 - 2023-12-21
+
+- Update iOS native lib
+
 ## 1.0.50 - 2023-12-21
 
 - Update iOS native lib
