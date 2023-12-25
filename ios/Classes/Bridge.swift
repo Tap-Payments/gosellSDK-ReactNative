@@ -86,6 +86,10 @@ extension Bridge: SessionDataSource {
     }
     
     internal var isScanButtonVisible: Bool {
+        return setCardScannerIconVisible
+    }
+    
+    public var setCardScannerIconVisible: Bool {
 #if canImport(CardIO)
         return CardIOUtilities.canReadCardWithCamera() && TapApplicationPlistInfo.shared.hasUsageDescription(for: .camera)
 #else

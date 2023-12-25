@@ -1,3 +1,7 @@
+## 1.0.52 - 2023-12-25
+
+- Enable scan feature for iOS
+
 ## 1.0.51 - 2023-12-21
 
 - Update iOS native lib
