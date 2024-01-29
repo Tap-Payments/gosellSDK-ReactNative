@@ -1,3 +1,7 @@
+## 1.0.53 - 2024-01-29
+
+- Add payment reference in response
+
 ## 1.0.52 - 2023-12-25
 
 - Enable scan feature for iOS
