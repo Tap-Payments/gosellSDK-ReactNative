@@ -33,6 +33,7 @@ import company.tap.gosellapi.open.delegate.SessionDelegate;
 import company.tap.gosellapi.open.enums.AppearanceMode;
 import company.tap.gosellapi.open.exception.CurrencyException;
 import company.tap.gosellapi.open.models.CardsList;
+import company.tap.gosellapi.open.models.Reference;
 import company.tap.gosellapi.open.models.TapCurrency;
 
 
@@ -42,6 +43,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     private Activity activity;
     private RNGosellSdkReactNativeModule callback;
 
+    private Reference reference;
     public GoSellSdKDelegate(Activity _activity) {
         this.activity = _activity;
     }
@@ -133,6 +135,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void configureSDKSession(HashMap<String, Object> sessionParameters, RNGosellSdkReactNativeModule result) {
         callback = result;
+        reference = null;
         // Instantiate SDK Session
         if (sdkSession == null)
             sdkSession = new SDKSession(); // ** Required **
@@ -206,7 +209,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
         // Payment Reference
         sdkSession.setPaymentReference(DeserializationUtil.getReference(sessionParameters.get("paymentReference"))); // **Optional**you can pass null
-
+        reference = DeserializationUtil.getReference(sessionParameters.get("paymentReference"));
         // Payment Statement Descriptor
         sdkSession.setPaymentStatementDescriptor(sessionParameters.get("paymentStatementDescriptor").toString()); // **Optional**//
 
@@ -282,6 +285,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("customer_last_name", charge.getCustomer().getLastName());
             resultMap.put("customer_email", charge.getCustomer().getEmail());
         }
+        if (reference != null) {
+            if (reference.getOrder() != null) {
+                resultMap.put("order_number", reference.getOrder());
+            }
+            if (reference.getTransaction() != null) {
+                resultMap.put("transaction_number", reference.getTransaction());
+            }
+        }
 
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
@@ -315,6 +326,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("save_card", String.valueOf(saveCard));
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", "TOKENIZE");
+        if (reference != null) {
+            if (reference.getOrder() != null) {
+                resultMap.put("order_number", reference.getOrder());
+            }
+            if (reference.getTransaction() != null) {
+                resultMap.put("transaction_number", reference.getTransaction());
+            }
+        }
         callback.onSuccess(resultMap);
         callback = null;
     }
@@ -333,6 +352,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_error_code", String.valueOf(errorCode));
         resultMap.put("sdk_error_message", errorMessage);
         resultMap.put("sdk_error_description", errorBody);
+        if (reference != null) {
+            if (reference.getOrder() != null) {
+                resultMap.put("order_number", reference.getOrder());
+            }
+            if (reference.getTransaction() != null) {
+                resultMap.put("transaction_number", reference.getTransaction());
+            }
+        }
         callback.onFailure(resultMap);
         callback = null;
     }
@@ -419,6 +446,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
         Log.d("MainActivity", "Session Cancelled.........");
         HashMap<String, String> resultMap = new HashMap<>();
         resultMap.put("sdk_result", "CANCELLED");
+        if (reference != null) {
+            if (reference.getOrder() != null) {
+                resultMap.put("order_number", reference.getOrder());
+            }
+            if (reference.getTransaction() != null) {
+                resultMap.put("transaction_number", reference.getTransaction());
+            }
+        }
         callback.onFailure(resultMap);
         callback = null;
     }
@@ -513,6 +548,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("sdk_result", "SUCCESS");
             resultMap.put("trx_mode", "CHARGE");
             resultMap.put("charge_id", charge.getId());
+            if (reference != null) {
+                if (reference.getOrder() != null) {
+                    resultMap.put("order_number", reference.getOrder());
+                }
+                if (reference.getTransaction() != null) {
+                    resultMap.put("transaction_number", reference.getTransaction());
+                }
+            }
             System.out.println("resultMap on success = " + resultMap);
             System.out.println("callback on success = " + callback);
             callback.onPaymentInit(resultMap);
@@ -538,6 +581,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
         resultMap.put("charge_id", charge.getId());
+        if (reference != null) {
+            if (reference.getOrder() != null) {
+                resultMap.put("order_number", reference.getOrder());
+            }
+            if (reference.getTransaction() != null) {
+                resultMap.put("transaction_number", reference.getTransaction());
+            }
+        }
         callback.onSuccess(resultMap);
         callback = null;
         System.out.println("Card Saved is Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
@@ -551,6 +602,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_message", charge.getResponse().getMessage());
             resultMap.put("sdk_result", paymentStatus);
             resultMap.put("trx_mode", trx_mode);
+            if (reference != null) {
+                if (reference.getOrder() != null) {
+                    resultMap.put("order_number", reference.getOrder());
+                }
+                if (reference.getTransaction() != null) {
+                    resultMap.put("transaction_number", reference.getTransaction());
+                }
+            }
             callback.onFailure(resultMap);
             callback = null;
             System.out.println("Card Saved is failed " + charge.getResponse().getMessage());
