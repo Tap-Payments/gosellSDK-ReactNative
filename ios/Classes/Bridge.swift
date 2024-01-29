@@ -354,6 +354,10 @@ extension Bridge: SessionDelegate {
         resultMap["trx_mode"] = "TOKENIZE"
         resultMap["sdk_error_code"] = ""//error.type
         resultMap["sdk_error_message"] = error
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
         }
@@ -373,6 +377,10 @@ extension Bridge: SessionDelegate {
         resultMap["card_exp_year"] = token.card.expirationYear
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "TOKENIZE"
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if token.card.issuer != nil {
             resultMap["issuer"] =  token.card.issuer?.dictionary
         }
@@ -425,7 +433,10 @@ extension Bridge: SessionDelegate {
         resultMap["source_channel"] = charge.source.channel.textValue
         resultMap["source_object"] = charge.source.object.textValue
         resultMap["source_payment_type"] = charge.source.paymentType.textValue
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "CHARGE"
         print("------&&&&-----------")
@@ -475,7 +486,10 @@ extension Bridge: SessionDelegate {
         resultMap["source_channel"] = charge.source.channel.textValue
         resultMap["source_object"] = charge.source.object.textValue
         resultMap["source_payment_type"] = charge.source.paymentType.textValue
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "CHARGE"
         
@@ -516,8 +530,12 @@ extension Bridge: SessionDelegate {
             resultMap["source_channel"] = charge.source.channel.textValue
             resultMap["source_object"] = charge.source.object.textValue
             resultMap["source_payment_type"] = charge.source.paymentType.textValue
+            
         }
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         resultMap["sdk_result"] = "FAILED"
         resultMap["trx_mode"] = "CHARGE"
         
@@ -562,7 +580,10 @@ extension Bridge: SessionDelegate {
         
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "AUTHORIZE_CAPTURE"
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         //pendingResult.success(resultMap);
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
@@ -601,7 +622,10 @@ extension Bridge: SessionDelegate {
             resultMap["source_object"] = authorize.source.object.textValue
             resultMap["source_payment_type"] = authorize.source.paymentType.textValue
         }
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         resultMap["sdk_result"] = "FAILED"
         resultMap["trx_mode"] = "AUTHORIZE_CAPTURE"
         
@@ -613,6 +637,10 @@ extension Bridge: SessionDelegate {
     public func sessionCancelled(_ session: SessionProtocol) {
         var resultMap:[String:Any] = [:]
         resultMap["sdk_result"] = "CANCELLED"
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
         }
@@ -636,6 +664,10 @@ extension Bridge: SessionDelegate {
         resultMap["save_card"] = saveCard
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "TOKENIZE"
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if token.card.issuer != nil {
             resultMap["issuer"] =  token.card.issuer?.dictionary
         }
@@ -652,6 +684,10 @@ extension Bridge: SessionDelegate {
         resultMap["sdk_error_code"] = ""//error.type
         resultMap["sdk_error_message"] = error.description
         resultMap["sdk_error_description"] = error.description
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         //      result.success(resultMap)
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
@@ -679,7 +715,10 @@ extension Bridge: SessionDelegate {
         
         resultMap["sdk_result"] = "SUCCESS"
         resultMap["trx_mode"] = "SAVE_CARD"
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
         }
@@ -693,7 +732,10 @@ extension Bridge: SessionDelegate {
             resultMap["sdk_error_message"] = errorResult.description
             resultMap["sdk_error_description"] = errorResult.description
         }
-        
+        if let paymentReference = session.dataSource?.paymentReference {
+            resultMap["transaction_number"] = paymentReference?.transactionNumber
+            resultMap["order_number"] = paymentReference?.orderNumber
+        }
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
         }
