@@ -1,3 +1,7 @@
+## 1.0.54 - 2024-03-12
+
+- Update Android native lib
+
 ## 1.0.53 - 2024-01-29
 
 - Add payment reference in response
