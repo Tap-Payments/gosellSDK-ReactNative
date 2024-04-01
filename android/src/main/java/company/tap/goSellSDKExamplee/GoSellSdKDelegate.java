@@ -252,6 +252,13 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("description", charge.getDescription());
         resultMap.put("message", charge.getResponse().getMessage());
         resultMap.put("charge_id", charge.getId());
+        if (charge.getReceipt() != null) {
+            HashMap<String, Object> receiptSettingsMap = new HashMap<>();
+            receiptSettingsMap.put("id", charge.getReceipt().getId());
+            receiptSettingsMap.put("email", charge.getReceipt().isEmail());
+            receiptSettingsMap.put("sms", charge.getReceipt().isSms());
+            resultMap.put("receipt_settings", receiptSettingsMap);
+        }
         if (charge.getCard() != null) {
             resultMap.put("card_first_six", charge.getCard().getFirstSix());
             resultMap.put("card_last_four", charge.getCard().getLast4());
