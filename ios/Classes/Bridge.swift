@@ -453,7 +453,13 @@ extension Bridge: SessionDelegate {
         resultMap["charge_id"] = charge.identifier
         resultMap["description"] = charge.descriptionText
         resultMap["message"] = charge.response?.message
-        
+        if let receiptSettings = charge.receiptSettings {
+            var receiptSettingsMap = [String: Any]()
+            receiptSettingsMap["id"] = charge.receiptSettings?.identifier ?? ""
+            receiptSettingsMap["email"] = charge.receiptSettings?.email ?? ""
+            receiptSettingsMap["sms"] = charge.receiptSettings?.sms ?? ""
+            resultMap["receipt_settings"] = receiptSettingsMap
+        }
         if let card = charge.card {
             resultMap["card_first_six"] = card.firstSixDigits
             resultMap["card_last_four"] = card.lastFourDigits

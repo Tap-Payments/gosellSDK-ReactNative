@@ -1,3 +1,7 @@
+## 1.0.55 - 2024-04-01
+
+- Add recite
+
 ## 1.0.54 - 2024-03-12
 
 - Update Android native lib
