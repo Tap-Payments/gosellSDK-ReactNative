@@ -1,5 +1,9 @@
 
 
+## 1.0.57 - 2024-04-28
+
+- Disabling opening a payment option while executing a transaction.
+
 ## 1.0.56 - 2024-04-15
 
 - Update android
