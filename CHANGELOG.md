@@ -1,4 +1,8 @@
 
+## 1.0.61 - 2024-07-02
+
+- Upgrade readme
+
 ## 1.0.60 - 2024-07-02
 
 - Upgrade android version
