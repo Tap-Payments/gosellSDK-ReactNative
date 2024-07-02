@@ -1,5 +1,13 @@
 
 
+## 1.0.59 - 2024-07-02
+
+- Fix ios transaction fails when there is no phone number.
+
+## 1.0.58 - 2024-07-02
+
+- Remove fonts from android.
+
 ## 1.0.57 - 2024-04-28
 
 - Disabling opening a payment option while executing a transaction.
