@@ -97,7 +97,12 @@ You may face a compilation error when compiled using M1 based Mac devices, to so
 2. Add **multiDexEnabled true** build gradle of app in android
 3. Make sure to support **JDK 8**
 
----
+
+### Update library for versions above 1.0.57 to remove unused assets
+1. Make sure delete @tap_payments folders from node_modules
+2. Make sure run npm install
+3. Run gradle sync from android studio
+--- 
 
 <a name="configure_your_app"></a>
 
