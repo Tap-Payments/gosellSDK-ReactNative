@@ -57,6 +57,8 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
     .emit("paymentInit", writableMap);
   }
 
+
+
   @Override
   public void onSuccess(HashMap<String,Object> result) {
     System.out.println(" on success callback : "+ result);
@@ -64,8 +66,8 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
     for (Map.Entry<String, Object> entry : result.entrySet()) {
       if(entry.getValue() instanceof String) {
         writableMap.putString(entry.getKey(), (String) entry.getValue());
-      } else if (entry.getValue() instanceof ReadableMap) {
-        writableMap.putMap(entry.getKey(), (ReadableMap) entry.getValue());
+      } else if (entry.getValue() instanceof HashMap) {
+        writableMap.putMap(entry.getKey(), DeserializationUtil.convertHashMapToWritableMap(entry.getValue()));
       } else {
         writableMap.putString(entry.getKey(), (String) entry.getValue());
       }

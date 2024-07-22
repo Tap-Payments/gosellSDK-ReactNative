@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import company.tap.gosellapi.internal.api.models.PhoneNumber;
 import company.tap.gosellapi.open.enums.AppearanceMode;
@@ -251,6 +252,25 @@ public class DeserializationUtil {
         }
         return "ALL";
 
+    }
+
+    public static WritableMap convertHashMapToWritableMap(HashMap<String, Object> hashMap) {
+        WritableMap writableMap = new WritableNativeMap();
+
+        for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                writableMap.putString(entry.getKey(), (String) value);
+            } else if (value instanceof Boolean) {
+                writableMap.putBoolean(entry.getKey(), (Boolean) value);
+            } else if (value instanceof Double) {
+                writableMap.putDouble(entry.getKey(), (Double) value);
+            } else if (value instanceof Integer) {
+                writableMap.putInt(entry.getKey(), (Integer) value);
+            }
+        }
+
+        return writableMap;
     }
 
 }
