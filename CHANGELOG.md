@@ -1,4 +1,8 @@
 
+## 1.0.63 - 2024-07-22
+
+- Fix parsing receipt in android
+
 ## 1.0.61 - 2024-07-02
 
 - Upgrade readme
