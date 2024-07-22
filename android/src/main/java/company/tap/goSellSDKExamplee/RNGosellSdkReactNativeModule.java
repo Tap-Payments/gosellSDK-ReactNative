@@ -67,7 +67,7 @@ public class RNGosellSdkReactNativeModule extends ReactContextBaseJavaModule imp
       if(entry.getValue() instanceof String) {
         writableMap.putString(entry.getKey(), (String) entry.getValue());
       } else if (entry.getValue() instanceof HashMap) {
-        writableMap.putMap(entry.getKey(), DeserializationUtil.convertHashMapToWritableMap(entry.getValue()));
+        writableMap.putMap(entry.getKey(), DeserializationUtil.convertHashMapToWritableMap((HashMap<String, Object>) entry.getValue()));
       } else {
         writableMap.putString(entry.getKey(), (String) entry.getValue());
       }
