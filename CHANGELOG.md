@@ -1,4 +1,12 @@
 
+## 1.0.65 - 2024-08-08
+
+- Fix payment agreement json
+
+## 1.0.64 - 2024-08-08
+
+- Add payment agreement in save card response 
+
 ## 1.0.63 - 2024-07-22
 
 - Fix parsing receipt in android

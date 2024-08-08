@@ -663,6 +663,7 @@ extension Bridge: SessionDelegate {
             resultMap["token_currency"] = tokenCurrency.isoCode
         }
         resultMap["card_first_six"] = token.card.binNumber
+        resultMap["card_first_six"] = token.card.binNumber
         resultMap["card_last_four"] = token.card.lastFourDigits
         resultMap["card_object"] = token.card.object
         resultMap["card_exp_month"] = token.card.expirationMonth
@@ -712,6 +713,24 @@ extension Bridge: SessionDelegate {
         if let tokenDataSource = session.dataSource,
            let tokenCurrency:Currency = tokenDataSource.currency as? Currency {
             resultMap["token_currency"] = tokenCurrency.isoCode
+        }
+        
+        if let paymentAgreement = cardVerification.paymentAgreement {
+            var paymentAgreementMap = [String: Any]()
+
+//            resultMap["receipt_settings"] = receiptSettingsMap
+            paymentAgreementMap["id"] = paymentAgreement.id ?? ""
+            paymentAgreementMap["type"] = paymentAgreement.type ?? ""
+            paymentAgreementMap["trace_id"] = paymentAgreement.traceID ?? ""
+            paymentAgreementMap["total_payments_count"] = paymentAgreement.totalPaymentsCount ?? ""
+            if let contract = cardVerification.paymentAgreement?.contract {
+                var contractMap = [String: Any]()
+                contractMap["id"] = contract.id ?? ""
+                contractMap["customer_id"] = contract.customerID ?? ""
+                contractMap["type"] = contract.type ?? ""
+                paymentAgreementMap["contract"] = contractMap
+            }
+            resultMap["payment_agreement"] = paymentAgreementMap
         }
         resultMap["card_first_six"] = cardVerification.card.firstSixDigits
         resultMap["card_last_four"] = cardVerification.card.lastFourDigits
