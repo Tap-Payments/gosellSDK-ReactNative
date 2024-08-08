@@ -269,6 +269,8 @@ public class DeserializationUtil {
                 writableMap.putDouble(entry.getKey(), (Double) value);
             } else if (value instanceof Integer) {
                 writableMap.putInt(entry.getKey(), (Integer) value);
+            } else if (entry.getValue() instanceof HashMap) {
+                writableMap.putMap(entry.getKey(), DeserializationUtil.convertHashMapToWritableMap((HashMap<String, Object>) entry.getValue()));
             }
         }
 
