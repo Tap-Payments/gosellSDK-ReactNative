@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files = 'ios/Classes/**/*'
   s.public_header_files = 'ios/Classes/**/*.h'
   s.requires_arc = true
-  s.dependency 'goSellSDK', '2.3.37'
+  s.dependency 'goSellSDK', '2.3.38'
   s.dependency 'React-Core'
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
