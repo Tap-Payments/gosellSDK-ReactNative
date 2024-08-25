@@ -1,4 +1,9 @@
 
+
+## 1.0.66 - 2024-08-12
+
+- Remove setupApplePay.
+
 ## 1.0.65 - 2024-08-08
 
 - Fix payment agreement json
