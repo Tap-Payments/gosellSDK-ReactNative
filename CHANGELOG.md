@@ -1,6 +1,10 @@
 
 
-## 1.0.67 - 2024-08-12
+## 1.0.68 - 2024-08-26
+
+- Update Android dependency.
+
+## 1.0.67 - 2024-08-25
 
 - Update Android dependency.
 
