@@ -1,5 +1,9 @@
 
 
+## 1.0.67 - 2024-08-12
+
+- Update Android dependency.
+
 ## 1.0.66 - 2024-08-12
 
 - Remove setupApplePay.
