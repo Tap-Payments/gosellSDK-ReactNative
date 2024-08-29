@@ -201,7 +201,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
         sdkSession.setShipping(DeserializationUtil.getShipping(sessionParameters.get("shipping")));// ** Optional ** you can pass empty array list
 
         // Post URL
-        sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
+        if (sessionParameters.get("postURL") != null) {
+            sdkSession.setPostURL(sessionParameters.get("postURL").toString());// ** Optional **
+        }
 
         // Payment Description
         sdkSession.setPaymentDescription(sessionParameters.get("paymentDescription").toString()); // ** Optional **
@@ -611,6 +613,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("sdk_result", paymentStatus);
         resultMap.put("trx_mode", trx_mode);
         resultMap.put("charge_id", charge.getId());
+        if (charge.getPost() != null) {
+            resultMap.put("postURl", charge.getPost().getUrl());
+        }
         if (reference != null) {
             if (reference.getOrder() != null) {
                 resultMap.put("order_number", reference.getOrder());

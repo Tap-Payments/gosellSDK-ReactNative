@@ -744,6 +744,10 @@ extension Bridge: SessionDelegate {
             resultMap["transaction_number"] = paymentReference?.transactionNumber
             resultMap["order_number"] = paymentReference?.orderNumber
         }
+        
+        if let post = cardVerification.post {
+            resultMap["postURL"] = post.url
+        }
         if let reactResult = reactResult {
             reactResult([NSNull(), resultMap])
         }
