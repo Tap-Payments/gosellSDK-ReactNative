@@ -1,5 +1,9 @@
 
 
+## 1.0.69 - 2024-08-29
+
+- Add post url in save card.
+
 ## 1.0.68 - 2024-08-26
 
 - Update Android dependency.
