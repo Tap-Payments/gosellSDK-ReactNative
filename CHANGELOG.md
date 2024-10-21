@@ -1,4 +1,8 @@
 
+## 2.3.42 - 2024-10-21
+
+- Update iOS dependency.
+
 ## 2.3.41 - 2024-10-17
 
 - Remove card iO.
