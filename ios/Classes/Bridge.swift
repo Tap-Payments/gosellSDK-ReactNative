@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import goSellSDK
 import TapCardVlidatorKit_iOS
-import CardIO
 import TapApplicationV2
 
 @objc(Bridge)
@@ -90,11 +89,7 @@ extension Bridge: SessionDataSource {
     }
     
     public var setCardScannerIconVisible: Bool {
-#if canImport(CardIO)
-        return CardIOUtilities.canReadCardWithCamera() && TapApplicationPlistInfo.shared.hasUsageDescription(for: .camera)
-#else
         return false
-#endif
     }
     
     public var cardHolderNameIsEditable: Bool{
