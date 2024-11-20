@@ -1,4 +1,17 @@
 
+## 2.3.45 - 2024-11-21
+
+- Fix paymentMetaData not sent in ios.
+- Fix paymentMetaData typo in android
+
+## 2.3.44 - 2024-10-30
+
+- Update Android dependency.
+
+## 2.3.43 - 2024-10-24
+
+- Update iOS dependency.
+
 ## 2.3.42 - 2024-10-21
 
 - Update iOS dependency.
