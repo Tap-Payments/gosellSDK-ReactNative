@@ -91,6 +91,11 @@ extension Bridge: SessionDataSource {
     public var setCardScannerIconVisible: Bool {
         return false
     }
+
+    public var paymentMetadata: Metadata? {
+        return argsSessionParameters?["paymentMetaData"] as? [String: String]
+    }
+    
     
     public var cardHolderNameIsEditable: Bool{
         if let cardHolderNameIsEditableValue:Bool = argsSessionParameters?["editCardHolderName"] as? Bool {
