@@ -1,4 +1,8 @@
 
+## 2.3.46 - 2024-12-12
+
+- Add apple pay closed listener
+
 ## 2.3.45 - 2024-11-21
 
 - Fix paymentMetaData not sent in ios.

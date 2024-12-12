@@ -18,6 +18,7 @@ public class Bridge: NSObject {
     public var argsAppCredentials:[String:String]?
     var reactResult: RCTResponseSenderBlock?
     var paymentInit: ((_ charge: [String: Any]) -> Void)?
+    var applePayCancelled: ((_ sdkResult: [String: Any]) -> Void)?
     var argsDataSource:[String:Any]?{
         didSet{
             argsSessionParameters = argsDataSource?["sessionParameters"] as? [String : Any]
@@ -25,7 +26,9 @@ public class Bridge: NSObject {
         }
     }
     
-    @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock, paymentInitCallback: @escaping (_ chargeId: [String: Any]) -> Void) {
+    @objc public func startPayment(_ arguments: NSDictionary, timeout: Int, callback: @escaping RCTResponseSenderBlock,
+                                   paymentInitCallback: @escaping (_ chargeId: [String: Any]) -> Void,
+                                   applePayCancelledCallback: @escaping (_ sdkResult: [String:Any]) -> Void) {
         argsDataSource = arguments as? [String: Any]
         print("arguments: \(arguments)")
         GoSellSDK.reset()
@@ -39,6 +42,7 @@ public class Bridge: NSObject {
         session.start()
         reactResult = callback
         paymentInit = paymentInitCallback
+        applePayCancelled = applePayCancelledCallback
         if timeout > 0 {
             let timeoutSeconds = TimeInterval(timeout / 1000)
             Timer.scheduledTimer(timeInterval: timeoutSeconds, target: self, selector: #selector(terminateSession), userInfo: nil, repeats: false)
@@ -347,6 +351,16 @@ extension Bridge: SessionDataSource {
 }
 
 extension Bridge: SessionDelegate {
+    
+    
+    public func applePaymentCanceled( on session: SessionProtocol) {
+        var resultMap:[String:Any] = [:]
+        guard let applePayCancelled else {
+            return
+        }
+        resultMap["sdk_result_apple_pay"] = "CANCELLED"
+        applePayCancelled(resultMap)
+    }
     
     public func applePaymentTokenizationFailed(_ error: String, on session: SessionProtocol) {
         var resultMap:[String:Any] = [:]

@@ -402,6 +402,19 @@ render() {
     this.subscription.remove() // to clear the listener
   }
 ```
+**Use apple pay cancel callback**
+``` javascript
+  constructor(props) {
+    super(props);
+     this.subscription = RNGoSell.goSellListener.addListener(RNGoSell.goSellSDKModels.Listener.applePayCancelled, (result) => {
+      console.log("result", result)
+    })
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove() // to clear the listener
+  }
+```
 ``` javascript
 const styles = StyleSheet.create({
   safeAreaView: {
