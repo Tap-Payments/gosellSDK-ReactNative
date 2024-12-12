@@ -38,6 +38,7 @@ const SDKMode = {
 
 const Listener = {
     paymentInit: 'paymentInit',
+    applePayCancelled: 'applePayCancelled',
 }
 
 const SDKAppearanceMode = {
