@@ -1,4 +1,8 @@
 
+## 2.3.47 - 2024-12-24
+
+- Update iOS dependency to fix ios 18 webkit issue
+
 ## 2.3.46 - 2024-12-12
 
 - Add apple pay closed listener
