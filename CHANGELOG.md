@@ -1,3 +1,7 @@
+## 2.3.49 - 2025-03-19
+
+- Update SAR symbol
+
 ## 2.3.48 - 2025-01-12
 
 - Update android dependency
