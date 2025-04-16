@@ -1,3 +1,7 @@
+## 2.3.50 - 2025-04-16
+
+- Fix tokenize mode callback in android
+
 ## 2.3.49 - 2025-03-19
 
 - Update SAR symbol

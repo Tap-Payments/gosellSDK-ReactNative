@@ -325,7 +325,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             resultMap.put("card_object", token.getCard().getObject());
             resultMap.put("card_exp_month", "" + token.getCard().getExpirationYear());
             resultMap.put("card_exp_year", "" + token.getCard().getExpirationMonth());
-            WritableMap issuerMap = new WritableNativeMap();
+            HashMap<String, Object> issuerMap = new HashMap<>();
 
             if (token.getCard().getIssuer() != null ){
                 issuerMap.putString("id", token.getCard().getIssuer().getId());
