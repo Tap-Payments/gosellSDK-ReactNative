@@ -328,9 +328,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
             HashMap<String, Object> issuerMap = new HashMap<>();
 
             if (token.getCard().getIssuer() != null ){
-                issuerMap.putString("id", token.getCard().getIssuer().getId());
-                issuerMap.putString("bank", token.getCard().getIssuer().getBank());
-                issuerMap.putString("country", token.getCard().getIssuer().getCountry());
+                issuerMap.put("id", token.getCard().getIssuer().getId());
+                issuerMap.put("bank", token.getCard().getIssuer().getBank());
+                issuerMap.put("country", token.getCard().getIssuer().getCountry());
                 resultMap.put("issuer", issuerMap);
             }
         }
