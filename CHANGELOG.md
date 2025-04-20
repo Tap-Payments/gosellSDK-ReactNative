@@ -1,3 +1,7 @@
+## 2.3.52 - 2025-04-20
+
+- Fix Keyboard issue in ios
+
 ## 2.3.51 - 2025-04-16
 
 - Fix tokenize mode callback in android
