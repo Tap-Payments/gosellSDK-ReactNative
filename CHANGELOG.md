@@ -1,3 +1,125 @@
+
+## 2.3.55  - 2025-07-24
+### Enhancement Feature:
+• Updating to support latest android api 35
+• Updating support lib to support android api 35
+### Impact on existing integrations:
+• May need to update gradles to support latest apis support sdk 35
+• compileSdkVersion 35
+• targetSdkVersion 35
+• Project build.gradle classpath 'com.android.tools.build:gradle:8.6.0'
+• Gradle wrapper.properties distributionUrl=https://services.gradle.org/distributions/gradle-8.10.2-bin.zip
+• May need to add proguard rules# Add project specific ProGuard rules here.  
+You can control the set of applied configuration files using the  
+proguardFiles setting in build.gradle.  
+For more details, see http://developer.android.com/guide/developing/tools/proguard.html  
+If your project uses WebView with JS, uncomment the following  
+and specify the fully qualified class name to the JavaScript interface  
+
+```
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}
+-keep class com.facebook.react.** { *; }
+-keep class com.facebook.** { *; }
+-keep class com.crashlytics.** { *; }
+-keep class com.qualtrics.** {*;}
+-keep public class com.horcrux.svg.** {*;}
+-keep class com.google.android.gms.common.** {*;}
+-keep class **.BuildConfig { *; }
+-dontwarn com.crashlytics.**
+
+-keep class com.adjust.sdk.** { *; }
+-keep class com.google.android.gms.common.ConnectionResult {
+    int SUCCESS;
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
+    com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getAdvertisingIdInfo(android.content.Context);
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
+    java.lang.String getId();
+    boolean isLimitAdTrackingEnabled();
+}
+-keep public class com.android.installreferrer.** { *; }
+-keep class com.shopify.reactnative.skia.SkiaDomView {*;}
+
+# Added as per WhatFix Mobile SDK.
+-dontwarn is.leap.android.**
+
+-keep class is.leap.android.** {*;}
+
+-dontwarn okhttp3.internal.platform.**
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.bun.miitmdid.core.MdidSdkHelper
+-dontwarn com.bun.miitmdid.interfaces.IIdentifierListener
+-dontwarn com.bun.miitmdid.interfaces.IdSupplier
+-dontwarn com.facebook.stetho.dumpapp.DumpException
+-dontwarn com.facebook.stetho.dumpapp.DumpUsageException
+-dontwarn com.facebook.stetho.dumpapp.DumperContext
+-dontwarn com.facebook.stetho.dumpapp.DumperPlugin
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient$Info
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
+
+# Retrofit
+-keepattributes Signature
+-keepattributes RuntimeVisibleAnnotations
+-keep class retrofit2.** { *; }
+-keep interface retrofit2.** { *; }
+-keepclassmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+# OkHttp
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+
+# Gson
+#-keep class com.google.gson.** { *; }
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+-keepattributes Signature
+
+-keep class company.tap.gosellapi.** { *; }
+-keep class company.tap.goSellSDKExamplee.** { *; }
+-keep class com.tapgooglepayrn.** { *; }
+-keep public class gotap.com.tapglkitandroid.** { *; }
+
+# Gson TypeToken
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+
+
+-keep class **.CreateTokenGPayRequest { *; }
+-keep class **.CreateTokenGPayRequest$Builder { *; }
+
+# If the class is in a specific package, be more specific (replace with your actual package):
+# -keep class com.yourpackage.CreateTokenGPayRequest { *; }
+# -keep class com.yourpackage.CreateTokenGPayRequest$Builder { *; }
+
+# Keep all classes that use Gson annotations
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+    @com.google.gson.annotations.Expose <fields>;
+}
+
+# Keep all model classes that implement Serializable (if this is your pattern)
+-keep class * implements java.io.Serializable {
+    *;
+}
+```
 ## 2.3.54  - 2025-07-24
 ### Enhancement Feature:
 • Updating to support latest android api 35
@@ -16,68 +138,61 @@ If your project uses WebView with JS, uncomment the following
 and specify the fully qualified class name to the JavaScript interface  
 
 ```
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
--keepattributes Signature
--keepclassmembernames,allowobfuscation interface * {
-@retrofit2.http.* methods;
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
 }
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keep class com.facebook.react.** { *; }
+-keep class com.facebook.** { *; }
+-keep class com.crashlytics.** { *; }
+-keep class com.qualtrics.** {*;}
+-keep public class com.horcrux.svg.** {*;}
+-keep class com.google.android.gms.common.** {*;}
+-keep class **.BuildConfig { *; }
+-dontwarn com.crashlytics.**
 
-    #########################################################################
-    # OkHttp
-    #########################################################################
-    -dontwarn okhttp3.**
-    -dontwarn okhttp2.**
-    -dontwarn okio.**
-    -dontwarn javax.annotation.**
-    -dontwarn org.conscrypt.**
-    -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
--keep class company.tap.gosellapi.** { *; }
--keep class gotap.com.tapglkitandroid.** { *; }
+-keep class com.adjust.sdk.** { *; }
+-keep class com.google.android.gms.common.ConnectionResult {
+    int SUCCESS;
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
+    com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getAdvertisingIdInfo(android.content.Context);
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
+    java.lang.String getId();
+    boolean isLimitAdTrackingEnabled();
+}
+-keep public class com.android.installreferrer.** { *; }
+-keep class com.shopify.reactnative.skia.SkiaDomView {*;}
 
+# Added as per WhatFix Mobile SDK.
+-dontwarn is.leap.android.**
 
--dontwarn okhttp2.**
--dontwarn okio.**
--dontwarn javax.annotation.**
+-keep class is.leap.android.** {*;}
+
+-dontwarn okhttp3.internal.platform.**
 -dontwarn org.conscrypt.**
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-#-dontobfuscate
--optimizations !code/allocation/variable
--keep class company.tap.gosellapi.** { *; }
-# KEEP TapGLKit classes
--keep class gotap.com.tapglkitandroid.** { *; }
--keep class gotap.com.tapglkitandroid.gl.Views.TapLoadingView { *; }
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
 
--dontwarn gotap.com.tapglkitandroid.**
--keepclassmembers class gotap.com.tapglkitandroid.gl.Views.TapLoadingView {
-public init(android.content.Context);
-public init(android.content.Context, android.util.AttributeSet);
-public init(android.content.Context, android.util.AttributeSet, int);
-}
--keep class company.tap.tapcardvalidator_android.** { *; }
--dontwarn company.tap.tapcardvalidator_android.**
-
-
-# GSON.
--keepnames class com.google.gson.** {*;}
--keepnames enum com.google.gson.** {*;}
--keepnames interface com.google.gson.** {*;}
--keep class com.google.gson.** { *; }
--keepnames class org.** {*;}
--keepnames enum org.** {*;}
--keepnames interface org.** {*;}
--keep class org.** { *; }
--keepclassmembers enum * { *; }
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.bun.miitmdid.core.MdidSdkHelper
+-dontwarn com.bun.miitmdid.interfaces.IIdentifierListener
+-dontwarn com.bun.miitmdid.interfaces.IdSupplier
+-dontwarn com.facebook.stetho.dumpapp.DumpException
+-dontwarn com.facebook.stetho.dumpapp.DumpUsageException
+-dontwarn com.facebook.stetho.dumpapp.DumperContext
+-dontwarn com.facebook.stetho.dumpapp.DumperPlugin
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient$Info
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
 
 # Retrofit
 -keepattributes Signature
@@ -85,7 +200,7 @@ public init(android.content.Context, android.util.AttributeSet, int);
 -keep class retrofit2.** { *; }
 -keep interface retrofit2.** { *; }
 -keepclassmembers class * {
-@retrofit2.http.* methods;
+    @retrofit2.http.* <methods>;
 }
 
 # OkHttp
@@ -93,14 +208,38 @@ public init(android.content.Context, android.util.AttributeSet, int);
 -keep interface okhttp3.** { *; }
 
 # Gson
--keep class com.google.gson.** { *; }
+#-keep class com.google.gson.** { *; }
 -keepattributes EnclosingMethod
 -keepattributes InnerClasses
 -keepattributes Signature
 
+-keep class company.tap.gosellapi.** { *; }
+-keep class company.tap.goSellSDKExamplee.** { *; }
+-keep class com.tapgooglepayrn.** { *; }
+-keep public class gotap.com.tapglkitandroid.** { *; }
+
 # Gson TypeToken
 -keep class com.google.gson.reflect.TypeToken { *; }
 -keep class * extends com.google.gson.reflect.TypeToken
+
+
+-keep class **.CreateTokenGPayRequest { *; }
+-keep class **.CreateTokenGPayRequest$Builder { *; }
+
+# If the class is in a specific package, be more specific (replace with your actual package):
+# -keep class com.yourpackage.CreateTokenGPayRequest { *; }
+# -keep class com.yourpackage.CreateTokenGPayRequest$Builder { *; }
+
+# Keep all classes that use Gson annotations
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+    @com.google.gson.annotations.Expose <fields>;
+}
+
+# Keep all model classes that implement Serializable (if this is your pattern)
+-keep class * implements java.io.Serializable {
+    *;
+}
 ```
 ## 2.3.53  - 2025-07-24
 
@@ -120,68 +259,61 @@ If your project uses WebView with JS, uncomment the following
 and specify the fully qualified class name to the JavaScript interface  
 
 ```
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
--keepattributes Signature
--keepclassmembernames,allowobfuscation interface * {
-@retrofit2.http.* methods;
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
 }
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keep class com.facebook.react.** { *; }
+-keep class com.facebook.** { *; }
+-keep class com.crashlytics.** { *; }
+-keep class com.qualtrics.** {*;}
+-keep public class com.horcrux.svg.** {*;}
+-keep class com.google.android.gms.common.** {*;}
+-keep class **.BuildConfig { *; }
+-dontwarn com.crashlytics.**
 
-    #########################################################################
-    # OkHttp
-    #########################################################################
-    -dontwarn okhttp3.**
-    -dontwarn okhttp2.**
-    -dontwarn okio.**
-    -dontwarn javax.annotation.**
-    -dontwarn org.conscrypt.**
-    -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
--keep class company.tap.gosellapi.** { *; }
--keep class gotap.com.tapglkitandroid.** { *; }
+-keep class com.adjust.sdk.** { *; }
+-keep class com.google.android.gms.common.ConnectionResult {
+    int SUCCESS;
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
+    com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getAdvertisingIdInfo(android.content.Context);
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
+    java.lang.String getId();
+    boolean isLimitAdTrackingEnabled();
+}
+-keep public class com.android.installreferrer.** { *; }
+-keep class com.shopify.reactnative.skia.SkiaDomView {*;}
 
+# Added as per WhatFix Mobile SDK.
+-dontwarn is.leap.android.**
 
--dontwarn okhttp2.**
--dontwarn okio.**
--dontwarn javax.annotation.**
+-keep class is.leap.android.** {*;}
+
+-dontwarn okhttp3.internal.platform.**
 -dontwarn org.conscrypt.**
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-#-dontobfuscate
--optimizations !code/allocation/variable
--keep class company.tap.gosellapi.** { *; }
-# KEEP TapGLKit classes
--keep class gotap.com.tapglkitandroid.** { *; }
--keep class gotap.com.tapglkitandroid.gl.Views.TapLoadingView { *; }
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
 
--dontwarn gotap.com.tapglkitandroid.**
--keepclassmembers class gotap.com.tapglkitandroid.gl.Views.TapLoadingView {
-public init(android.content.Context);
-public init(android.content.Context, android.util.AttributeSet);
-public init(android.content.Context, android.util.AttributeSet, int);
-}
--keep class company.tap.tapcardvalidator_android.** { *; }
--dontwarn company.tap.tapcardvalidator_android.**
-
-
-# GSON.
--keepnames class com.google.gson.** {*;}
--keepnames enum com.google.gson.** {*;}
--keepnames interface com.google.gson.** {*;}
--keep class com.google.gson.** { *; }
--keepnames class org.** {*;}
--keepnames enum org.** {*;}
--keepnames interface org.** {*;}
--keep class org.** { *; }
--keepclassmembers enum * { *; }
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.bun.miitmdid.core.MdidSdkHelper
+-dontwarn com.bun.miitmdid.interfaces.IIdentifierListener
+-dontwarn com.bun.miitmdid.interfaces.IdSupplier
+-dontwarn com.facebook.stetho.dumpapp.DumpException
+-dontwarn com.facebook.stetho.dumpapp.DumpUsageException
+-dontwarn com.facebook.stetho.dumpapp.DumperContext
+-dontwarn com.facebook.stetho.dumpapp.DumperPlugin
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient$Info
+-dontwarn com.huawei.hms.ads.identifier.AdvertisingIdClient
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
 
 # Retrofit
 -keepattributes Signature
@@ -189,7 +321,7 @@ public init(android.content.Context, android.util.AttributeSet, int);
 -keep class retrofit2.** { *; }
 -keep interface retrofit2.** { *; }
 -keepclassmembers class * {
-@retrofit2.http.* methods;
+    @retrofit2.http.* <methods>;
 }
 
 # OkHttp
@@ -197,14 +329,38 @@ public init(android.content.Context, android.util.AttributeSet, int);
 -keep interface okhttp3.** { *; }
 
 # Gson
--keep class com.google.gson.** { *; }
+#-keep class com.google.gson.** { *; }
 -keepattributes EnclosingMethod
 -keepattributes InnerClasses
 -keepattributes Signature
 
+-keep class company.tap.gosellapi.** { *; }
+-keep class company.tap.goSellSDKExamplee.** { *; }
+-keep class com.tapgooglepayrn.** { *; }
+-keep public class gotap.com.tapglkitandroid.** { *; }
+
 # Gson TypeToken
 -keep class com.google.gson.reflect.TypeToken { *; }
 -keep class * extends com.google.gson.reflect.TypeToken
+
+
+-keep class **.CreateTokenGPayRequest { *; }
+-keep class **.CreateTokenGPayRequest$Builder { *; }
+
+# If the class is in a specific package, be more specific (replace with your actual package):
+# -keep class com.yourpackage.CreateTokenGPayRequest { *; }
+# -keep class com.yourpackage.CreateTokenGPayRequest$Builder { *; }
+
+# Keep all classes that use Gson annotations
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+    @com.google.gson.annotations.Expose <fields>;
+}
+
+# Keep all model classes that implement Serializable (if this is your pattern)
+-keep class * implements java.io.Serializable {
+    *;
+}
 ```
 
 ## 2.3.52 - 2025-04-20
