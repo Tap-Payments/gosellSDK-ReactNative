@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.6.0'
+        classpath 'com.android.tools.build:gradle:8.4.0'
     }
 }
 
@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
 implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.19.34'
+    implementation 'com.github.Tap-Payments:goSellSDK-AndroidX:3.19.35.1'
     implementation 'com.google.code.gson:gson:2.13.1'
     implementation 'com.google.android.material:material:1.14.0-alpha03'
     implementation 'com.github.Tap-Payments:TapGLKit-Android:1.19.1'
