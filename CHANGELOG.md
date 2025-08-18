@@ -1,4 +1,7 @@
 
+## 2.3.56  - 2025-08-18
+### Enhancement Feature:
+• Fix conflicts with okHttp
 ## 2.3.55  - 2025-07-24
 ### Enhancement Feature:
 • Updating to support latest android api 35
