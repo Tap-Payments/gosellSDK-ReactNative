@@ -1,4 +1,7 @@
 
+## 2.3.58  - 2025-08-20
+• Updating to support latest android api 35
+• Updating to support gradle 8.5.0
 ## 2.3.57  - 2025-08-20
 ### Enhancement Feature:
 • Fix Dark mode in android
