@@ -1,4 +1,7 @@
 
+## 2.3.57  - 2025-08-20
+### Enhancement Feature:
+• Fix Dark mode in android
 ## 2.3.56  - 2025-08-18
 ### Enhancement Feature:
 • Fix conflicts with okHttp
