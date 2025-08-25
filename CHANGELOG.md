@@ -1,4 +1,6 @@
 
+## 2.3.59  - 2025-08-25
+• Fix arabic language issue in android
 ## 2.3.58  - 2025-08-20
 • Updating to support latest android api 35
 • Updating to support gradle 8.5.0
