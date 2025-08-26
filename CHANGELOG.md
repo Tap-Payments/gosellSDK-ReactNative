@@ -1,4 +1,6 @@
 
+## 2.3.60  - 2025-08-26
+• Fix old dependency issue in android
 ## 2.3.59  - 2025-08-25
 • Fix arabic language issue in android
 ## 2.3.58  - 2025-08-20
