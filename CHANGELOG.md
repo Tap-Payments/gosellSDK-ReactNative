@@ -1,4 +1,6 @@
 
+## 2.3.61  - 2025-08-26
+• Change locale method to accept activity context
 ## 2.3.60  - 2025-08-26
 • Fix old dependency issue in android
 ## 2.3.59  - 2025-08-25
