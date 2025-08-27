@@ -107,9 +107,9 @@ public class GoSellSdKDelegate implements SessionDelegate {
          */
         configureSDKSession(sessionParameters, result);
         if(sessionParameters.get("trxMode").toString().equals("TransactionMode.SAVE_CARD")){
-            ThemeObject.getInstance().setPayButtonText(activity.getResources().getString(company.tap.gosellapi.R.string.save_card));
+            // ThemeObject.getInstance().setPayButtonText(activity.getResources().getString(company.tap.gosellapi.R.string.save_card));
         } else {
-            ThemeObject.getInstance().setPayButtonText(activity.getResources().getString(company.tap.gosellapi.R.string.pay));
+            // ThemeObject.getInstance().setPayButtonText(activity.getResources().getString(company.tap.gosellapi.R.string.pay));
         }
         if (sessionParameters.get("appearanceMode") != null) {
             ThemeObject.getInstance()
