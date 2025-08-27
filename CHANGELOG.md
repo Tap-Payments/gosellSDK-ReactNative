@@ -1,4 +1,6 @@
 
+## 2.3.63  - 2025-08-27
+• Apply localization to pay button
 ## 2.3.62  - 2025-08-27
 • Support old appCompact change local 
 ## 2.3.61  - 2025-08-26
