@@ -1,4 +1,6 @@
 
+## 2.3.62  - 2025-08-27
+• Support old appCompact change local 
 ## 2.3.61  - 2025-08-26
 • Change locale method to accept activity context
 ## 2.3.60  - 2025-08-26
