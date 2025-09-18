@@ -1,3 +1,5 @@
+## 2.3.65  - 2025-09-18
+• Support 16kb page size in android 15 
 ## 2.3.64  - 2025-09-18
 • Support 16kb page size in android 15 
 ## 2.3.63  - 2025-08-27
