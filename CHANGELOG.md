@@ -1,4 +1,5 @@
-
+## 2.3.64  - 2025-09-18
+• Support 16kb page size in android 15 
 ## 2.3.63  - 2025-08-27
 • Apply localization to pay button
 ## 2.3.62  - 2025-08-27
