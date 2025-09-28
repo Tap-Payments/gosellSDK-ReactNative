@@ -1,3 +1,5 @@
+## 2.3.66  - 2025-09-28
+• Fix android crash
 ## 2.3.66  - 2025-09-21
 • Support 16kb page size in android 15 
 ## 2.3.65  - 2025-09-18
