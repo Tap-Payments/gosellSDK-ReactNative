@@ -1,3 +1,7 @@
+## 2.3.68  - 2025-09-29
+• Fix android compatibility with Kotlin 2.0.0
+## 2.3.67  - 2025-09-28
+• Fix android crash
 ## 2.3.66  - 2025-09-28
 • Fix android crash
 ## 2.3.66  - 2025-09-21
