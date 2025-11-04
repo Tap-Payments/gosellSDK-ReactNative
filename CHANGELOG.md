@@ -1,3 +1,5 @@
+## 2.3.69  - 2025-11-04
+• Remove JCenter to support new react native
 ## 2.3.68  - 2025-09-29
 • Fix android compatibility with Kotlin 2.0.0
 ## 2.3.67  - 2025-09-28
