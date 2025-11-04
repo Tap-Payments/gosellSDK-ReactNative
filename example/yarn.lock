@@ -1789,10 +1789,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@tap-payments/gosell-sdk-react-native@^2.3.68":
-  version "2.3.68"
-  resolved "https://registry.npmjs.org/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.68.tgz"
-  integrity sha512-2DAVJ70PBjHyeZ18vQL4RKp9MbyopB8NHh+HTw0sKkBuqXE0voVggvDAgxx4aOt/PgTC+hSCoEx8mqjwe7/QJg==
+"@tap-payments/gosell-sdk-react-native@^2.3.69":
+  version "2.3.69"
+  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.69.tgz#2ae55221b2f53b166d21cd13640b94423e99ad6e"
+  integrity sha512-mDPjeZRB4zJg7i6Ycljp5UtlHZMXS4+3o6V4DVVwOPYTbgvTOvmwNLhP8EGh/IJ9NSTopB6POZkDkX23iYGyXw==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
