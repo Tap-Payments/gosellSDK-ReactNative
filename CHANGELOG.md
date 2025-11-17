@@ -1,3 +1,5 @@
+## 2.3.70  - 2025-11-17
+• Update native android
 ## 2.3.69  - 2025-11-04
 • Remove JCenter to support new react native
 ## 2.3.68  - 2025-09-29

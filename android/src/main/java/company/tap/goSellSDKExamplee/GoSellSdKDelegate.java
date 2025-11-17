@@ -125,7 +125,6 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println("act val :" + this.activity);
         this.activity = activity1;
         GoSellSDK.init(this.activity, secrete_key, bundleID); // to be replaced by merchant
-        GoSellSDK.setLocale(this.activity,language); // to be replaced by merchant
         ThemeObject.getInstance().setSdkLanguage(language);
     }
 
