@@ -311,7 +311,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println("resultMap on success = " + resultMap);
         System.out.println("callback on success = " + callback);
         callback.onSuccess(resultMap);
-        callback = null;
+        // callback = null;
     }
 
     private void sendTokenResult(Token token, String paymentStatus, boolean saveCard) {
@@ -346,7 +346,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             }
         }
         callback.onSuccess(resultMap);
-        callback = null;
+        // callback = null;
     }
 
 //    @Override
@@ -372,7 +372,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             }
         }
         callback.onFailure(resultMap);
-        callback = null;
+        // callback = null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -466,7 +466,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             }
         }
         callback.onFailure(resultMap);
-        callback = null;
+        // callback = null;
     }
 
     @Override
@@ -625,7 +625,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
             }
         }
         callback.onSuccess(resultMap);
-        callback = null;
+        // callback = null;
         System.out.println("Card Saved is Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
     }
 
@@ -646,7 +646,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 }
             }
             callback.onFailure(resultMap);
-            callback = null;
+            // callback = null;
             System.out.println("Card Saved is failed " + charge.getResponse().getMessage());
         }
     }
