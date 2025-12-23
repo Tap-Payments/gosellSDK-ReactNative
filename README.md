@@ -58,7 +58,7 @@ npm install
 ```
 **Install goSellSdkReactNative package**
 ```
-npm i @tap-payments/gosell-sdk-react-native@1.0.53
+npm i @tap-payments/gosell-sdk-react-native@1.0.71
 ```
 
 ### Install pods for iOS
@@ -67,29 +67,6 @@ cd ios
 pod install
 pod update
 ```
-
-### Install pods for iOS for M1
-```
-sudo arch -x86_64 gem install ffi
-arch -x86_64 pod install
-```
-## M1 based Macs
-
-You may face a compilation error when compiled using M1 based Mac devices, to solve this please follow these steps:
-
-1. Close the Xcode.
-  
-2. Go to the `application` folder.
-  
-3. Find the `Xcode` icon.
-  
-4. Right click on Xcode icon.
-  
-5. Choose `Get info`
-  
-6. Check the option `Open using Rosetta`
-
-![img](https://i.ibb.co/vQDnnwG/Stephen-Mickelsen-2-1645220554524.png)
 
 
 ### Install for Andoid

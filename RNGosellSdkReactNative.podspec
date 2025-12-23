@@ -16,11 +16,11 @@ Pod::Spec.new do |s|
   s.source_files = 'ios/Classes/**/*'
   s.public_header_files = 'ios/Classes/**/*.h'
   s.requires_arc = true
-  s.dependency 'goSellSDK', '2.3.46'
+  s.dependency 'goSellSDK', '2.3.47'
   s.dependency 'React-Core'
 
-  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  # s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  # s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES'}
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
