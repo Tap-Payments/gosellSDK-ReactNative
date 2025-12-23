@@ -1,3 +1,5 @@
+## 2.3.71  - 2025-12-23
+• Update iOS native to support Arm arch
 ## 2.3.70  - 2025-11-17
 • Update native android
 ## 2.3.69  - 2025-11-04
