@@ -77,8 +77,14 @@ public class GoSellSdKDelegate implements SessionDelegate {
     public void terminatePayment() {
         System.out.println("terminate session!");
         Log.d("MainActivity", "Session Terminated.........");
-        if (activity != null) {
-            sdkSession.cancelSession(activity);
+        if (activity != null && sdkSession != null) {
+            try {
+                sdkSession.cancelSession(activity);
+            } catch (Exception e) {
+                Log.e("GoSellSdKDelegate", "Error while cancelling session: " + e.getMessage(), e);
+            }
+        } else {
+            Log.d("GoSellSdKDelegate", "terminatePayment: sdkSession or activity was null");
         }
     }
 
@@ -116,7 +122,11 @@ public class GoSellSdKDelegate implements SessionDelegate {
                     .setAppearanceMode(DeserializationUtil.getAppearanceMode((double) sessionParameters.get("appearanceMode")));
         }
 
-        sdkSession.start(activity);
+        if (sdkSession != null) {
+            sdkSession.start(activity);
+        } else {
+            Log.e("GoSellSdKDelegate", "showSDK: sdkSession is null, cannot start");
+        }
     }
 
 
@@ -125,6 +135,7 @@ public class GoSellSdKDelegate implements SessionDelegate {
         System.out.println("act val :" + this.activity);
         this.activity = activity1;
         GoSellSDK.init(this.activity, secrete_key, bundleID); // to be replaced by merchant
+        GoSellSDK.setLocale(this.activity,language); // to be replaced by merchant
         ThemeObject.getInstance().setSdkLanguage(language);
     }
 
@@ -250,11 +261,33 @@ public class GoSellSdKDelegate implements SessionDelegate {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void sendChargeResult(Charge charge, String paymentStatus, String trx_mode) {
+        if (charge == null) {
+            Log.w("GoSellSdKDelegate", "sendChargeResult called with null charge");
+            HashMap<String, String> fallback = new HashMap<>();
+            fallback.put("sdk_result", paymentStatus != null ? paymentStatus : "UNKNOWN");
+            fallback.put("trx_mode", trx_mode != null ? trx_mode : "UNKNOWN");
+            if (reference != null) {
+                if (reference.getOrder() != null) {
+                    fallback.put("order_number", reference.getOrder());
+                }
+                if (reference.getTransaction() != null) {
+                    fallback.put("transaction_number", reference.getTransaction());
+                }
+            }
+            if (callback != null) {
+                callback.onFailure(fallback);
+                callback = null;
+            } else {
+                Log.w("GoSellSdKDelegate", "callback is null in sendChargeResult (fallback)");
+            }
+            return;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
         if (charge.getStatus() != null)
             resultMap.put("status", charge.getStatus().name());
         resultMap.put("description", charge.getDescription());
-        resultMap.put("message", charge.getResponse().getMessage());
+        resultMap.put("message", charge.getResponse() != null ? charge.getResponse().getMessage() : null);
         resultMap.put("charge_id", charge.getId());
         if (charge.getReceipt() != null) {
             HashMap<String, Object> receiptSettingsMap = new HashMap<>();
@@ -278,8 +311,10 @@ public class GoSellSdKDelegate implements SessionDelegate {
         }
         if (charge.getAcquirer() != null) {
             resultMap.put("acquirer_id", charge.getAcquirer().getId());
-            resultMap.put("acquirer_response_code", charge.getAcquirer().getResponse().getCode());
-            resultMap.put("acquirer_response_message", charge.getAcquirer().getResponse().getMessage());
+            if (charge.getAcquirer().getResponse() != null) {
+                resultMap.put("acquirer_response_code", charge.getAcquirer().getResponse().getCode());
+                resultMap.put("acquirer_response_message", charge.getAcquirer().getResponse().getMessage());
+            }
         }
         if (charge.getSource() != null) {
             resultMap.put("source_id", charge.getSource().getId());
@@ -310,11 +345,27 @@ public class GoSellSdKDelegate implements SessionDelegate {
         resultMap.put("id", charge.getId());
         System.out.println("resultMap on success = " + resultMap);
         System.out.println("callback on success = " + callback);
-        callback.onSuccess(resultMap);
-        callback = null;
+        if (callback != null) {
+            callback.onSuccess(resultMap);
+            callback = null;
+        } else {
+            Log.w("GoSellSdKDelegate", "callback is null in sendChargeResult");
+        }
     }
 
     private void sendTokenResult(Token token, String paymentStatus, boolean saveCard) {
+        if (token == null) {
+            Log.w("GoSellSdKDelegate", "sendTokenResult called with null token");
+            if (callback != null) {
+                HashMap<String, String> m = new HashMap<>();
+                m.put("sdk_result", "FAILED");
+                m.put("message", "token is null");
+                callback.onFailure(m);
+                callback = null;
+            }
+            return;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
         resultMap.put("token", token.getId());
@@ -345,8 +396,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 resultMap.put("transaction_number", reference.getTransaction());
             }
         }
-        callback.onSuccess(resultMap);
-        callback = null;
+        if (callback != null) {
+            callback.onSuccess(resultMap);
+            callback = null;
+        } else {
+            Log.w("GoSellSdKDelegate", "callback is null in sendTokenResult");
+        }
     }
 
 //    @Override
@@ -371,8 +426,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 resultMap.put("transaction_number", reference.getTransaction());
             }
         }
-        callback.onFailure(resultMap);
-        callback = null;
+        if (callback != null) {
+            callback.onFailure(resultMap);
+            callback = null;
+        } else {
+            Log.w("GoSellSdKDelegate", "callback is null in sendSDKError");
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,16 +445,26 @@ public class GoSellSdKDelegate implements SessionDelegate {
 
     @Override
     public void paymentFailed(@Nullable Charge charge) {
+        if (charge == null) {
+            Log.w("GoSellSdKDelegate", "paymentFailed called with null charge");
+            sendSDKError(Constants.ERROR_CODE_BACKEND_UNKNOWN_ERROR, "Payment failed: charge is null", "Charge object is null");
+            return;
+        }
         sendChargeResult(charge, "FAILED", "CHARGE");
     }
 
     @Override
     public void authorizationSucceed(@NonNull Authorize authorize) {
+        // Authorize may be compatible with sendChargeResult in original library; keep behavior but guard callback inside sendChargeResult
         sendChargeResult(authorize, "SUCCESS", "AUTHORIZE");
     }
 
     @Override
     public void authorizationFailed(Authorize authorize) {
+        if (authorize == null) {
+            sendSDKError(Constants.ERROR_CODE_BACKEND_UNKNOWN_ERROR, "Authorization failed: authorize is null", "Authorize object is null");
+            return;
+        }
         sendChargeResult(authorize, "FAILED", "AUTHORIZE");
     }
 
@@ -425,10 +494,18 @@ public class GoSellSdKDelegate implements SessionDelegate {
             System.out.println("SDK Process Error : " + goSellError.getErrorBody());
             System.out.println("SDK Process Error : " + goSellError.getErrorMessage());
             System.out.println("SDK Process Error : " + goSellError.getErrorCode());
-        }
 
-        sendSDKError(goSellError.getErrorCode(), goSellError.getErrorMessage(), goSellError.getErrorBody());
-        Toast.makeText(activity.getBaseContext(), goSellError.getErrorMessage(), Toast.LENGTH_LONG).show();
+            sendSDKError(goSellError.getErrorCode(), goSellError.getErrorMessage(), goSellError.getErrorBody());
+            if (activity != null) {
+                Toast.makeText(activity.getBaseContext(), goSellError.getErrorMessage(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Log.w("GoSellSdKDelegate", "sdkError called with null GoSellError");
+            sendSDKError(Constants.ERROR_CODE_BACKEND_UNKNOWN_ERROR, "Unknown SDK error", "goSellError is null");
+            if (activity != null) {
+                Toast.makeText(activity.getBaseContext(), "Unknown SDK error", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Override
@@ -465,8 +542,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 resultMap.put("transaction_number", reference.getTransaction());
             }
         }
-        callback.onFailure(resultMap);
-        callback = null;
+        if (callback != null) {
+            callback.onFailure(resultMap);
+            callback = null;
+        } else {
+            Log.w("GoSellSdKDelegate", "callback is null in sessionCancelled");
+        }
     }
 
     @Override
@@ -569,7 +650,13 @@ public class GoSellSdKDelegate implements SessionDelegate {
             }
             System.out.println("resultMap on success = " + resultMap);
             System.out.println("callback on success = " + callback);
-            callback.onPaymentInit(resultMap);
+            if (callback != null) {
+                callback.onPaymentInit(resultMap);
+            } else {
+                Log.w("GoSellSdKDelegate", "callback is null in paymentInitiated");
+            }
+        } else {
+            Log.w("GoSellSdKDelegate", "paymentInitiated called with null charge");
         }
     }
 
@@ -624,8 +711,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                 resultMap.put("transaction_number", reference.getTransaction());
             }
         }
-        callback.onSuccess(resultMap);
-        callback = null;
+        if (callback != null) {
+            callback.onSuccess(resultMap);
+            callback = null;
+        } else {
+            Log.w("GoSellSdKDelegate", "callback is null in sendSavedCardResult");
+        }
         System.out.println("Card Saved is Succeeded : first six digits : " + ((SaveCard) charge).getCard().getFirstSix() + "  last four :" + ((SaveCard) charge).getCard().getLast4());
     }
 
@@ -645,8 +736,12 @@ public class GoSellSdKDelegate implements SessionDelegate {
                     resultMap.put("transaction_number", reference.getTransaction());
                 }
             }
-            callback.onFailure(resultMap);
-            callback = null;
+            if (callback != null) {
+                callback.onFailure(resultMap);
+                callback = null;
+            } else {
+                Log.w("GoSellSdKDelegate", "callback is null in sendSavedCardFailure");
+            }
             System.out.println("Card Saved is failed " + charge.getResponse().getMessage());
         }
     }
