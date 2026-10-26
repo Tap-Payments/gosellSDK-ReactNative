@@ -1789,10 +1789,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@tap-payments/gosell-sdk-react-native@^2.3.69":
-  version "2.3.69"
-  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.69.tgz#2ae55221b2f53b166d21cd13640b94423e99ad6e"
-  integrity sha512-mDPjeZRB4zJg7i6Ycljp5UtlHZMXS4+3o6V4DVVwOPYTbgvTOvmwNLhP8EGh/IJ9NSTopB6POZkDkX23iYGyXw==
+"@tap-payments/gosell-sdk-react-native@2.3.71":
+  version "2.3.71"
+  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.71.tgz#0858370c87934b3cfd29cdd851d208d9bd212b4d"
+  integrity sha512-ee0l++Bo05+5wsBJciKjSlcxEuXUNY3VmVaUfvziSzBMv9Gq49LuJk3rcT0084RpW8Mxu8M9vPf1LBV06t+dEg==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -2704,13 +2704,14 @@ compressible@~2.0.18:
     mime-db ">= 1.43.0 < 2"
 
 compression@^1.7.1:
-  version "1.8.1"
-  resolved "https://registry.npmjs.org/compression/-/compression-1.8.1.tgz"
-  integrity sha512-9mAqGPHLakhCLeNyxPkK4xVo746zQ/czLH1Ky+vkitMnWfWZps8r0qXuwhwizagCRttsL4lfG4pIOvaWLpAP0w==
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/compression/-/compression-1.8.2.tgz#781397127ae2da00c0c5f7c76bda5b2a9b32a49f"
+  integrity sha512-o8vI5RE5A6EVVOd9o41jKp41aJom+QTEO/Bx8MYNjexMo/Bv2WOjUfZr+aL0WnYSgymUy6zeguqLTsIhV0gMvQ==
   dependencies:
     bytes "3.1.2"
     compressible "~2.0.18"
     debug "2.6.9"
+    destroy "1.2.0"
     negotiator "~0.6.4"
     on-headers "~1.1.0"
     safe-buffer "5.2.1"
