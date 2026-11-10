@@ -272,8 +272,8 @@ extension Bridge: SessionDataSource {
                 let destinationsItems: DestinationGroup = try decoder.decode(DestinationGroup.self, from: jsonData)
                 return destinationsItems
             } catch  {
-                return nil
                 print(error.localizedDescription)
+                return nil
             }
         }
         return nil
@@ -469,9 +469,9 @@ extension Bridge: SessionDelegate {
         resultMap["message"] = charge.response?.message
         if let receiptSettings = charge.receiptSettings {
             var receiptSettingsMap = [String: Any]()
-            receiptSettingsMap["id"] = charge.receiptSettings?.identifier ?? ""
-            receiptSettingsMap["email"] = charge.receiptSettings?.email ?? ""
-            receiptSettingsMap["sms"] = charge.receiptSettings?.sms ?? ""
+            receiptSettingsMap["id"] = receiptSettings.identifier ?? ""
+            receiptSettingsMap["email"] = receiptSettings.email
+            receiptSettingsMap["sms"] = receiptSettings.sms
             resultMap["receipt_settings"] = receiptSettingsMap
         }
         if let card = charge.card {
