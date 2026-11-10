@@ -39,8 +39,8 @@ To use the SDK the following requirements must be met:
 1. **Visual Studio - InteliJ Idea**
 2. **react: 16.13.1** or newer
 3. **react-native: 0.63.3** or newer
-4. **iOS 11** or later
-5. **XCode 12** or later
+4. **iOS 15** or later
+5. **XCode 12** or later (Xcode 27 is supported, see [Xcode 27 / iOS 27](#xcode_27))
 
 <a name="installation"></a>
 
@@ -582,4 +582,29 @@ You may refer to https://github.com/Tap-Payments/goSellSDK-AndroidX/tree/FT_Goog
    1. In iOS Podfile, **replace ```use_flipper!``` with**   ```use_flipper!({ 'Flipper-Folly' => '2.3.0' })```
    2. Use command ```pod deintegrate``` then **remove Podfile.lock**
    3. Use command ```pod install``` then ```pod update```
+
+<a name="xcode_27"></a>
+
+3. Xcode 27 / iOS 27: `The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 11.0, but the range of supported deployment target versions is 15.0 to 27.x`
+
+   Xcode 27 treats deployment targets below iOS 15.0 as a build error. Some goSellSDK dependency pods (including their resource bundles) still declare iOS 11.0.
+
+   ###### Fix:
+   Add this to the `post_install` block of your `ios/Podfile` (after `react_native_post_install(...)`), then run `pod install`:
+   ```ruby
+   installer.pods_project.targets.each do |target|
+     target.build_configurations.each do |config|
+       if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 15.0
+         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+       end
+     end
+   end
+   ```
+
+4. Xcode 27 / iOS 27: the app closes immediately on launch with `UIScene life cycle is required for apps built with this SDK`
+
+   Apps built with the iOS 27 SDK must adopt the UIScene life cycle. This applies to the host app, not to this SDK.
+
+   ###### Fix:
+   Add a `UIApplicationSceneManifest` to your `Info.plist` and create the React Native window in a `UIWindowSceneDelegate` (set `automaticallyLoadReactNativeWindow = false` in your `RCTAppDelegate` subclass). See Apple's "Transitioning to the UIKit scene-based life cycle".
 

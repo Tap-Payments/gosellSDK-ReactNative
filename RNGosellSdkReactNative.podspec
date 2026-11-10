@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
-  s.platform     = :ios, "11.0"
+  s.platform     = :ios, "15.0"
+  s.swift_version = "5.0"
   s.source       = { :git => "https://github.com/Tap-Payments/gosellSDK-ReactNative.git", :tag => "master" }
   # s.source_files  = "RNGosellSdkReactNative/*/.{h,m}"
   s.source_files = 'ios/Classes/**/*'
