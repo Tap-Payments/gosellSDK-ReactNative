@@ -1789,10 +1789,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@tap-payments/gosell-sdk-react-native@^2.3.69":
-  version "2.3.69"
-  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.69.tgz#2ae55221b2f53b166d21cd13640b94423e99ad6e"
-  integrity sha512-mDPjeZRB4zJg7i6Ycljp5UtlHZMXS4+3o6V4DVVwOPYTbgvTOvmwNLhP8EGh/IJ9NSTopB6POZkDkX23iYGyXw==
+"@tap-payments/gosell-sdk-react-native@2.3.71":
+  version "2.3.71"
+  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.71.tgz#0858370c87934b3cfd29cdd851d208d9bd212b4d"
+  integrity sha512-ee0l++Bo05+5wsBJciKjSlcxEuXUNY3VmVaUfvziSzBMv9Gq49LuJk3rcT0084RpW8Mxu8M9vPf1LBV06t+dEg==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -5088,9 +5088,9 @@ nocache@^3.0.1:
   integrity sha512-WDD0bdg9mbq6F4mRxEYcPWwfA1vxd0mrvKOyxI7Xj/atfRHVeutzuWByG//jfm4uPzp0y4Kj051EORCBSQMycw==
 
 node-forge@^1:
-  version "1.3.1"
-  resolved "https://registry.npmjs.org/node-forge/-/node-forge-1.3.1.tgz"
-  integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.4.3.tgz#5dc578529ac8e162f58038c6673337cabfab3277"
+  integrity sha512-P6wzfh6t70avmV8FrVEAd/36sOPJQ+hkaJVX1Laap9J/77m7M0eyozDvc8SwnDf4P7MP94gwbAAo0rg3YVXT+g==
 
 node-int64@^0.4.0:
   version "0.4.0"
