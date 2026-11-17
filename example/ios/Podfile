@@ -17,6 +17,11 @@ end
 target 'example' do
   config = use_native_modules!
 
+  # The goSell wrapper's native code and podspec come from this repository (react-native.config.js turns
+  # off autolinking for it). goSellSDK itself comes from CocoaPods; ../../exampleSPM gets it through
+  # Swift Package Manager instead.
+  pod 'RNGosellSdkReactNative', :path => '../..'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
@@ -31,5 +36,22 @@ target 'example' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    # Xcode 27 rejects IPHONEOS_DEPLOYMENT_TARGET < 15.0 as a build error. goSellSDK 2.4.1 and its
+    # Tap*V2 pods declare 15.0; this keeps any other pod (and resource-bundle targets, which
+    # react_native_post_install doesn't bump) at the app's minimum too.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |build_config|
+        current = build_config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+        if current.nil? || current.to_f < min_ios_version_supported.to_f
+          build_config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
+        end
+        # RN 0.77 ships fmt 11.0.2, whose consteval format strings fail to compile with
+        # Xcode 26.4+/27 clang. Building fmt as C++17 disables the consteval path.
+        if target.name == 'fmt'
+          build_config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        end
+      end
+    end
   end
 end

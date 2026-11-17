@@ -68,6 +68,21 @@ pod install
 pod update
 ```
 
+The iOS wrapper uses **goSellSDK 2.4.1** (iOS 15+, Xcode 27). By default it comes from CocoaPods. To get goSellSDK
+through **Swift Package Manager** instead (React Native 0.75 or newer), set `GOSELL_USE_SPM=1` when installing pods,
+or put `ENV['GOSELL_USE_SPM'] = '1'` at the top of your `ios/Podfile`:
+```
+cd ios
+GOSELL_USE_SPM=1 pod install
+```
+
+### Example apps
+- [`example`](example): React Native app; goSellSDK comes from **CocoaPods** (iOS and Android).
+- [`exampleSPM`](exampleSPM): the same app (iOS only); goSellSDK comes from **Swift Package Manager**.
+
+Both build the wrapper's native iOS code from this repository. Your Tap keys go in `keys.json` in each example
+(git-ignored, created from `keys.example.json` by `yarn install`), never in the source files.
+
 
 ### Install for Andoid
 1. Make sure to set **minimum version to 21 in gradle**
@@ -587,7 +602,7 @@ You may refer to https://github.com/Tap-Payments/goSellSDK-AndroidX/tree/FT_Goog
 
 3. Xcode 27 / iOS 27: `The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 11.0, but the range of supported deployment target versions is 15.0 to 27.x`
 
-   Xcode 27 treats deployment targets below iOS 15.0 as a build error. Some goSellSDK dependency pods (including their resource bundles) still declare iOS 11.0.
+   Xcode 27 treats deployment targets below iOS 15.0 as a build error. goSellSDK 2.4.1 and all its pods declare iOS 15.0, so this only happens with older goSellSDK versions or other pods that still declare a lower target.
 
    ###### Fix:
    Add this to the `post_install` block of your `ios/Podfile` (after `react_native_post_install(...)`), then run `pod install`:

@@ -1,3 +1,7 @@
+## 2.3.72  - 2026-11-17
+• Update iOS native goSellSDK to 2.4.1 (iOS 15+, Xcode 27, iPhone Duo/foldable layout fixes)
+• iOS: optionally get goSellSDK through Swift Package Manager with `GOSELL_USE_SPM=1 pod install`
+• Examples: `example` (CocoaPods) and `exampleSPM` (Swift Package Manager); keys move to a git-ignored `keys.json`
 ## 2.3.71  - 2025-12-23
 • Update iOS native to support Arm arch
 ## 2.3.70  - 2025-11-17
