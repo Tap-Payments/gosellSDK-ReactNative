@@ -72,3 +72,6 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Tap API keys (copy keys.example.json to keys.json and fill it in)
+keys.json

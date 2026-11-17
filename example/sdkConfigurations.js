@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import RNGoSell from '@tap-payments/gosell-sdk-react-native';
 const {
     Languages,
@@ -81,11 +82,16 @@ const paymentReference = {
 };
 
 
+// Keys live in keys.json, which is git-ignored so they never get committed. `yarn install` creates it
+// from keys.example.json if it's missing; put your own sandbox / production keys and bundle ID there.
+const keys = require('./keys.json');
+const platformKeys = Platform.OS === 'ios' ? keys.ios : keys.android;
+
 const appCredentials = {
-    production_secrete_key: (Platform.OS == 'ios') ? 'iOS-Live-KEY' :  'Android-Live-KEY',
+    production_secrete_key: platformKeys.productionSecretKey,
     language: Languages.EN,
-    sandbox_secrete_key: (Platform.OS == 'ios') ? 'iOS-SANDBOX-KEY' :   'Android-SANDBOX-KEY',
-    bundleID: (Platform.OS == 'ios') ? 'iOS-PACKAGE-NAME' : 'ANDROIID-PACKAGE-NAME',
+    sandbox_secrete_key: platformKeys.sandboxSecretKey,
+    bundleID: platformKeys.bundleID,
 }
 
 const allConfigurations = {

@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "node -e \"const fs=require('fs');if(!fs.existsSync('keys.json')){fs.copyFileSync('keys.example.json','keys.json');console.log('Created keys.json from keys.example.json - add your Tap keys there.')}\""
   },
   "dependencies": {
     "react": "18.3.1",

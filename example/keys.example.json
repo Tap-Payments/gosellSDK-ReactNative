@@ -1,0 +1,12 @@
+{
+  "ios": {
+    "sandboxSecretKey": "iOS-SANDBOX-KEY",
+    "productionSecretKey": "iOS-LIVE-KEY",
+    "bundleID": "company.tap.goSellSDKExamplee"
+  },
+  "android": {
+    "sandboxSecretKey": "Android-SANDBOX-KEY",
+    "productionSecretKey": "Android-LIVE-KEY",
+    "bundleID": "com.example"
+  }
+}
