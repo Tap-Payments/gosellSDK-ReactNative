@@ -2,6 +2,7 @@
 .travis
 docs
 example
+exampleSPM
 example_tmp
 example_podspec
 tmp
