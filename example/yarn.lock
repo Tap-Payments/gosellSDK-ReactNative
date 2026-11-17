@@ -1789,10 +1789,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@tap-payments/gosell-sdk-react-native@^2.3.69":
-  version "2.3.69"
-  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.69.tgz#2ae55221b2f53b166d21cd13640b94423e99ad6e"
-  integrity sha512-mDPjeZRB4zJg7i6Ycljp5UtlHZMXS4+3o6V4DVVwOPYTbgvTOvmwNLhP8EGh/IJ9NSTopB6POZkDkX23iYGyXw==
+"@tap-payments/gosell-sdk-react-native@2.3.71":
+  version "2.3.71"
+  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.71.tgz#0858370c87934b3cfd29cdd851d208d9bd212b4d"
+  integrity sha512-ee0l++Bo05+5wsBJciKjSlcxEuXUNY3VmVaUfvziSzBMv9Gq49LuJk3rcT0084RpW8Mxu8M9vPf1LBV06t+dEg==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -4538,17 +4538,17 @@ joi@^17.2.1:
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
 js-yaml@^3.13.1:
-  version "3.14.1"
-  resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.14.1.tgz"
-  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.15.2.tgz#3f83823ac6be17f570f23b2ecdef3777ff5ea364"
+  integrity sha512-6EuL879VkRA+1Cz578mKMiKvjPNEuk6+r1JaFzoSWejZmtf7xWbIyw1e3KkxlkzTIt9Taw6JBhEppG7utc1P+w==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
 js-yaml@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-4.1.0.tgz"
-  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.3.2.tgz#8e44fb14a2643c59726bb15787b5f1512cb3d3fb"
+  integrity sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==
   dependencies:
     argparse "^2.0.1"
 
