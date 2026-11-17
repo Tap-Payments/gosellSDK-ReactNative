@@ -1789,10 +1789,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@tap-payments/gosell-sdk-react-native@^2.3.69":
-  version "2.3.69"
-  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.69.tgz#2ae55221b2f53b166d21cd13640b94423e99ad6e"
-  integrity sha512-mDPjeZRB4zJg7i6Ycljp5UtlHZMXS4+3o6V4DVVwOPYTbgvTOvmwNLhP8EGh/IJ9NSTopB6POZkDkX23iYGyXw==
+"@tap-payments/gosell-sdk-react-native@2.3.71":
+  version "2.3.71"
+  resolved "https://registry.yarnpkg.com/@tap-payments/gosell-sdk-react-native/-/gosell-sdk-react-native-2.3.71.tgz#0858370c87934b3cfd29cdd851d208d9bd212b4d"
+  integrity sha512-ee0l++Bo05+5wsBJciKjSlcxEuXUNY3VmVaUfvziSzBMv9Gq49LuJk3rcT0084RpW8Mxu8M9vPf1LBV06t+dEg==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -2416,17 +2416,17 @@ bl@^4.1.0:
     readable-stream "^3.4.0"
 
 brace-expansion@^1.1.7:
-  version "1.1.12"
-  resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.12.tgz"
-  integrity sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==
+  version "1.1.21"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.21.tgz#edf4fab5c64d051aea5a8def49aba1c7522279f3"
+  integrity sha512-9zeA+KLZNNzglF2TPKRQEDyx6Yby7daAkuy8MiPzpXPsYDWi/DRM8jmwUDxokQjYqBpv5DgPiwD4h4ZZSy1Ujw==
   dependencies:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
 brace-expansion@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.2.tgz"
-  integrity sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-2.1.7.tgz#14ea3836731823bb24740225ea43b941b436f9d1"
+  integrity sha512-uZbew1NqdmPDTMJ8ah1y+b+9QEJrfkXFk3RcTQw3X0jW/xRUvFKsg1CfQdSYGdTbXZWExtU3J3ccxtnfw1Fi0g==
   dependencies:
     balanced-match "^1.0.0"
 
